@@ -235,6 +235,108 @@ SOAP_FMAC3 long * SOAP_FMAC4 soap_get_long(struct soap*, long *, const char*, co
 
 #endif
 
+#ifndef SOAP_TYPE_unsignedByte_DEFINED
+#define SOAP_TYPE_unsignedByte_DEFINED
+
+#ifdef SOAP_DEFAULT_unsignedByte
+#define soap_default_unsignedByte(soap, a) (*(a) = SOAP_DEFAULT_unsignedByte)
+#else
+#define soap_default_unsignedByte(soap, a) (*(a) = (unsigned char)0)
+#endif
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_unsignedByte(struct soap*, const char*, int, const unsigned char *, const char*);
+SOAP_FMAC3 unsigned char * SOAP_FMAC4 soap_in_unsignedByte(struct soap*, const char*, unsigned char *, const char*);
+
+SOAP_FMAC3 unsigned char * SOAP_FMAC4 soap_new_unsignedByte(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_unsignedByte(struct soap*, const unsigned char *, const char*, const char*);
+
+#ifndef soap_write_unsignedByte
+#define soap_write_unsignedByte(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || soap_put_unsignedByte(soap, data, "unsignedByte", "") || soap_end_send(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_PUT_unsignedByte
+#define soap_PUT_unsignedByte(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || soap_put_unsignedByte(soap, data, "unsignedByte", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_PATCH_unsignedByte
+#define soap_PATCH_unsignedByte(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || soap_put_unsignedByte(soap, data, "unsignedByte", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_send_unsignedByte
+#define soap_POST_send_unsignedByte(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || soap_put_unsignedByte(soap, data, "unsignedByte", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#endif
+
+SOAP_FMAC3 unsigned char * SOAP_FMAC4 soap_get_unsignedByte(struct soap*, unsigned char *, const char*, const char*);
+
+#ifndef soap_read_unsignedByte
+#define soap_read_unsignedByte(soap, data) ( soap_begin_recv(soap) || !soap_get_unsignedByte(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_GET_unsignedByte
+#define soap_GET_unsignedByte(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read_unsignedByte(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv_unsignedByte
+#define soap_POST_recv_unsignedByte(soap, data) ( soap_read_unsignedByte(soap, (data)) || soap_closesock(soap), (soap)->error )
+#endif
+
+#endif
+
+#ifndef SOAP_TYPE_unsignedInt_DEFINED
+#define SOAP_TYPE_unsignedInt_DEFINED
+
+#ifdef SOAP_DEFAULT_unsignedInt
+#define soap_default_unsignedInt(soap, a) (*(a) = SOAP_DEFAULT_unsignedInt)
+#else
+#define soap_default_unsignedInt(soap, a) (*(a) = (unsigned int)0)
+#endif
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_unsignedInt(struct soap*, const char*, int, const unsigned int *, const char*);
+SOAP_FMAC3 unsigned int * SOAP_FMAC4 soap_in_unsignedInt(struct soap*, const char*, unsigned int *, const char*);
+
+SOAP_FMAC3 unsigned int * SOAP_FMAC4 soap_new_unsignedInt(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_unsignedInt(struct soap*, const unsigned int *, const char*, const char*);
+
+#ifndef soap_write_unsignedInt
+#define soap_write_unsignedInt(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || soap_put_unsignedInt(soap, data, "unsignedInt", "") || soap_end_send(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_PUT_unsignedInt
+#define soap_PUT_unsignedInt(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || soap_put_unsignedInt(soap, data, "unsignedInt", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_PATCH_unsignedInt
+#define soap_PATCH_unsignedInt(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || soap_put_unsignedInt(soap, data, "unsignedInt", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_send_unsignedInt
+#define soap_POST_send_unsignedInt(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || soap_put_unsignedInt(soap, data, "unsignedInt", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#endif
+
+SOAP_FMAC3 unsigned int * SOAP_FMAC4 soap_get_unsignedInt(struct soap*, unsigned int *, const char*, const char*);
+
+#ifndef soap_read_unsignedInt
+#define soap_read_unsignedInt(soap, data) ( soap_begin_recv(soap) || !soap_get_unsignedInt(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_GET_unsignedInt
+#define soap_GET_unsignedInt(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read_unsignedInt(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv_unsignedInt
+#define soap_POST_recv_unsignedInt(soap, data) ( soap_read_unsignedInt(soap, (data)) || soap_closesock(soap), (soap)->error )
+#endif
+
+#endif
+
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Fault_DEFINED
@@ -960,6 +1062,55 @@ SOAP_FMAC3 struct ns__connectResponse * SOAP_FMAC4 soap_get_ns__connectResponse(
 
 #endif
 
+#ifndef SOAP_TYPE_xsd__base64Binary_DEFINED
+#define SOAP_TYPE_xsd__base64Binary_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_xsd__base64Binary(struct soap*, struct xsd__base64Binary *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_xsd__base64Binary(struct soap*, const struct xsd__base64Binary *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_xsd__base64Binary(struct soap*, const char*, int, const struct xsd__base64Binary *, const char*);
+SOAP_FMAC3S const char* SOAP_FMAC4S soap_xsd__base64Binary2s(struct soap*, struct xsd__base64Binary);
+SOAP_FMAC3 struct xsd__base64Binary * SOAP_FMAC4 soap_in_xsd__base64Binary(struct soap*, const char*, struct xsd__base64Binary *, const char*);
+SOAP_FMAC3S int SOAP_FMAC4S soap_s2xsd__base64Binary(struct soap*, const char*, struct xsd__base64Binary *);
+
+SOAP_FMAC3 struct xsd__base64Binary * SOAP_FMAC4 soap_new_xsd__base64Binary(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_xsd__base64Binary(struct soap*, const struct xsd__base64Binary *, const char*, const char*);
+
+#ifndef soap_write_xsd__base64Binary
+#define soap_write_xsd__base64Binary(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize_xsd__base64Binary(soap, data), 0) || soap_put_xsd__base64Binary(soap, data, "xsd:base64Binary", "") || soap_end_send(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_PUT_xsd__base64Binary
+#define soap_PUT_xsd__base64Binary(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize_xsd__base64Binary(soap, data), 0) || soap_put_xsd__base64Binary(soap, data, "xsd:base64Binary", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_PATCH_xsd__base64Binary
+#define soap_PATCH_xsd__base64Binary(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize_xsd__base64Binary(soap, data), 0) || soap_put_xsd__base64Binary(soap, data, "xsd:base64Binary", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_send_xsd__base64Binary
+#define soap_POST_send_xsd__base64Binary(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize_xsd__base64Binary(soap, data), 0) || soap_put_xsd__base64Binary(soap, data, "xsd:base64Binary", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#endif
+
+SOAP_FMAC3 struct xsd__base64Binary * SOAP_FMAC4 soap_get_xsd__base64Binary(struct soap*, struct xsd__base64Binary *, const char*, const char*);
+
+#ifndef soap_read_xsd__base64Binary
+#define soap_read_xsd__base64Binary(soap, data) ( ((data) ? (soap_default_xsd__base64Binary(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get_xsd__base64Binary(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_GET_xsd__base64Binary
+#define soap_GET_xsd__base64Binary(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read_xsd__base64Binary(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv_xsd__base64Binary
+#define soap_POST_recv_xsd__base64Binary(soap, data) ( soap_read_xsd__base64Binary(soap, (data)) || soap_closesock(soap), (soap)->error )
+#endif
+
+#endif
+
 #ifndef SOAP_TYPE_ns__byeType_DEFINED
 #define SOAP_TYPE_ns__byeType_DEFINED
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns__byeType(struct soap*, struct byeStruct *);
@@ -1317,6 +1468,15 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTons__stringType(struct soap*, char **
 SOAP_FMAC3 char *** SOAP_FMAC4 soap_get_PointerTons__stringType(struct soap*, char ***, const char*, const char*);
 #endif
 
+#ifndef SOAP_TYPE_PointerToxsd__base64Binary_DEFINED
+#define SOAP_TYPE_PointerToxsd__base64Binary_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToxsd__base64Binary(struct soap*, struct xsd__base64Binary *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToxsd__base64Binary(struct soap*, const char *, int, struct xsd__base64Binary *const*, const char *);
+SOAP_FMAC3 struct xsd__base64Binary ** SOAP_FMAC4 soap_in_PointerToxsd__base64Binary(struct soap*, const char*, struct xsd__base64Binary **, const char*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToxsd__base64Binary(struct soap*, struct xsd__base64Binary *const*, const char*, const char*);
+SOAP_FMAC3 struct xsd__base64Binary ** SOAP_FMAC4 soap_get_PointerToxsd__base64Binary(struct soap*, struct xsd__base64Binary **, const char*, const char*);
+#endif
+
 #ifndef SOAP_TYPE_PointerTons__longType_DEFINED
 #define SOAP_TYPE_PointerTons__longType_DEFINED
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTons__longType(struct soap*, long *const*);
@@ -1380,6 +1540,15 @@ SOAP_FMAC3 char ** SOAP_FMAC4 soap_get_ns__stringType(struct soap*, char **, con
 #define soap_POST_recv_ns__stringType(soap, data) ( soap_read_ns__stringType(soap, (data)) || soap_closesock(soap), (soap)->error )
 #endif
 
+#endif
+
+#ifndef SOAP_TYPE_PointerTounsignedByte_DEFINED
+#define SOAP_TYPE_PointerTounsignedByte_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTounsignedByte(struct soap*, unsigned char *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTounsignedByte(struct soap*, const char *, int, unsigned char *const*, const char *);
+SOAP_FMAC3 unsigned char ** SOAP_FMAC4 soap_in_PointerTounsignedByte(struct soap*, const char*, unsigned char **, const char*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTounsignedByte(struct soap*, unsigned char *const*, const char*, const char*);
+SOAP_FMAC3 unsigned char ** SOAP_FMAC4 soap_get_PointerTounsignedByte(struct soap*, unsigned char **, const char*, const char*);
 #endif
 
 #ifndef SOAP_TYPE__QName_DEFINED

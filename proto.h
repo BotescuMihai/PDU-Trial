@@ -10,7 +10,9 @@
 typedef struct msgHeader {
   int msgSize ;				  // the size of current message
   int clientID ;				  // your clientID
-  int opID ;   				  // the requested operation.
+  int opID ;
+  char * fileName;
+  // the requested operation.
 } msgHeaderType ;
 // 4 4 4
 typedef struct int2Msg {

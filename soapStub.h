@@ -36,16 +36,17 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
 struct concatStruct;	/* sclient.h:3 */
 struct addStruct;	/* sclient.h:9 */
 struct byeStruct;	/* sclient.h:15 */
-struct ns__connectResponse;	/* sclient.h:22 */
-struct ns__connect;	/* sclient.h:22 */
-struct ns__echoResponse;	/* sclient.h:24 */
-struct ns__echo;	/* sclient.h:24 */
-struct ns__concatResponse;	/* sclient.h:26 */
-struct ns__concat;	/* sclient.h:26 */
-struct ns__adderResponse;	/* sclient.h:28 */
-struct ns__adder;	/* sclient.h:28 */
-struct ns__byeResponse;	/* sclient.h:30 */
-struct ns__bye;	/* sclient.h:30 */
+struct xsd__base64Binary;	/* sclient.h:19 */
+struct ns__connectResponse;	/* sclient.h:33 */
+struct ns__connect;	/* sclient.h:33 */
+struct ns__echoResponse;	/* sclient.h:37 */
+struct ns__echo;	/* sclient.h:37 */
+struct ns__concatResponse;	/* sclient.h:39 */
+struct ns__concat;	/* sclient.h:39 */
+struct ns__adderResponse;	/* sclient.h:41 */
+struct ns__adder;	/* sclient.h:41 */
+struct ns__byeResponse;	/* sclient.h:43 */
+struct ns__bye;	/* sclient.h:43 */
 
 /* sclient.h:3 */
 #ifndef SOAP_TYPE_concatStruct
@@ -85,9 +86,25 @@ struct byeStruct {
 };
 #endif
 
-/* sclient.h:22 */
+/* sclient.h:19 */
+#ifndef SOAP_TYPE_xsd__base64Binary
+#define SOAP_TYPE_xsd__base64Binary (14)
+/* binary data attached as MTOM/MIME/DIME attachment or included as *`xsd:base64Binary`* base64: */
+struct xsd__base64Binary {
+        unsigned char *__ptr;
+        int __size;
+        /** Optional element 'id' of XML schema type 'xsd:string' */
+        char *id;
+        /** Optional element 'type' of XML schema type 'xsd:string' */
+        char *type;
+        /** Optional element 'options' of XML schema type 'xsd:string' */
+        char *options;
+};
+#endif
+
+/* sclient.h:33 */
 #ifndef SOAP_TYPE_ns__connectResponse
-#define SOAP_TYPE_ns__connectResponse (18)
+#define SOAP_TYPE_ns__connectResponse (22)
 /* complex XML schema type 'ns:connectResponse': */
 struct ns__connectResponse {
         /** Optional element 'connect' of XML schema type 'ns:longType' */
@@ -95,9 +112,9 @@ struct ns__connectResponse {
 };
 #endif
 
-/* sclient.h:22 */
+/* sclient.h:33 */
 #ifndef SOAP_TYPE_ns__connect
-#define SOAP_TYPE_ns__connect (19)
+#define SOAP_TYPE_ns__connect (23)
 /* complex XML schema type 'ns:connect': */
 struct ns__connect {
 #ifdef WITH_NOEMPTYSTRUCT
@@ -106,29 +123,29 @@ struct ns__connect {
 };
 #endif
 
-/* sclient.h:24 */
+/* sclient.h:37 */
 #ifndef SOAP_TYPE_ns__echoResponse
-#define SOAP_TYPE_ns__echoResponse (22)
+#define SOAP_TYPE_ns__echoResponse (26)
 /* complex XML schema type 'ns:echoResponse': */
 struct ns__echoResponse {
-        /** Optional element 'echo' of XML schema type 'ns:stringType' */
-        char **echo;
+        /** Optional element 'result' of XML schema type 'xsd:base64Binary' */
+        struct xsd__base64Binary *result;
 };
 #endif
 
-/* sclient.h:24 */
+/* sclient.h:37 */
 #ifndef SOAP_TYPE_ns__echo
-#define SOAP_TYPE_ns__echo (23)
+#define SOAP_TYPE_ns__echo (27)
 /* complex XML schema type 'ns:echo': */
 struct ns__echo {
-        /** Required element 'echoRequest' of XML schema type 'ns:stringType' */
-        char *echoRequest;
+        /** Optional element 'data' of XML schema type 'xsd:base64Binary' */
+        struct xsd__base64Binary *data;
 };
 #endif
 
-/* sclient.h:26 */
+/* sclient.h:39 */
 #ifndef SOAP_TYPE_ns__concatResponse
-#define SOAP_TYPE_ns__concatResponse (25)
+#define SOAP_TYPE_ns__concatResponse (30)
 /* complex XML schema type 'ns:concatResponse': */
 struct ns__concatResponse {
         /** Optional element 'concat' of XML schema type 'ns:stringType' */
@@ -136,9 +153,9 @@ struct ns__concatResponse {
 };
 #endif
 
-/* sclient.h:26 */
+/* sclient.h:39 */
 #ifndef SOAP_TYPE_ns__concat
-#define SOAP_TYPE_ns__concat (26)
+#define SOAP_TYPE_ns__concat (31)
 /* complex XML schema type 'ns:concat': */
 struct ns__concat {
         /** Required element 'concatRequest' of XML schema type 'ns:concatType' */
@@ -146,9 +163,9 @@ struct ns__concat {
 };
 #endif
 
-/* sclient.h:28 */
+/* sclient.h:41 */
 #ifndef SOAP_TYPE_ns__adderResponse
-#define SOAP_TYPE_ns__adderResponse (28)
+#define SOAP_TYPE_ns__adderResponse (33)
 /* complex XML schema type 'ns:adderResponse': */
 struct ns__adderResponse {
         /** Optional element 'adder' of XML schema type 'ns:longType' */
@@ -156,9 +173,9 @@ struct ns__adderResponse {
 };
 #endif
 
-/* sclient.h:28 */
+/* sclient.h:41 */
 #ifndef SOAP_TYPE_ns__adder
-#define SOAP_TYPE_ns__adder (29)
+#define SOAP_TYPE_ns__adder (34)
 /* complex XML schema type 'ns:adder': */
 struct ns__adder {
         /** Required element 'adderRequest' of XML schema type 'ns:addType' */
@@ -166,9 +183,9 @@ struct ns__adder {
 };
 #endif
 
-/* sclient.h:30 */
+/* sclient.h:43 */
 #ifndef SOAP_TYPE_ns__byeResponse
-#define SOAP_TYPE_ns__byeResponse (30)
+#define SOAP_TYPE_ns__byeResponse (35)
 /* complex XML schema type 'ns:byeResponse': */
 struct ns__byeResponse {
 #ifdef WITH_NOEMPTYSTRUCT
@@ -177,9 +194,9 @@ struct ns__byeResponse {
 };
 #endif
 
-/* sclient.h:30 */
+/* sclient.h:43 */
 #ifndef SOAP_TYPE_ns__bye
-#define SOAP_TYPE_ns__bye (33)
+#define SOAP_TYPE_ns__bye (38)
 /* complex XML schema type 'ns:bye': */
 struct ns__bye {
         /** Required element 'byeRequest' of XML schema type 'ns:byeType' */
@@ -187,10 +204,10 @@ struct ns__bye {
 };
 #endif
 
-/* sclient.h:32 */
+/* sclient.h:45 */
 #ifndef WITH_NOGLOBAL
 #ifndef SOAP_TYPE_SOAP_ENV__Header
-#define SOAP_TYPE_SOAP_ENV__Header (34)
+#define SOAP_TYPE_SOAP_ENV__Header (39)
 /* SOAP_ENV__Header: */
 struct SOAP_ENV__Header {
 #ifdef WITH_NOEMPTYSTRUCT
@@ -200,10 +217,10 @@ struct SOAP_ENV__Header {
 #endif
 #endif
 
-/* sclient.h:32 */
+/* sclient.h:45 */
 #ifndef WITH_NOGLOBAL
 #ifndef SOAP_TYPE_SOAP_ENV__Code
-#define SOAP_TYPE_SOAP_ENV__Code (35)
+#define SOAP_TYPE_SOAP_ENV__Code (40)
 /* Type SOAP_ENV__Code is a recursive data type, (in)directly referencing itself through its (base or derived class) members */
 /* SOAP_ENV__Code: */
 struct SOAP_ENV__Code {
@@ -215,10 +232,10 @@ struct SOAP_ENV__Code {
 #endif
 #endif
 
-/* sclient.h:32 */
+/* sclient.h:45 */
 #ifndef WITH_NOGLOBAL
 #ifndef SOAP_TYPE_SOAP_ENV__Detail
-#define SOAP_TYPE_SOAP_ENV__Detail (37)
+#define SOAP_TYPE_SOAP_ENV__Detail (42)
 /* SOAP_ENV__Detail: */
 struct SOAP_ENV__Detail {
         char *__any;
@@ -230,10 +247,10 @@ struct SOAP_ENV__Detail {
 #endif
 #endif
 
-/* sclient.h:32 */
+/* sclient.h:45 */
 #ifndef WITH_NOGLOBAL
 #ifndef SOAP_TYPE_SOAP_ENV__Reason
-#define SOAP_TYPE_SOAP_ENV__Reason (40)
+#define SOAP_TYPE_SOAP_ENV__Reason (45)
 /* SOAP_ENV__Reason: */
 struct SOAP_ENV__Reason {
         /** Optional element 'SOAP-ENV:Text' of XML schema type 'xsd:string' */
@@ -242,10 +259,10 @@ struct SOAP_ENV__Reason {
 #endif
 #endif
 
-/* sclient.h:32 */
+/* sclient.h:45 */
 #ifndef WITH_NOGLOBAL
 #ifndef SOAP_TYPE_SOAP_ENV__Fault
-#define SOAP_TYPE_SOAP_ENV__Fault (41)
+#define SOAP_TYPE_SOAP_ENV__Fault (46)
 /* SOAP_ENV__Fault: */
 struct SOAP_ENV__Fault {
         /** Optional element 'faultcode' of XML schema type 'xsd:QName' */
@@ -307,15 +324,15 @@ typedef struct addStruct ns__addType;
 typedef struct byeStruct ns__byeType;
 #endif
 
-/* sclient.h:19 */
+/* sclient.h:30 */
 #ifndef SOAP_TYPE_ns__stringType
-#define SOAP_TYPE_ns__stringType (14)
+#define SOAP_TYPE_ns__stringType (18)
 typedef char *ns__stringType;
 #endif
 
-/* sclient.h:20 */
+/* sclient.h:31 */
 #ifndef SOAP_TYPE_ns__longType
-#define SOAP_TYPE_ns__longType (15)
+#define SOAP_TYPE_ns__longType (19)
 typedef long ns__longType;
 #endif
 
@@ -338,7 +355,7 @@ typedef long ns__longType;
 
 /* ns__longType has binding name 'ns__longType' for type 'ns:longType' */
 #ifndef SOAP_TYPE_ns__longType
-#define SOAP_TYPE_ns__longType (15)
+#define SOAP_TYPE_ns__longType (19)
 #endif
 
 /* long has binding name 'long' for type 'xsd:long' */
@@ -346,79 +363,94 @@ typedef long ns__longType;
 #define SOAP_TYPE_long (8)
 #endif
 
+/* unsigned char has binding name 'unsignedByte' for type 'xsd:unsignedByte' */
+#ifndef SOAP_TYPE_unsignedByte
+#define SOAP_TYPE_unsignedByte (16)
+#endif
+
+/* unsigned int has binding name 'unsignedInt' for type 'xsd:unsignedInt' */
+#ifndef SOAP_TYPE_unsignedInt
+#define SOAP_TYPE_unsignedInt (15)
+#endif
+
 /* struct SOAP_ENV__Fault has binding name 'SOAP_ENV__Fault' for type '' */
 #ifndef SOAP_TYPE_SOAP_ENV__Fault
-#define SOAP_TYPE_SOAP_ENV__Fault (41)
+#define SOAP_TYPE_SOAP_ENV__Fault (46)
 #endif
 
 /* struct SOAP_ENV__Reason has binding name 'SOAP_ENV__Reason' for type '' */
 #ifndef SOAP_TYPE_SOAP_ENV__Reason
-#define SOAP_TYPE_SOAP_ENV__Reason (40)
+#define SOAP_TYPE_SOAP_ENV__Reason (45)
 #endif
 
 /* struct SOAP_ENV__Detail has binding name 'SOAP_ENV__Detail' for type '' */
 #ifndef SOAP_TYPE_SOAP_ENV__Detail
-#define SOAP_TYPE_SOAP_ENV__Detail (37)
+#define SOAP_TYPE_SOAP_ENV__Detail (42)
 #endif
 
 /* struct SOAP_ENV__Code has binding name 'SOAP_ENV__Code' for type '' */
 #ifndef SOAP_TYPE_SOAP_ENV__Code
-#define SOAP_TYPE_SOAP_ENV__Code (35)
+#define SOAP_TYPE_SOAP_ENV__Code (40)
 #endif
 
 /* struct SOAP_ENV__Header has binding name 'SOAP_ENV__Header' for type '' */
 #ifndef SOAP_TYPE_SOAP_ENV__Header
-#define SOAP_TYPE_SOAP_ENV__Header (34)
+#define SOAP_TYPE_SOAP_ENV__Header (39)
 #endif
 
 /* struct ns__bye has binding name 'ns__bye' for type 'ns:bye' */
 #ifndef SOAP_TYPE_ns__bye
-#define SOAP_TYPE_ns__bye (33)
+#define SOAP_TYPE_ns__bye (38)
 #endif
 
 /* struct ns__byeResponse has binding name 'ns__byeResponse' for type 'ns:byeResponse' */
 #ifndef SOAP_TYPE_ns__byeResponse
-#define SOAP_TYPE_ns__byeResponse (30)
+#define SOAP_TYPE_ns__byeResponse (35)
 #endif
 
 /* struct ns__adder has binding name 'ns__adder' for type 'ns:adder' */
 #ifndef SOAP_TYPE_ns__adder
-#define SOAP_TYPE_ns__adder (29)
+#define SOAP_TYPE_ns__adder (34)
 #endif
 
 /* struct ns__adderResponse has binding name 'ns__adderResponse' for type 'ns:adderResponse' */
 #ifndef SOAP_TYPE_ns__adderResponse
-#define SOAP_TYPE_ns__adderResponse (28)
+#define SOAP_TYPE_ns__adderResponse (33)
 #endif
 
 /* struct ns__concat has binding name 'ns__concat' for type 'ns:concat' */
 #ifndef SOAP_TYPE_ns__concat
-#define SOAP_TYPE_ns__concat (26)
+#define SOAP_TYPE_ns__concat (31)
 #endif
 
 /* struct ns__concatResponse has binding name 'ns__concatResponse' for type 'ns:concatResponse' */
 #ifndef SOAP_TYPE_ns__concatResponse
-#define SOAP_TYPE_ns__concatResponse (25)
+#define SOAP_TYPE_ns__concatResponse (30)
 #endif
 
 /* struct ns__echo has binding name 'ns__echo' for type 'ns:echo' */
 #ifndef SOAP_TYPE_ns__echo
-#define SOAP_TYPE_ns__echo (23)
+#define SOAP_TYPE_ns__echo (27)
 #endif
 
 /* struct ns__echoResponse has binding name 'ns__echoResponse' for type 'ns:echoResponse' */
 #ifndef SOAP_TYPE_ns__echoResponse
-#define SOAP_TYPE_ns__echoResponse (22)
+#define SOAP_TYPE_ns__echoResponse (26)
 #endif
 
 /* struct ns__connect has binding name 'ns__connect' for type 'ns:connect' */
 #ifndef SOAP_TYPE_ns__connect
-#define SOAP_TYPE_ns__connect (19)
+#define SOAP_TYPE_ns__connect (23)
 #endif
 
 /* struct ns__connectResponse has binding name 'ns__connectResponse' for type 'ns:connectResponse' */
 #ifndef SOAP_TYPE_ns__connectResponse
-#define SOAP_TYPE_ns__connectResponse (18)
+#define SOAP_TYPE_ns__connectResponse (22)
+#endif
+
+/* struct xsd__base64Binary has binding name 'xsd__base64Binary' for type 'xsd:base64Binary' */
+#ifndef SOAP_TYPE_xsd__base64Binary
+#define SOAP_TYPE_xsd__base64Binary (14)
 #endif
 
 /* ns__byeType has binding name 'ns__byeType' for type 'ns:byeType' */
@@ -453,37 +485,47 @@ typedef long ns__longType;
 
 /* struct SOAP_ENV__Reason * has binding name 'PointerToSOAP_ENV__Reason' for type '' */
 #ifndef SOAP_TYPE_PointerToSOAP_ENV__Reason
-#define SOAP_TYPE_PointerToSOAP_ENV__Reason (43)
+#define SOAP_TYPE_PointerToSOAP_ENV__Reason (48)
 #endif
 
 /* struct SOAP_ENV__Detail * has binding name 'PointerToSOAP_ENV__Detail' for type '' */
 #ifndef SOAP_TYPE_PointerToSOAP_ENV__Detail
-#define SOAP_TYPE_PointerToSOAP_ENV__Detail (42)
+#define SOAP_TYPE_PointerToSOAP_ENV__Detail (47)
 #endif
 
 /* struct SOAP_ENV__Code * has binding name 'PointerToSOAP_ENV__Code' for type '' */
 #ifndef SOAP_TYPE_PointerToSOAP_ENV__Code
-#define SOAP_TYPE_PointerToSOAP_ENV__Code (36)
+#define SOAP_TYPE_PointerToSOAP_ENV__Code (41)
 #endif
 
 /* struct ns__byeResponse * has binding name 'PointerTons__byeResponse' for type 'ns:byeResponse' */
 #ifndef SOAP_TYPE_PointerTons__byeResponse
-#define SOAP_TYPE_PointerTons__byeResponse (31)
+#define SOAP_TYPE_PointerTons__byeResponse (36)
 #endif
 
 /* char ** has binding name 'PointerTons__stringType' for type 'ns:stringType' */
 #ifndef SOAP_TYPE_PointerTons__stringType
-#define SOAP_TYPE_PointerTons__stringType (20)
+#define SOAP_TYPE_PointerTons__stringType (28)
+#endif
+
+/* struct xsd__base64Binary * has binding name 'PointerToxsd__base64Binary' for type 'xsd:base64Binary' */
+#ifndef SOAP_TYPE_PointerToxsd__base64Binary
+#define SOAP_TYPE_PointerToxsd__base64Binary (24)
 #endif
 
 /* long * has binding name 'PointerTons__longType' for type 'ns:longType' */
 #ifndef SOAP_TYPE_PointerTons__longType
-#define SOAP_TYPE_PointerTons__longType (16)
+#define SOAP_TYPE_PointerTons__longType (20)
 #endif
 
 /* ns__stringType has binding name 'ns__stringType' for type 'ns:stringType' */
 #ifndef SOAP_TYPE_ns__stringType
-#define SOAP_TYPE_ns__stringType (14)
+#define SOAP_TYPE_ns__stringType (18)
+#endif
+
+/* unsigned char * has binding name 'PointerTounsignedByte' for type 'xsd:unsignedByte' */
+#ifndef SOAP_TYPE_PointerTounsignedByte
+#define SOAP_TYPE_PointerTounsignedByte (17)
 #endif
 
 /* _QName has binding name '_QName' for type 'xsd:QName' */
@@ -517,7 +559,7 @@ typedef long ns__longType;
     /** Web service operation 'ns__connect' implementation, should return SOAP_OK or error code */
     SOAP_FMAC5 int SOAP_FMAC6 ns__connect(struct soap*, long *connect);
     /** Web service operation 'ns__echo' implementation, should return SOAP_OK or error code */
-    SOAP_FMAC5 int SOAP_FMAC6 ns__echo(struct soap*, char *echoRequest, char **echo);
+    SOAP_FMAC5 int SOAP_FMAC6 ns__echo(struct soap*, struct xsd__base64Binary *data, struct xsd__base64Binary *result);
     /** Web service operation 'ns__concat' implementation, should return SOAP_OK or error code */
     SOAP_FMAC5 int SOAP_FMAC6 ns__concat(struct soap*, struct concatStruct concatRequest, char **concat);
     /** Web service operation 'ns__adder' implementation, should return SOAP_OK or error code */

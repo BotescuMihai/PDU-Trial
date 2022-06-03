@@ -11,7 +11,7 @@
 
 void *unix_main (void *args) ;
 void *inet_main (void *args) ;
-//void *soap_main (void *args) ;
+void *soap_main (void *args) ;
 
 // WINDOW *mainwnd ;
 #define UNIXSOCKET "/tmp/unixds"
@@ -36,6 +36,9 @@ int main () {
   init_pair (1, COLOR_RED, COLOR_BLACK) ;
 //  refresh () ;
 */
+
+////
+//printf("");
     unlink (UNIXSOCKET) ;
 
     pthread_create (&unixthr, NULL, unix_main, UNIXSOCKET) ; /* Transmite SOCKET-ul utilizat */
@@ -43,7 +46,7 @@ int main () {
     pthread_create (&inetthr, NULL, inet_main, &iport) ;
 
     sport = SOAPPORT ;
-    // pthread_create (&soapthr, NULL, soap_main, &sport) ;
+     pthread_create (&soapthr, NULL, soap_main, &sport) ;
 /*
   pthread_create (&workerthr, NULL, work_main, NULL) ;
     Implementarea firului de lucru:
@@ -54,7 +57,7 @@ int main () {
  */
     pthread_join (unixthr, NULL) ;
     pthread_join (inetthr, NULL) ;
-    // pthread_join (soapthr, NULL) ;
+    pthread_join (soapthr, NULL) ;
 
 /*
   getch () ;

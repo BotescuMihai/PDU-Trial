@@ -87,6 +87,8 @@ int my_get(struct soap *soap, char * rq)
     soap_clr_mime(soap);
     return SOAP_OK;
 }
+
+/*
 int ns__echo(struct soap*s, char *rq, char **rsp) {
     char *rsp1 ;
     int n = 0;
@@ -108,11 +110,13 @@ int ns__echo(struct soap*s, char *rq, char **rsp) {
     rsp1 = do_client_concat (s, ":: Am primit ::", rq) ;
     *rsp = rsp1 ;
     fprintf(stderr, "File content\n===========\n");
-    fprintf(stderr, "%s\n", *rsp); */
+    fprintf(stderr, "%s\n", *rsp);
     return SOAP_OK ;
-}
+}*/
 
-int ns__webmethod(struct soap *soap, struct xsd__base64Binary *data, struct xsd__base64Binary *result)
+
+
+int ns__echo(struct soap *soap, struct xsd__base64Binary *data, struct xsd__base64Binary *result)
 {
     // echo back the structure (as a MIME attachment)
     result->__ptr = data->__ptr;
@@ -122,6 +126,7 @@ int ns__webmethod(struct soap *soap, struct xsd__base64Binary *data, struct xsd_
     result->options = data->options;
     struct soap_multipart *attachment;
     printf("Attachements\n");
+    int n = 0;
     for (attachment = soap->dime.list; attachment; attachment = attachment->next)
     {
         ++n;

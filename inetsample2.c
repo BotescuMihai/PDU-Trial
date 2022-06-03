@@ -9,6 +9,7 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 #include "proto.h"
+#include "files_util.h"
 
 #define PORT            18081
 #define SERVERHOST      "127.0.0.1" 
@@ -75,7 +76,7 @@ int main (void) {
   readSingleInt (sock,  &m) ;   // Just for tests, ignore the response!
   clientID = m.msg ;
   fprintf (stderr, "Got a clientID: %d\n", clientID) ;
-/* 1. Now do some stupid math: negative of a number. */
+/* 1. Now do some stupid math: negative of a number.
   h.clientID = clientID ;
   h.opID = OPR_NEG ;
   fprintf (stderr, "1. Do some OPR_NEG calls...\n") ;
@@ -83,8 +84,8 @@ int main (void) {
     writeSingleInt (sock, h, -100+i*15) ; // Just for tests, ignore the response!
     readSingleInt (sock,  &m) ;   // Just for tests, ignore the response!
     fprintf (stderr, "Got the negative (hopefully) version of %d ==> %d\n", -100+i*15, m.msg) ;
-  }
-/* 2. More stupid math: add two numbers :) */
+  } */
+/* 2. More stupid math: add two numbers :)
   h.clientID = clientID ;
   h.opID = OPR_ADD ;
   fprintf (stderr, "2. Do some OPR_ADD calls...\n") ;
@@ -92,16 +93,46 @@ int main (void) {
     writeMultiInt (sock, h, -100+i*15, 100-i*22) ; // Just for tests, ignore the response!
     readSingleInt (sock,  &m) ;   // Just for tests, ignore the response!
     fprintf (stderr, "Got the sum of %d %d ==> %d\n", -100+i*15, 100-i*22, m.msg) ;
-  }
+  } */
 /* 3. ECHO */
-  h.clientID = clientID ;
-  h.opID = OPR_ECHO ;
-  fprintf (stderr, "3. Do some OPR_ECHO calls...\n") ;
-  char *outgoing = "This is a really long test message3" ;
-  writeSingleString (sock, h, outgoing) ; // Just for tests, ignore the response!
-  readSingleString (sock,  &str) ;   // Just for tests, ignore the response!
-  fprintf (stderr, "Got the echo of %s  ==> %s\n", outgoing, str.msg) ;
-  free (str.msg) ; // Need to free, once it's used!
+char filename[100];
+int fd;
+int id = 0;
+while(1) {
+    start: bzero(filename, sizeof(filename));
+    h.clientID = clientID;
+    h.opID = OPR_ECHO;
+    fprintf(stderr, "Enter the file name...> ");
+    scanf("%s", filename);
+   // fprintf(stderr, "You entered %s", filename);
+    if((fd = open(filename, O_RDONLY)) < 0){
+        perror("open");
+        goto start;
+    }
+    char * outgoing = getContent(fd);
+    h.msgSize = strlen(outgoing);
+    h.fileName = getFileName(filename);
+   // printf("%s\n", outgoing);
+    writeSingleString(sock, h, getContent(fd)); // Just for tests, ignore the response!
+    writeSingleString(sock, h, getFileName(filename));
+    fprintf(stderr,"filename: %s%s\n", getFilePath(filename), getFileName(filename));
+    writeSingleString(sock, h, getFilePath(filename));
+    readSingleString(sock, &str);   // Just for tests, ignore the response!
+    // mai intai numele fisierului
+
+    char fname[100];
+ //   strcpy(fname, "./client_files/INET/");
+ /*
+    strcpy(fname, str.msg);
+    fname[strlen(fname)] = 0;
+    readSingleString(sock, &str);
+    fprintf(stderr, "filename and path: %s\n", fname);*/
+    sprintf(fname, "./client_files/INET/log_[%s].txt", getTimestamp());
+    int fd = open(fname, S_IRUSR | S_IWUSR | S_IXUSR | O_RDWR | O_CREAT, 0666);
+    write(fd, str.msg, strlen(str.msg));
+    //   fprintf(stderr, "Got the echo of %s  ==> %s\n", outgoing, str.msg);
+    free(str.msg); // Need to free, once it's used!
+}
 /* 5. BYE */
   h.clientID = clientID ;
   h.opID = OPR_BYE ;

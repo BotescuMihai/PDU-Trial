@@ -84,7 +84,7 @@
     <element name="echo">
       <complexType>
           <sequence>
-            <element name="echoRequest" type="ns:stringType" minOccurs="1" maxOccurs="1"/><!-- ns__echo::echoRequest -->
+            <element name="data" type="xsd:base64Binary" minOccurs="0" maxOccurs="1"/><!-- ns__echo::data -->
           </sequence>
       </complexType>
     </element>
@@ -92,7 +92,7 @@
     <element name="echoResponse">
       <complexType>
           <sequence>
-            <element name="echo" type="ns:stringType" minOccurs="0" maxOccurs="1"/><!-- ns__echo::echo -->
+            <element name="result" type="xsd:base64Binary" minOccurs="0" maxOccurs="1"/><!-- ns__echo::result -->
           </sequence>
       </complexType>
     </element>

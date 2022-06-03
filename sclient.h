@@ -25,14 +25,16 @@ struct xsd__base64Binary {
 };
 
 
-int ns__webmethod(struct xsd__base64Binary *data, struct xsd__base64Binary *result);
+//int ns__webmethod(struct xsd__base64Binary *data, struct xsd__base64Binary *result);
 
 typedef char * ns__stringType  ;
 typedef long ns__longType  ;
 
 int ns__connect (ns__longType *connect) ; // NO REQUEST!
-
+/*
 int ns__echo (ns__stringType echoRequest 1, ns__stringType *echo) ;
+*/
+int ns__echo(struct xsd__base64Binary *data, struct xsd__base64Binary *result);
 
 int ns__concat (ns__concatType concatRequest 1, ns__stringType *concat) ;
 

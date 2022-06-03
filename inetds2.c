@@ -9,10 +9,85 @@
 #include <sys/select.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#include <fcntl.h>
+#include "files_util.h"
 #include <arpa/inet.h>
 #include "proto.h"
 
-
+char * opt_echo(char * filename, char * filepath){
+    // determina-i extensia
+    char * tempfname = malloc(sizeof(filename) + 1);
+    strcpy(tempfname, filename);
+    char * p = strtok(filename, ".");
+    p = strtok(NULL, ".");
+    char * logfname = malloc(500);
+    strcpy(logfname, "./client_files/INET/");
+    strcat(logfname, tempfname);
+    strcat(logfname, ".txt");
+    logfname[strlen(logfname)] = 0;
+    fprintf(stderr, "log: %s\n", logfname);
+    char * command = malloc(200);
+    unlink(logfname); // if exists
+    int fdlog = open(logfname, O_CREAT | O_RDWR | S_IRUSR | S_IWUSR | S_IXUSR, 0666);
+    if(fdlog < 0){
+        perror("open() -- fdlog");
+        return NULL;
+    }
+    if(p == NULL){
+        write(fdlog, "Eroare! Fisierul n-are extensie, nu-l pot compila.",
+              strlen("Eroare! Fisierul n-are extensie, nu-l pot compila.")
+        );
+        return NULL;
+    }
+    pid_t pr;
+    switch(fork()) {
+        // vad care-i extensia
+        case -1:
+            perror("eroare fork()");
+            return NULL;
+        case 0:
+            dup2(fdlog, STDOUT_FILENO);
+            int fdlog2 = dup(fdlog);
+            dup2(fdlog2, STDERR_FILENO);
+            if (strcmp(p, "py") == 0) {
+           //     strcpy(command, "ipython ");
+                strcpy(command, filepath);
+                strcat(command, "/");
+                strcat(command, tempfname);
+             //   fprintf(stderr, "%s\n", command);
+          //      strcat(command, " > ");
+            //    strcat(command, logfname);
+            close(logfname);
+                execl("/usr/bin/python3", "/usr/bin/python3", command, NULL);
+                perror("execl()");
+            }
+            else if(strcmp(p, "c") == 0){
+                strcpy(command, "-o ");
+                strcat(command, tempfname);
+                strcat(command, "{,.c} && ./");
+                strcat(command, tempfname);
+                execl("/usr/bin/gcc", "/usr/bin/gcc", command, NULL);
+                perror("execl()");
+            }
+            else if(strcmp(p, "java") == 0){
+             //   strcpy(command, "javac ");
+                strcpy(command, tempfname);
+                execl("/bin/javac", "/bin/javac", command, NULL);
+                perror("execl()");
+            }
+            break;
+        default:
+            wait(NULL); // asteapta dupa fiu
+    }
+    int fd = open(logfname, S_IRUSR, 0666);
+    if(fd < 0){
+        perror("open");
+    }
+    char * buf = malloc(10000);
+    read(fd, buf, 10000);
+    unlink(logfname);
+    return buf;
+}
 
 int inet_socket (uint16_t port, short reuse) {
   int sock;
@@ -216,17 +291,45 @@ void *inet_main (void *args) {
               switch (operation) {
                  case OPR_ECHO: 
                       {
-                      	 msgStringType str ;
+                      	 msgStringType str, str2, str3 ;
 	                 if (readSingleString (i, &str) < 0) {
 	                        // Cannot write to client. Close connection!
 	                        close (i) ; FD_CLR (i, &active_fd_set) ;
                          }
-                 	fprintf (stderr, "An echo value was received: %s\n", str.msg) ;
+                          if (readSingleString (i, &str2) < 0) {
+                              // Cannot write to client. Close connection!
+                              close (i) ; FD_CLR (i, &active_fd_set) ;
+                          }
+                          if (readSingleString (i, &str3) < 0) {
+                              // Cannot write to client. Close connection!
+                              close (i) ; FD_CLR (i, &active_fd_set) ;
+                          }
+                          //// asta-i continutul fisierului
+                          // 	fprintf (stderr, "An echo value was received: %s\n", str.msg) ;
+                 ///// asta-i numele fisierului
+                     fprintf(stderr, "Filename is %s%s\n", str3.msg, str2.msg);
+                  // calea fisierului este str3.msg
+                        char * logcontent = opt_echo(str2.msg, str3.msg);
+                        strcpy(str.msg, logcontent);
+                          if (writeSingleString (i, h, str.msg) < 0) {
+                              // Cannot write to client. Close connection!
+                              close (i) ; FD_CLR (i, &active_fd_set) ;
+                          }
+                    //    int fd = open(log, O_RDONLY | S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
+                      //  if(fd < 0){perror("open() --");}
+                      //  char bf[10000];
+                       // bzero(bf, 10000);
+                       // read(fd, bf, 10000);
+                        //bf[strlen(bf)] = 0;
+                        /*
+                        str.msg = malloc(strlen(bf)+1);
+                        strcpy(str.msg, bf);
+                        unlink(log);//sterge fisier temporar
                       	if (writeSingleString (i, h, str.msg) < 0) {
                  		// Cannot write to client. Close connection!
                  	  close (i) ; FD_CLR (i, &active_fd_set) ;
-                 	}
-                 	fprintf (stderr, "An echo value was sent back: %s\n", str.msg) ;
+                 	} */
+                 //	fprintf (stderr, "An echo value was sent back: %s\n", str.msg) ;
                         free (str.msg) ; // Need to free, once is used!
                       }    
                       break ;

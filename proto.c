@@ -33,7 +33,7 @@ msgHeaderType peekMsgHeader (int sock) { 	 // Use this function to 'peek' into m
 		h.opID = h.clientID = OPR_BYE ; // Connection closed for some reason. Just close it!
 	}
 #ifdef DEBUG
-	fprintf (stderr, "\tReceived msgHeader: %d %d, %d (%ld)\n", h.msgSize, h.clientID, h.opID, nb) ;
+	fprintf (stderr, "\tReceived msgHeader: %d %d, %d (%ld) filename:%s\n", h.msgSize, h.clientID, h.opID, nb, h.fileName) ;
 #endif
 	return h ;
 }

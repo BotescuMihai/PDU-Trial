@@ -17,7 +17,7 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
 #endif
 #include "soapH.h"
 
-SOAP_SOURCE_STAMP("@(#) soapServer.c ver 2.8.122 2022-05-30 15:28:18 GMT")
+SOAP_SOURCE_STAMP("@(#) soapServer.c ver 2.8.122 2022-05-30 19:05:40 GMT")
 SOAP_FMAC5 int SOAP_FMAC6 soap_serve(struct soap *soap)
 {
 #ifndef WITH_FASTCGI
@@ -117,10 +117,10 @@ SOAP_FMAC5 int SOAP_FMAC6 soap_serve_ns__connect(struct soap *soap)
 SOAP_FMAC5 int SOAP_FMAC6 soap_serve_ns__echo(struct soap *soap)
 {	struct ns__echo soap_tmp_ns__echo;
 	struct ns__echoResponse soap_tmp_ns__echoResponse;
-	char * soap_tmp_ns__stringType;
+	struct xsd__base64Binary soap_tmp_xsd__base64Binary;
 	soap_default_ns__echoResponse(soap, &soap_tmp_ns__echoResponse);
-	soap_tmp_ns__stringType = NULL;
-	soap_tmp_ns__echoResponse.echo = &soap_tmp_ns__stringType;
+	soap_default_xsd__base64Binary(soap, &soap_tmp_xsd__base64Binary);
+	soap_tmp_ns__echoResponse.result = &soap_tmp_xsd__base64Binary;
 	soap_default_ns__echo(soap, &soap_tmp_ns__echo);
 	if (!soap_get_ns__echo(soap, &soap_tmp_ns__echo, "ns:echo", NULL))
 		return soap->error;
@@ -128,7 +128,7 @@ SOAP_FMAC5 int SOAP_FMAC6 soap_serve_ns__echo(struct soap *soap)
 	 || soap_envelope_end_in(soap)
 	 || soap_end_recv(soap))
 		return soap->error;
-	soap->error = ns__echo(soap, soap_tmp_ns__echo.echoRequest, soap_tmp_ns__echoResponse.echo);
+	soap->error = ns__echo(soap, soap_tmp_ns__echo.data, soap_tmp_ns__echoResponse.result);
 	if (soap->error)
 		return soap->error;
 	soap->encodingStyle = NULL; /* use SOAP literal style */
