@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdio.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/select.h>
@@ -45,11 +46,15 @@ int unix_socket (const char *filename) {
   /* And RETURN success :) */
   return sock;
 }
-
+int conn;
 void *unix_main (void *args) {
   char *socket = (char *) args ;
-
-  if (unix_socket (socket)) { 
+  if(conn == 1){
+      fprintf(stderr, "Nu mai pot accepta alti clienti!\n");
+      return NULL;
+  }
+  if (unix_socket (socket)) {
+      conn = 1;
  /*
     pthread_mutex_lock (&curmtx) ; // Protect CURSES usage!!!
     attron (COLOR_PAIR(1)) ;

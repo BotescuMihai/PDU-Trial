@@ -10,6 +10,9 @@
 #include <stdlib.h>
 #include <libgen.h>
 #define MAX 10000
+int client_UIDS[10000];
+int client_no;
+
 
 char * getTimestamp(){
     time_t ltime;

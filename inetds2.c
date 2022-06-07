@@ -13,7 +13,9 @@
 #include "files_util.h"
 #include <arpa/inet.h>
 #include "proto.h"
-
+extern int client_UIDS[10000];
+extern int client_no;
+#define BUF_SIZE 1000000
 char * opt_echo(char * filename, char * filepath){
     // determina-i extensia
     char * tempfname = malloc(sizeof(filename) + 1);
@@ -57,7 +59,7 @@ char * opt_echo(char * filename, char * filepath){
              //   fprintf(stderr, "%s\n", command);
           //      strcat(command, " > ");
             //    strcat(command, logfname);
-            close(logfname);
+            close(logfname); // inchide fisierul ca sa functioneze dup2 in exec
                 execl("/usr/bin/python3", "/usr/bin/python3", command, NULL);
                 perror("execl()");
             }
@@ -258,7 +260,8 @@ void *inet_main (void *args) {
 	  	Pe baza informatiei din header, se decide operatia de urmat!
 			
 	  */
-	  msgHeaderType h = peekMsgHeader (i) ; 
+	  msgHeaderType h = peekMsgHeader (i) ;
+      //sleep(5);
  	  if ((clientID = h.clientID) < 0) {
              // Protocol error: missing client ID. Close connection
              fprintf (stderr, "There's something wrong! Negative ClientID.\t Closing connection, probably the client was terminated.\n") ;
@@ -268,15 +271,16 @@ void *inet_main (void *args) {
                int newID ; 
                msgIntType m ;
                newID = create_client_id () ;
-               fprintf (stderr, "\tDetected new client! New clientID: %d\n", newID ) ; 
-               if (readSingleInt (i, &m)<0) {
+               fprintf (stderr, "\tDetected new client! New clientID: %d\n", newID ) ;
+               client_UIDS[client_no ++] = newID;
+              if (readSingleInt (i, &m)<0) {
                  // Cannot read from client. This is impossible :) Close connection!
                  close (i) ; FD_CLR (i, &active_fd_set) ;
                }
                if (writeSingleInt (i, h, newID) < 0) {
                  // Cannot write to client. Close connection!
                  close (i) ; FD_CLR (i, &active_fd_set) ;
-               } 
+               }
             } else { /* Already identified. Existing client... communication continues */
               /* YOU SHOULD CHECK IF THIS IS AN EXISTING CLIENT !!! */
               int operation, dsize ;
@@ -291,8 +295,25 @@ void *inet_main (void *args) {
               switch (operation) {
                  case OPR_ECHO: 
                       {
-                      	 msgStringType str, str2, str3 ;
-	                 if (readSingleString (i, &str) < 0) {
+                      	 msgStringType str, str2, str3;
+                         // readSingleString(i, &str2);
+                           char * buf = (char*) malloc(BUF_SIZE + 1);
+                         char path[100];
+                         strcpy(path, h.fileName); //just for tests!!!!
+                       //  strcat(path, str2.msg);
+                     //    path[strlen(path)] = 0;
+                          //unlink(path);
+                         int fd = open(path, O_CREAT | O_RDWR);
+                         int n;
+                         while((n=readSingleString(i, &str)) > 0){
+                             write(fd, str.msg, n);
+                         }
+                         if(n < 0){
+                             // Cannot write to client. Close connection!
+                             close (i) ; FD_CLR (i, &active_fd_set) ;
+                         }
+                         fprintf(stderr, "%s\n", h.fileName);
+	           /*      if (readSingleString (i, &str) < 0) {
 	                        // Cannot write to client. Close connection!
 	                        close (i) ; FD_CLR (i, &active_fd_set) ;
                          }
@@ -303,18 +324,18 @@ void *inet_main (void *args) {
                           if (readSingleString (i, &str3) < 0) {
                               // Cannot write to client. Close connection!
                               close (i) ; FD_CLR (i, &active_fd_set) ;
-                          }
+                          } */
                           //// asta-i continutul fisierului
                           // 	fprintf (stderr, "An echo value was received: %s\n", str.msg) ;
                  ///// asta-i numele fisierului
-                     fprintf(stderr, "Filename is %s%s\n", str3.msg, str2.msg);
+                   //  fprintf(stderr, "Filename is %s%s\n", str3.msg, str2.msg);
                   // calea fisierului este str3.msg
-                        char * logcontent = opt_echo(str2.msg, str3.msg);
-                        strcpy(str.msg, logcontent);
-                          if (writeSingleString (i, h, str.msg) < 0) {
-                              // Cannot write to client. Close connection!
-                              close (i) ; FD_CLR (i, &active_fd_set) ;
-                          }
+                     //   char * logcontent = opt_echo(str2.msg, str3.msg);
+                       // strcpy(str.msg, logcontent);
+                         // if (writeSingleString (i, h, str.msg) < 0) {
+                           //   // Cannot write to client. Close connection!
+                            //  close (i) ; FD_CLR (i, &active_fd_set) ;
+                          //}
                     //    int fd = open(log, O_RDONLY | S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
                       //  if(fd < 0){perror("open() --");}
                       //  char bf[10000];
@@ -329,6 +350,7 @@ void *inet_main (void *args) {
                  		// Cannot write to client. Close connection!
                  	  close (i) ; FD_CLR (i, &active_fd_set) ;
                  	} */
+
                  //	fprintf (stderr, "An echo value was sent back: %s\n", str.msg) ;
                         free (str.msg) ; // Need to free, once is used!
                       }    

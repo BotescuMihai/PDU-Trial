@@ -39,6 +39,7 @@ typedef struct multiIntMsg {
 typedef struct stringMsg {
 //  int strSize ; 				  // For a string it is required to send its length!
   char *msg ;
+  int transfer; // flag-ul pentru transfer: 0 => nu transfer; 1 => transfer
 } msgStringType ;
 
 

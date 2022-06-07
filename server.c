@@ -14,7 +14,7 @@ void *inet_main (void *args) ;
 void *soap_main (void *args) ;
 
 // WINDOW *mainwnd ;
-#define UNIXSOCKET "/tmp/unixds"
+#define UNIXSOCKET "tpf_unix_sock.server"
 #define INETPORT   18081
 #define SOAPPORT   18082
 

@@ -5,12 +5,13 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/select.h>
+#include <sys/stat.h>
 #include <netinet/in.h>
 #include <netdb.h>
 #include <arpa/inet.h>
 #include "proto.h"
 #include "files_util.h"
-
+#define BUF_SIZE 1000000
 #define PORT            18081
 #define SERVERHOST      "127.0.0.1" 
 #define MSGLEN	128
@@ -69,10 +70,12 @@ int main (void) {
   msgIntType m ;
   msgStringType str ;
   int clientID = 0 ;
-  
+  int fd;
   h.clientID = 0 ;
-  h.opID = 0 ;
-  writeSingleInt (sock, h, 0) ; // Just for tests, ignore the response!
+    char filename[100];
+    h.fileName = malloc(100);
+    strcpy(h.fileName, "/serv_files/INET/lorem_transfered.txt");
+ writeSingleInt (sock, h, 0) ; // Just for tests, ignore the response!
   readSingleInt (sock,  &m) ;   // Just for tests, ignore the response!
   clientID = m.msg ;
   fprintf (stderr, "Got a clientID: %d\n", clientID) ;
@@ -95,29 +98,61 @@ int main (void) {
     fprintf (stderr, "Got the sum of %d %d ==> %d\n", -100+i*15, 100-i*22, m.msg) ;
   } */
 /* 3. ECHO */
-char filename[100];
-int fd;
+//int fd;
 int id = 0;
-while(1) {
-    start: bzero(filename, sizeof(filename));
-    h.clientID = clientID;
-    h.opID = OPR_ECHO;
-    fprintf(stderr, "Enter the file name...> ");
-    scanf("%s", filename);
-   // fprintf(stderr, "You entered %s", filename);
-    if((fd = open(filename, O_RDONLY)) < 0){
-        perror("open");
-        goto start;
-    }
-    char * outgoing = getContent(fd);
-    h.msgSize = strlen(outgoing);
-    h.fileName = getFileName(filename);
-   // printf("%s\n", outgoing);
+    h.opID = OPR_ECHO ;
+    while(1) {
+        start: bzero(filename, sizeof(filename));
+        h.clientID = clientID;
+        h.opID = OPR_ECHO;
+        fprintf(stderr, "Enter the file name...> ");
+        scanf("%s", filename);
+        //h.fileName = malloc(strlen(getFileName(filename)) + 1);
+        //strcpy(h.fileName, getFileName(filename));
+        msgStringType msg;
+        msg.transfer = 0;
+        // fprintf(stderr, "You entered %s", filename);
+        if((fd = open(filename, O_RDONLY)) < 0){
+            perror("open");
+            goto start;
+        }
+
+        // char * outgoing = getContent(fd);
+        //  h.msgSize = lseek(fd, 0L, SEEK_END); // marimea fisierului intreg
+        ///  lseek(fd, 0L, SEEK_SET); // resetare cursor
+        struct stat sb;
+        stat(filename, &sb);
+        h.msgSize = sb.st_size;
+        fprintf(stderr,"Dimensiune fisier:%d\n", h.msgSize);
+        //   writeSingleString(sock, h, h.fileName);
+        //  h.fileName = getFileName(filename);
+        // printf("%s\n", outgoing);
+        int msgSize = h.msgSize;
+        while(msgSize != 0){
+            if(msgSize < BUF_SIZE){
+                //   bzero(msg.msg, BUF_SIZE);
+                msg.msg = malloc(msgSize + 1);
+                h.msgSize = read(fd, msg.msg, msgSize);
+                msg.transfer = 0; // am incheiat transfer
+                writeSingleString(sock, h, msg.msg);
+                msgSize = 0; // ultima iteratie
+            }
+            else{
+                //   bzero(msg.msg, sizeof(msg.msg));
+                msg.msg = malloc(BUF_SIZE  + 1);
+                h.msgSize = read(fd, msg.msg, BUF_SIZE);
+                msg.transfer = 1; // transfer in progress
+                writeSingleString(sock, h, msg.msg);
+                msgSize -= BUF_SIZE;
+            }
+        }
+
+   /*
     writeSingleString(sock, h, getContent(fd)); // Just for tests, ignore the response!
     writeSingleString(sock, h, getFileName(filename));
     fprintf(stderr,"filename: %s%s\n", getFilePath(filename), getFileName(filename));
     writeSingleString(sock, h, getFilePath(filename));
-    readSingleString(sock, &str);   // Just for tests, ignore the response!
+    readSingleString(sock, &str);   // Just for tests, ignore the response! */
     // mai intai numele fisierului
 
     char fname[100];
@@ -126,12 +161,12 @@ while(1) {
     strcpy(fname, str.msg);
     fname[strlen(fname)] = 0;
     readSingleString(sock, &str);
-    fprintf(stderr, "filename and path: %s\n", fname);*/
+    fprintf(stderr, "filename and path: %s\n", fname);
     sprintf(fname, "./client_files/INET/log_[%s].txt", getTimestamp());
     int fd = open(fname, S_IRUSR | S_IWUSR | S_IXUSR | O_RDWR | O_CREAT, 0666);
     write(fd, str.msg, strlen(str.msg));
     //   fprintf(stderr, "Got the echo of %s  ==> %s\n", outgoing, str.msg);
-    free(str.msg); // Need to free, once it's used!
+    free(str.msg); // Need to free, once it's used! */
 }
 /* 5. BYE */
   h.clientID = clientID ;

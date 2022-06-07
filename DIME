@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<wsdl:definitions name="DIME Sample" targetNamespace="https://example.com/DimeExample" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:dime="http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/" xmlns:content= "http://schemas.xmlsoap.org/ws/2002/04/content-type/" xmlns:ref="http://schemas.xmlsoap.org/ws/2002/04/reference/" xmlns:svc="https://example.com/DimeExample/Service/" xmlns:msg="https://example.com/DimeExample/Messages/" xmlns:xs="https://www.w3.org/2001/XMLSchema" >
+         <wsdl:types>
+          <xs:schema targetNamespace="https://example.com/DimeExample" elementFormDefault="qualified">
+           <xs:import namespace= "https://schemas.xmlsoap.org/ws/2002/04/content-type/"/>
+           <xs:import namespace= "https://schemas.xmlsoap.org/ws/2002/04/reference/"/>
+           <xs:element name="GetMediaFile">
+           <xs:complexType>
+           <xs:sequence>
+            <xs:element name="fileName" type="xs:string"/>
+             <xs:element name="file" type="msg:MediaFile" minOccurs="0"/>
+              </xs:sequence> </xs:complexType> </xs:element>
+               <xs:complexType name="ReferencedBinary">
+                <xs:simpleContent> <xs:extension base="xs:base64Binary">
+                 <xs:attribute ref="ref:location" use="optional"/>
+                  </xs:extension> </xs:simpleContent> </xs:complexType>
+                   <xs:complexType name="MediaFile"> <xs:simpleContent>
+                    <xs:restriction base="msg:ReferencedBinary"> <xs:annotation>
+                    <xs:appinfo> <content:mediaType type="video/mpeg"/>
+                    </xs:appinfo> </xs:annotation> </xs:restriction>
+                    </xs:simpleContent> </xs:complexType> </xs:schema>
+                    </wsdl:types> <wsdl:message name="GetMediaFile">
+                    <wsdl:part name="body" element="msg:GetMediaFile"/>
+                    </wsdl:message> <wsdl:portType name="PortType">
+                    <wsdl:operation name="GetMediaFile">
+                    <wsdl:input message="svc:GetMediaFile"/> </wsdl:operation>
+                     </wsdl:portType> <wsdl:binding name="SoapDimeBinding" type="svc:PortType">
+                      <soap:binding transport="https://schemas.xmlsoap.org/soap/http" style="document"/>
+                       <wsdl:operation name="GetMediaFile">
+                        <soap:operation soapAction="https://example.com/GetMediaFile"/>
+                        <wsdl:input>
+                        <dime:message layout= "https://schemas.xmlsoap.org/ws/2002/04/dime/closed-layout" wsdl:required="true"/>
+                        <soap:body parts="body" use="literal"/> </wsdl:input>
+                         </wsdl:operation> </wsdl:binding> <wsdl:service name="DimeSample">
+                         <wsdl:port name="SoapDimePort" binding="svc:SoapDimeBinding">
+                         <soap:address location="https://example.com/DimeSample/"/> </wsdl:port>
+                         </wsdl:service> </wsdl:definitions>
