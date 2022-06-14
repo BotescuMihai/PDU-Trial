@@ -12,8 +12,7 @@
 /*
 extern WINDOW * mainwnd ;
 extern pthread_mutex_t curmtx ;
-
-WINDOW *soapwnd; 
+WINDOW *soapwnd;
 */
 
 /* Reuse this function. Previously from inetds.c */
@@ -22,56 +21,56 @@ long create_client_id () ;
 void closewin (WINDOW *wnd) ;
 
 void *soap_main (void *args) {
-  struct soap soap ;
-  int msd, csd, port, reuseAddrON = 1 ;
-  port = *(int *)(args);
-  soap_init (&soap) ;
-  
-  soap.bind_flags=SO_REUSEADDR ;
-  msd = soap_bind (&soap, "127.0.0.1", port, 100) ;
-  if (!soap_valid_socket(msd)) {
-    soap_print_fault (&soap, stderr) ; 
-    pthread_exit (NULL) ;
-  } else {
-    setsockopt(msd, SOL_SOCKET, SO_REUSEADDR, &reuseAddrON, sizeof(reuseAddrON)) ; 
-  }
+    struct soap soap ;
+    int msd, csd, port, reuseAddrON = 1 ;
+    port = *(int *)(args);
+    soap_init (&soap) ;
 
-  for (;;) {
-    csd = soap_accept (&soap) ;
-    if (csd < 0) { soap_print_fault (&soap, stderr); break ; }
+    soap.bind_flags=SO_REUSEADDR ;
+    msd = soap_bind (&soap, "127.0.0.1", port, 100) ;
+    if (!soap_valid_socket(msd)) {
+        soap_print_fault (&soap, stderr) ;
+        pthread_exit (NULL) ;
+    } else {
+        setsockopt(msd, SOL_SOCKET, SO_REUSEADDR, &reuseAddrON, sizeof(reuseAddrON)) ;
+    }
+
+    for (;;) {
+        csd = soap_accept (&soap) ;
+        if (csd < 0) { soap_print_fault (&soap, stderr); break ; }
 //    soapwnd = newwin (16, 70, 5, 5) ;
-    if (soap_serve (&soap) != SOAP_OK) soap_print_fault (&soap, stderr) ;
-     soap_destroy (&soap) ;
-    soap_end (&soap) ;
-  }
-  soap_done (&soap) ;
-  pthread_exit (NULL) ;
+        if (soap_serve (&soap) != SOAP_OK) soap_print_fault (&soap, stderr) ;
+        soap_destroy (&soap) ;
+        soap_end (&soap) ;
+    }
+    soap_done (&soap) ;
+    pthread_exit (NULL) ;
 }
 
 char *do_client_concat (struct soap *soap, char *o1, char *o2) {
-  int bsize ;
-  char *b ; 
-  bsize = strlen (o1) + strlen (o2)+2 ;
-  b = soap_malloc (soap, bsize) ;
-  sprintf (b, "%s %s", o2, o1) ; b [bsize] = 0 ;
+    int bsize ;
+    char *b ;
+    bsize = strlen (o1) + strlen (o2)+2 ;
+    b = soap_malloc (soap, bsize) ;
+    sprintf (b, "%s %s", o2, o1) ; b [bsize] = 0 ;
 
 
 
-  return b ;
+    return b ;
 
 }
- 
+
 int ns__bye (struct soap*s, struct byeStruct rq, struct ns__byeResponse *rsp) {
-  /* Do nothing for this sample. 
-     In "Real" application clear structures associated with your ID */
-  return SOAP_OK ;
+    /* Do nothing for this sample.
+       In "Real" application clear structures associated with your ID */
+    return SOAP_OK ;
 }
 
 int ns__connect(struct soap*s, long *rsp) {
-  long clientid = create_client_id() ;
-  *rsp = clientid ;
+    long clientid = create_client_id() ;
+    *rsp = clientid ;
 
-  return SOAP_OK ;
+    return SOAP_OK ;
 }
 int my_get(struct soap *soap, char * rq)
 {
@@ -106,7 +105,6 @@ int ns__echo(struct soap*s, char *rq, char **rsp) {
         printf("location   =%s\n", attachment->location ? attachment->location : "");
         printf("description=%s\n", attachment->description ? attachment->description : "");
     }
-
     rsp1 = do_client_concat (s, ":: Am primit ::", rq) ;
     *rsp = rsp1 ;
     fprintf(stderr, "File content\n===========\n");
@@ -115,29 +113,26 @@ int ns__echo(struct soap*s, char *rq, char **rsp) {
 }*/
 
 
-
-int ns__echo(struct soap *soap, struct xsd__base64Binary *data, struct xsd__base64Binary *result)
+int ns__echo(struct soap *soap, char * rq, char ** rsp)
 {
-    // echo back the structure (as a MIME attachment)
-    result->__ptr = data->__ptr;
-    result->__size = data->__size;
-    result->id = data->id;
-    result->type = data->type;
-    result->options = data->options;
     struct soap_multipart *attachment;
     printf("Attachements\n");
     int n = 0;
-    for (attachment = soap->dime.list; attachment; attachment = attachment->next)
+    for (attachment = soap->mime.list; attachment; attachment = attachment->next)
     {
         ++n;
         printf("Part %d:\n", n);
         printf("ptr        =%p\n", attachment->ptr);
+        printf("%s\n", attachment->ptr);
+       // write(1, attachment->ptr, sizeof(attachment->ptr));
+    //    write(1, "\n", 1);
         printf("size       =%ul\n", attachment->size);
         printf("id         =%s\n", attachment->id ? attachment->id : "");
         printf("type       =%s\n", attachment->type ? attachment->type : "");
         printf("location   =%s\n", attachment->location ? attachment->location : "");
         printf("description=%s\n", attachment->description ? attachment->description : "");
     }
+    * rsp = rq;
     return SOAP_OK;
 }
 
@@ -157,7 +152,6 @@ int ns__echo(struct soap *soap, struct xsd__base64Binary *data, struct xsd__base
   </ns:echo>
  </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
-
  ALA BUN
  */
 
@@ -182,19 +176,16 @@ int ns__echo(struct soap*s, char *rq, char **rsp) {
 }*/
 
 int ns__concat(struct soap*s, struct concatStruct rq, char **rsp) {
-  char *rsp1;
-  rsp1 = do_client_concat (s, rq.op1, rq.op2) ;
-  *rsp = rsp1 ; 
-  return SOAP_OK ;
+    char *rsp1;
+    rsp1 = do_client_concat (s, rq.op1, rq.op2) ;
+    *rsp = rsp1 ;
+    return SOAP_OK ;
 }
 
 int ns__adder(struct soap*s, struct addStruct rq, long *rsp) {
-  long rsp1 ;
-  rsp1 = rq.op1 + rq.op2; 
-  *rsp = rsp1 ;
+    long rsp1 ;
+    rsp1 = rq.op1 + rq.op2;
+    *rsp = rsp1 ;
 
-  return SOAP_OK ;
+    return SOAP_OK ;
 }
-
-
-

@@ -6,65 +6,219 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <fcntl.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/select.h>
 #include <sys/un.h>
-
+#include <dirent.h>
+#define MAX 1024
+#define SOCK_PATH  "tpf_unix_sock.server"
 /*
 extern WINDOW * mainwnd ;
 extern pthread_mutex_t curmtx ;
 */
 
-int unix_socket (const char *filename) {
-  struct sockaddr_un name;
-  int sock; /* UNIX Socket descriptor */
-  size_t size;
-  
-  /* Create the socket. */
-  sock = socket (PF_LOCAL, SOCK_DGRAM, 0);
-  if (sock < 0) {
-//    perror ("unix-common: socket error");
-    pthread_exit (NULL);
-  }
-  
-  name.sun_family = AF_LOCAL; /* Set ADDRESS Family */
-  strncpy (name.sun_path, filename, sizeof (name.sun_path));
-  /* Create SOCKET Path info */
-  name.sun_path[sizeof (name.sun_path) - 1] = '\0';
-  
-  size = (offsetof (struct sockaddr_un, sun_path)
-	  + strlen (name.sun_path) + 1);
-  /* You can use size = SUN_LEN (&name) ; instead */
-  
-  /* Now BIND the socket */
-  if (bind (sock, (struct sockaddr *) &name, size) < 0) {
-//    perror ("bind");
-    pthread_exit (NULL);
-  }
-  
-  /* And RETURN success :) */
-  return sock;
+char * my_ls(char * path){
+    struct dirent *d;
+    DIR * dh = opendir(path);
+    if(!dh){
+        perror("opendir");
+        return NULL;
+    }
+    char * res = malloc(10000);
+    sprintf(res, "\t[%s]\n", path);
+    while((d = readdir(dh)) != NULL){
+        char * tempent = malloc(1000);
+      //  sprintf(tempent, "%d\t%s\t%d\t%d\t%d\t%d\n", d->d_ino, d->d_name, d->d_namlen, d->d_reclen, d->d_seekoff, d->d_type);
+      sprintf(tempent,"%s\n", d->d_name);
+      strcat(res, tempent);
+    }
+    return res;
+}
+
+int fd_temp;
+char * procesare(long opt){
+    fprintf(stderr,"Opt %ld\n", opt);
+    char * rs1;
+    switch(opt){
+        case 1:
+            system("make inetclient && ./inetclient");
+            break;
+        case 2:
+            // conectare client py
+            break;
+        case 3:
+            system("killall serverds");
+            break;
+        case 4:
+            rs1 = (char*) malloc(strlen(my_ls("./serv_files/INET/")));
+            strcpy(rs1, my_ls("./serv_files/INET/"));
+            strcat(rs1, my_ls("./serv_files/SOAP/"));
+            rs1[strlen(rs1)] = 0;
+           /* dup2(fd_temp, STDOUT_FILENO);
+            fprintf(stdout, "\t[INET]\n");
+            system("ls -la ./serv_files/INET/");
+            fprintf(stdout, "\t[SOAP]\n");
+            system("ls -la ./serv_files/SOAP/");
+            close(fd_temp); */
+            break;
+        case 5:
+            rs1 = (char*) malloc(my_ls("./client_files/INET"));
+            strcpy(rs1, my_ls("./client_files/INET"));
+            break;
+        case 6:
+            // client PY
+            break;
+        case 7:
+            // client SOAP
+            break;
+        default: break;
+    }
+    /*
+    fd_temp = open("temp", O_RDWR | O_CREAT, O_TRUNC);
+    char * buf = (char*) malloc(10000);
+    read(fd_temp, buf, 10000);
+    buf[strlen(buf)] = 0;
+    return buf; */
+    return rs1;
 }
 int conn;
 void *unix_main (void *args) {
-  char *socket = (char *) args ;
-  if(conn == 1){
-      fprintf(stderr, "Nu mai pot accepta alti clienti!\n");
-      return NULL;
-  }
-  if (unix_socket (socket)) {
-      conn = 1;
- /*
-    pthread_mutex_lock (&curmtx) ; // Protect CURSES usage!!!
-    attron (COLOR_PAIR(1)) ;
-    mvwprintw (mainwnd, LINES-4, 2, "Socket UNIX (%s) created", socket) ;
-    attroff (COLOR_PAIR(1)) ;
-//    wrefresh (mainwnd) ;
-    pthread_mutex_unlock (&curmtx) ;
-    */
-  }
+    int server_sock, client_sock, len, rc;
+    int bytes_rec = 0;
+    struct sockaddr_un server_sockaddr;
+    struct sockaddr_un client_sockaddr;
+    char buf[256];
+    int backlog = 10;
+    memset(&server_sockaddr, 0, sizeof(struct sockaddr_un));
+    memset(&client_sockaddr, 0, sizeof(struct sockaddr_un));
+    memset(buf, 0, 256);
 
-  pthread_exit (NULL) ;
+    /**************************************/
+    /* Create a UNIX domain stream socket */
+    /**************************************/
+    server_sock = socket(AF_UNIX, SOCK_STREAM, 0);
+    if (server_sock == -1){
+        perror("socket");
+ //      printf("SOCKET ERROR: %d\n", sock_errno());
+        exit(1);
+    }
+
+    /***************************************/
+    /* Set up the UNIX sockaddr structure  */
+    /* by using AF_UNIX for the family and */
+    /* giving it a filepath to bind to.    */
+    /*                                     */
+    /* Unlink the file so the bind will    */
+    /* succeed, then bind to that file.    */
+    /***************************************/
+    server_sockaddr.sun_family = AF_UNIX;
+    strcpy(server_sockaddr.sun_path, SOCK_PATH);
+    len = sizeof(server_sockaddr);
+
+    unlink(SOCK_PATH);
+    rc = bind(server_sock, (struct sockaddr *) &server_sockaddr, len);
+    if (rc == -1){
+        perror("bind");
+       // printf("BIND ERROR: %d\n", sock_errno());
+        close(server_sock);
+        exit(1);
+    }
+
+    /*********************************/
+    /* Listen for any client sockets */
+    /*********************************/
+    rc = listen(server_sock, backlog);
+    if (rc == -1){
+        perror("listen");
+        //printf("LISTEN ERROR: %d\n", sock_errno());
+        close(server_sock);
+        exit(1);
+    }
+    printf("socket listening...\n");
+    char opt[10];
+    /*********************************/
+    /* Accept an incoming connection */
+    /*********************************/
+    if(conn == 0) {
+        client_sock = accept(server_sock, (struct sockaddr *) &client_sockaddr, &len);
+        if (client_sock == -1) {
+            perror("accept");
+            //   printf("ACCEPT ERROR: %d\n", sock_errno());
+            close(server_sock);
+            close(client_sock);
+            exit(1);
+        }
+        conn = 1;
+        /****************************************/
+        /* Get the name of the connected socket */
+        /****************************************/
+        len = sizeof(client_sockaddr);
+        rc = getpeername(client_sock, (struct sockaddr *) &client_sockaddr, &len);
+        if (rc == -1) {
+            perror("getpeername");
+            //  printf("GETPEERNAME ERROR: %d\n", sock_errno());
+            close(server_sock);
+            close(client_sock);
+            exit(1);
+        } else {
+            printf("Client socket filepath: %s\n", client_sockaddr.sun_path);
+        }
+
+        /************************************/
+        /* Read and print the data          */
+        /* incoming on the connected socket */
+        /************************************/
+        while (1) {
+            printf("waiting to read...\n");
+            bytes_rec = recv(client_sock, buf, sizeof(buf), 0);
+            if (bytes_rec == -1) {
+                perror("recv");
+                //   printf("RECV ERROR: %d\n", sock_errno());
+                close(server_sock);
+                close(client_sock);
+                exit(1);
+            } else {
+                printf("DATA RECEIVED = %s\n", buf);
+                strcpy(opt, buf);
+            }
+            long opt = strtol(buf, NULL, 10);
+            char * buff;
+            if(opt < 4) procesare(opt);
+            buff = opt >= 4 ? procesare(opt) : NULL;
+            /******************************************/
+            /* Send data back to the connected socket */
+            /******************************************/
+           // sprintf(buf, "Mi-ai trimis optiunea %s", buf);
+           if(buff != NULL) {
+               //memset(buf, 0, 256);
+               //  sprintf(buf, "Mi-ai trimis optiunea %s", opt);
+             //  buf[strlen(buf)] = 0;
+               printf("Sending data...\n");
+               rc = send(client_sock, buff, strlen(buff), 0);
+               if (rc == -1) {
+                   perror("send");
+                   //printf("SEND ERROR: %d", sock_errno());
+                   close(server_sock);
+                   close(client_sock);
+                   exit(1);
+               } else {
+                   printf("Data sent!\n");
+               }
+           }
+
+            /******************************/
+            /* Close the sockets and exit */
+            /******************************/
+        }
+    }
+    else{
+        fprintf(stderr, "Nu pot accepta alte conexiuni\n");
+    }
+    close(server_sock);
+    close(client_sock);
+    pthread_exit(NULL);
 }
+
 

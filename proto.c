@@ -24,7 +24,7 @@ msgHeaderType peekMsgHeader (int sock) { 	 // Use this function to 'peek' into m
 	h.msgSize  = ntohl (h.msgSize) ;
 	h.clientID = ntohl (h.clientID) ;
 	h.opID = ntohl (h.opID) ;
- //   h.fileName = ntohs(h.fileName);
+    //h.fileName = ntohs(h.fileName);
 
 	// End of mandatory conversions!
 	if (nb == -1) {
@@ -57,8 +57,7 @@ int writeSingleInt (int sock, msgHeaderType h, int i) {			// Build the message a
   s.header.opID = htonl(h.opID) ;
   s.i.msg = htonl(i) ;
   s.header.msgSize = htonl(sizeof(s)) ;
-  s.header.fileName = malloc(strlen(h.fileName) + 1);
-  strcpy(s.header.fileName, h.fileName);
+  s.header.fileName = h.fileName;
   size_t nb ;
   nb = send (sock, &s, sizeof(s), 0) ;
   if (nb == -1) {
@@ -113,10 +112,10 @@ int readSingleString (int sock,  msgStringType *str) {  		 // Simple read/write 
 	size_t nb ; 
 	msgIntType m ;
 	nb = readSingleInt (sock, &m) ;	 // Skip the header....
-    fprintf (stderr, "The string size was received: %d\n", m.msg) ;
+   // fprintf (stderr, "The string size was received: %d\n", m.msg) ;
 	str->msg = (char *)malloc (m.msg+1) ;
 	nb = recv (sock, str->msg, m.msg, MSG_WAITALL) ;
-	fprintf (stderr, "\tReceived stream is {%ld}\n", nb) ;
+	//fprintf (stderr, "\tReceived stream is {%ld}\n", nb) ;
 	
 	str->msg[m.msg]='\0';
 //	fprintf (stderr, "\tReceived message is {%s}\n", str->msg) ;
@@ -140,10 +139,10 @@ int writeSingleString (int sock, msgHeaderType h, char *str) {
     // Cannot send! Connection close, Just report and close connection!
     return -1 ;
   }
-  fprintf (stderr, "\tSent size notification [%d]\n", strSize) ;
+  //fprintf (stderr, "\tSent size notification [%d]\n", strSize) ;
  // nb = write (2, str, strSize) ;
   nb = send (sock, str, strSize, 0) ;
-  fprintf (stderr, "|\t[%ld/%ld//%ld]\n", nb, sizeof(singleStringType), sizeof(msgStringType)) ;
+ // fprintf (stderr, "|\t[%ld/%ld//%ld]\n", nb, sizeof(singleStringType), sizeof(msgStringType)) ;
   return nb ;
 }
 

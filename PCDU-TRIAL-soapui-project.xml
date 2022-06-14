@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="3960cf3f-b114-41e3-aa3d-30dfa2184b77" activeEnvironment="Default" name="PCDU_TRIAL" resourceRoot="${projectDir}" soapui-version="5.7.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="b25ba8b3-0b07-42b9-9505-9894ab37c4ab" wsaVersion="NONE" name="xRayStorageBinding" type="wsdl" bindingName="{http://mediStor.org/x-rays}xRayStorageBinding" soapVersion="1_1" anonymous="optional" definition="sample.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/Users/alex/CLionProjects/PDU-Trial/sample.wsdl"><con:part><con:url>file:/Users/alex/CLionProjects/PDU-Trial/sample.wsdl</con:url><con:content><![CDATA[<definitions name="XrayStorage" targetNamespace="http://mediStor.org/x-rays" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://mediStor.org/x-rays" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <message name="storRequest">
+    <part name="patientName" type="xsd:string"/>
+    <part name="patientNumber" type="xsd:int"/>
+    <part name="xRay" type="xsd:base64Binary"/>
+  </message>
+  <message name="storResponse">
+    <part name="success" type="xsd:boolean"/>
+  </message>
+  <portType name="xRayStorage">
+    <operation name="store">
+      <input message="tns:storRequest" name="storRequest"/>
+      <output message="tns:storResponse" name="storResponse"/>
+    </operation>
+  </portType>
+  <binding name="xRayStorageBinding" type="tns:xRayStorage">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="store">
+      <soap:operation soapAction="" style="document"/>
+      <input name="storRequest">
+        <mime:multipartRelated>
+          <mime:part name="bodyPart">
+            <soap:body use="literal"/>
+          </mime:part>
+          <mime:part name="imageData">
+            <mime:content part="xRay" type="image/jpeg"/>
+          </mime:part>
+        </mime:multipartRelated>
+      </input>
+      <output name="storResponse">
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="xRayStorageService">
+    <port binding="tns:xRayStorageBinding" name="xRayStoragePort">
+      <soap:address location="http://localhost:9000"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:9000</con:endpoint></con:endpoints><con:operation id="26304b3b-1026-42ca-a99c-01484a685644" isOneWay="false" action="" name="store" bindingOperationName="store" type="Request-Response" outputName="storResponse" inputName="storRequest" receivesAttachments="false" sendsAttachments="true" anonymous="optional"><con:settings/><con:call id="e1bf63bc-99c6-42d0-8c7c-37ca3185e619" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:18082</con:endpoint><con:request><![CDATA[<definitions name="XrayStorage"
+    targetNamespace="http://mediStor.org/x-rays"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:tns="http://mediStor.org/x-rays"
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <message name="storRequest">
+    <part name="patientName" type="xsd:string"/>
+    <part name="patientNumber" type="xsd:int"/>
+    <part name="xRay" type="xsd:base64Binary"/>
+  </message>
+  <message name="storResponse">
+    <part name="success" type="xsd:boolean"/>
+  </message>
+
+  <portType name="xRayStorage">
+    <operation name="store">
+      <input message="tns:storRequest" name="storRequest"/>
+      <output message="tns:storResponse" name="storResponse"/>
+    </operation>
+  </portType>
+
+  <binding name="xRayStorageBinding" type="tns:xRayStorage">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+      <operation name="store">
+      <soap:operation soapAction="" style="document"/>
+      <input name="storRequest">
+        <mime:multipartRelated>
+          <mime:part name="bodyPart">
+            <soap:body use="literal"/>
+          </mime:part>
+          <mime:part name="imageData">
+            <mime:content part="xRay" type="text/plain"/>
+          </mime:part>
+        </mime:multipartRelated>
+      </input>
+      <output name="storResponse">
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+
+  <service name="xRayStorageService">
+    <port binding="tns:xRayStorageBinding" name="xRayStoragePort">
+      <soap:address location="http://localhost:18082"/>
+    </port>
+  </service>
+</definitions>
+]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:attachment><con:name>calc.h</con:name><con:contentType>text/plain</con:contentType><con:contentId>calc.h</con:contentId><con:part>xRay</con:part><con:url>calc.h</con:url><con:id>7c682423-c662-4073-909f-af6ace1c5f7d</con:id></con:attachment><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://mediStor.org/x-rays/xRayStorage/storRequest"/><con:wsrmConfig version="1.2"/></con:call><con:requestParts><con:part name="xRay"><con:contentType>image/jpeg</con:contentType></con:part></con:requestParts></con:operation></con:interface><con:testSuite id="29a2f482-f0d6-4c33-9b6d-54baaf5e8ca3" name="xRayStorageBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="6ed65669-7957-411f-a29a-270951ce3a86" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="store TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="f3193096-c5f2-44f6-9453-8e08eac847f1" name="store"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>xRayStorageBinding</con:interface><con:operation>store</con:operation><con:request name="store" id="6b3ee16b-0780-41f8-bc66-80c53e32729a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:18082</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ns="http://tempuri.org/ns.xsd">
+ <SOAP-ENV:Body>
+  <ns:echo>
+   <echoRequest>Ceau</echoRequest>
+  </ns:echo>
+ </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:attachment><con:name>2liste.txt</con:name><con:contentType>text/plain</con:contentType><con:size>188</con:size><con:contentId>2liste.txt</con:contentId><con:part>xRay</con:part><con:url>../../2liste.txt</con:url><con:data>UEsDBBQACAgIAFt/yVQAAAAAAAAAAAAAAAAKAAAAMmxpc3RlLnR4dEvJL02MzynNS8/MzYzPySwuSdWI1/HWideJ17TS5VIAAk5vBRsFAx0FRR2FtMTMHD0urhRMPT46BjrRsTo+QE0KinrYVER71ITEAk0G0YaxOkFIxtuBjA8oSi1TyCxW8NY11IFIYDEkRAekTCfEEKhfjwsAUEsHCI8XLdd0AAAAvAAAAFBLAQIUABQACAgIAFt/yVSPFy3XdAAAALwAAAAKAAAAAAAAAAAAAAAAAAAAAAAybGlzdGUudHh0UEsFBgAAAAABAAEAOAAAAKwAAAAAAA==</con:data><con:id>b7bdf781-27a3-4828-ac9b-44ec1c43f8fd</con:id></con:attachment><con:attachment><con:name>calc.add.req.xml</con:name><con:contentType>text/xml</con:contentType><con:size>493</con:size><con:contentId>calc.add.req.xml</con:contentId><con:url>calc.add.req.xml</con:url><con:data>UEsDBBQACAgIAK6cyVQAAAAAAAAAAAAAAAAQAAAAY2FsYy5hZGQucmVxLnhtbJWRTW/CMAyG7/0VUe6NA1ymKC0CBKd9Sd0mriGJoFJxqqaj8O8X2vFRcQB88iv7cd7YcrzfFmRnK587TOiAcUosamdyXCf0+2sRv9BxGsnsY/IZz99/xBx3tnCljUiIwKIXp1pCN3VdCgCvN3arPAtl71TJXLWGYwL2HwZ6i88ewTtjPXzv8zPZNA1rRi0w5HwAy7fXrB0W5+hrhdr2SXOfvAbQDxP6W6HQqtA0jchlLVNnDuSsTkaz+lDYZ/4VZhIZnhHKmGNOpEo54xJUp1adWrV9cGmU0HMSDgY3F0ujP1BLBwiwQCjG4QAAAO0BAABQSwECFAAUAAgICACunMlUsEAoxuEAAADtAQAAEAAAAAAAAAAAAAAAAAAAAAAAY2FsYy5hZGQucmVxLnhtbFBLBQYAAAAAAQABAD4AAAAfAQAAAAA=</con:data><con:id>a8fad9c4-c062-4d57-9f11-2463b07e5f15</con:id></con:attachment><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://mediStor.org/x-rays/xRayStorage/storRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

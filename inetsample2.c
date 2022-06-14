@@ -16,7 +16,47 @@
 #define SERVERHOST      "127.0.0.1" 
 #define MSGLEN	128
 
-  void init_sockaddr (struct sockaddr_in *name,
+static char * options[] = {
+        "Trimite fisier sursa spre executie",
+        "Creeaza un fisier nou pe server",
+        "Modifica numele unui fisier deja existent pe server",
+        "Sterge un fisier existent de pe server",
+        "Vizualizeaza toate log-urile de la nivel de client",
+        "Vizualizeaza toate fisierele de la nivel de server",
+        "Vizualizeaza programele scrise intr-un anumit limbaj de programare de la nivel de server",
+        "Afiseaza marimea totala a tuturor fisierelor stocate pe server (INET) [GB]",
+        "Afiseaza informatii legate de cel mai MARE fisier din toate fisierele stocate pe server (INET)",
+        "Afiseaza informatii legate de cel mai MIC fisier din toate fisierele stocate pe server (INET)",
+        "Statistica (limbaj de programare -- numar fisiere)"
+};
+
+static char * avail_programming_languages[] ={
+        "c",
+        "cpp",
+        "java",
+        "py",
+        NULL
+};
+
+void avail_languages_menu(){
+    int i;
+    for(i=0;avail_programming_languages[i] != NULL;i++){
+        fprintf(stderr, "[%d]\t%s\n", i + 1, avail_programming_languages[i]);
+    }
+    fprintf(stderr, "Alegeti optiunea...>");
+}
+
+void menu(){
+    int i;
+    for(i=0;i<sizeof(options)/sizeof(char*);i++){
+        fprintf(stderr, "[%d]\t%s\n", i + 1, options[i]);
+    }
+    fprintf(stderr, "Alegeti optiunea...>");
+}
+
+
+
+void init_sockaddr (struct sockaddr_in *name,
   const char *hostname,
   uint16_t port)
   {
@@ -78,6 +118,7 @@ int main (void) {
  writeSingleInt (sock, h, 0) ; // Just for tests, ignore the response!
   readSingleInt (sock,  &m) ;   // Just for tests, ignore the response!
   clientID = m.msg ;
+  h.clientID = clientID; // salvez ID-ul
   fprintf (stderr, "Got a clientID: %d\n", clientID) ;
 /* 1. Now do some stupid math: negative of a number.
   h.clientID = clientID ;
@@ -100,74 +141,206 @@ int main (void) {
 /* 3. ECHO */
 //int fd;
 int id = 0;
-    h.opID = OPR_ECHO ;
+   // h.opID = OPR_ECHO ;
+char opt[2];
     while(1) {
-        start: bzero(filename, sizeof(filename));
-        h.clientID = clientID;
-        h.opID = OPR_ECHO;
-        fprintf(stderr, "Enter the file name...> ");
-        scanf("%s", filename);
-        //h.fileName = malloc(strlen(getFileName(filename)) + 1);
-        //strcpy(h.fileName, getFileName(filename));
-        msgStringType msg;
-        msg.transfer = 0;
-        // fprintf(stderr, "You entered %s", filename);
-        if((fd = open(filename, O_RDONLY)) < 0){
-            perror("open");
-            goto start;
-        }
-
-        // char * outgoing = getContent(fd);
-        //  h.msgSize = lseek(fd, 0L, SEEK_END); // marimea fisierului intreg
-        ///  lseek(fd, 0L, SEEK_SET); // resetare cursor
-        struct stat sb;
-        stat(filename, &sb);
-        h.msgSize = sb.st_size;
-        fprintf(stderr,"Dimensiune fisier:%d\n", h.msgSize);
-        //   writeSingleString(sock, h, h.fileName);
-        //  h.fileName = getFileName(filename);
-        // printf("%s\n", outgoing);
-        int msgSize = h.msgSize;
-        while(msgSize != 0){
-            if(msgSize < BUF_SIZE){
-                //   bzero(msg.msg, BUF_SIZE);
-                msg.msg = malloc(msgSize + 1);
-                h.msgSize = read(fd, msg.msg, msgSize);
-                msg.transfer = 0; // am incheiat transfer
-                writeSingleString(sock, h, msg.msg);
-                msgSize = 0; // ultima iteratie
+        menu();
+        bzero(opt, 2);
+        scanf("%s", opt);
+        writeSingleString(sock, h, opt);
+        long optiune = strtol(opt, NULL, 10);
+        h.opID = optiune;
+        if (optiune == 1) {
+            start:
+            bzero(filename, sizeof(filename));
+            h.clientID = clientID;
+            h.opID = 1;
+            fprintf(stderr, "Enter the file name...> ");
+            scanf("%s", filename);
+            msgStringType Filename;
+            Filename.msg = malloc(strlen(filename) + 1);
+            strcpy(Filename.msg, filename);
+            writeSingleString(sock, h, Filename.msg); // trimite-i mai intai numele fisierului
+            //h.fileName = malloc(strlen(getFileName(filename)) + 1);
+            //strcpy(h.fileName, getFileName(filename));
+            msgStringType msg;
+            msg.transfer = 0;
+            // fprintf(stderr, "You entered %s", filename);
+            if ((fd = open(filename, O_RDONLY)) < 0) {
+                perror("open");
+                goto start;
             }
-            else{
-                //   bzero(msg.msg, sizeof(msg.msg));
-                msg.msg = malloc(BUF_SIZE  + 1);
-                h.msgSize = read(fd, msg.msg, BUF_SIZE);
-                msg.transfer = 1; // transfer in progress
-                writeSingleString(sock, h, msg.msg);
-                msgSize -= BUF_SIZE;
+
+            // char * outgoing = getContent(fd);
+            //  h.msgSize = lseek(fd, 0L, SEEK_END); // marimea fisierului intreg
+            ///  lseek(fd, 0L, SEEK_SET); // resetare cursor
+            struct stat sb;
+            stat(filename, &sb);
+            h.msgSize = sb.st_size;
+            fprintf(stderr, "Dimensiune fisier:%d\n", h.msgSize);
+            //   writeSingleString(sock, h, h.fileName);
+            //  h.fileName = getFileName(filename);
+            // printf("%s\n", outgoing);
+            int msgSize = h.msgSize;
+            while (msgSize != 0) {
+                if (msgSize < BUF_SIZE) {
+                    //   bzero(msg.msg, BUF_SIZE);
+                    msg.msg = malloc(msgSize + 1);
+                    h.msgSize = read(fd, msg.msg, msgSize);
+                    msg.transfer = 0; // am incheiat transfer
+                    writeSingleString(sock, h, msg.msg);
+                    msgSize = 0; // ultima iteratie
+                } else {
+                    //   bzero(msg.msg, sizeof(msg.msg));
+                    msg.msg = malloc(BUF_SIZE + 1);
+                    h.msgSize = read(fd, msg.msg, BUF_SIZE);
+                    msg.transfer = 1; // transfer in progress
+                    writeSingleString(sock, h, msg.msg);
+                    msgSize -= BUF_SIZE;
+                }
             }
+            close(fd); // inchide fisierul!
+            msgStringType msg3;
+            // readSingleString(sock, &msg3);
+            msgSize = h.msgSize;
+            char fname[100]; // salvez local fisierul
+            strcpy(fname, getFileUID("INET"));
+            //fname[strlen(fname)] = 0;
+            fprintf(stderr, "Send file back: filename -- %s\n", fname);
+            fd = open(fname, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IXUSR);
+            if (fd < 0) {
+                perror("on open() -- send file back");
+                return 0;
+            }
+            // scrie in fisier
+            int n;
+            msgStringType str4;
+            /*
+            while ((n = readSingleString(sock, &str4)) > 0) {
+                write(fd, str4.msg, n);
+            } */
+            n = readSingleString(sock, &str4);
+            if(n > 0){
+                write(fd, str4.msg, n);
+            }
+            system("chmod u+r ./client_files/INET/*");
+            /*
+             writeSingleString(sock, h, getContent(fd)); // Just for tests, ignore the response!
+             writeSingleString(sock, h, getFileName(filename));
+             fprintf(stderr,"filename: %s%s\n", getFilePath(filename), getFileName(filename));
+             writeSingleString(sock, h, getFilePath(filename));
+             readSingleString(sock, &str);   // Just for tests, ignore the response! */
+            // mai intai numele fisierului
+
+            //   strcpy(fname, "./client_files/INET/");
+            /*
+               strcpy(fname, str.msg);
+               fname[strlen(fname)] = 0;
+               readSingleString(sock, &str);
+               fprintf(stderr, "filename and path: %s\n", fname);
+               sprintf(fname, "./client_files/INET/log_[%s].txt", getTimestamp());
+               int fd = open(fname, S_IRUSR | S_IWUSR | S_IXUSR | O_RDWR | O_CREAT, 0666);
+               write(fd, str.msg, strlen(str.msg));
+               //   fprintf(stderr, "Got the echo of %s  ==> %s\n", outgoing, str.msg);
+               free(str.msg); // Need to free, once it's used! */
         }
-
-   /*
-    writeSingleString(sock, h, getContent(fd)); // Just for tests, ignore the response!
-    writeSingleString(sock, h, getFileName(filename));
-    fprintf(stderr,"filename: %s%s\n", getFilePath(filename), getFileName(filename));
-    writeSingleString(sock, h, getFilePath(filename));
-    readSingleString(sock, &str);   // Just for tests, ignore the response! */
-    // mai intai numele fisierului
-
-    char fname[100];
- //   strcpy(fname, "./client_files/INET/");
- /*
-    strcpy(fname, str.msg);
-    fname[strlen(fname)] = 0;
-    readSingleString(sock, &str);
-    fprintf(stderr, "filename and path: %s\n", fname);
-    sprintf(fname, "./client_files/INET/log_[%s].txt", getTimestamp());
-    int fd = open(fname, S_IRUSR | S_IWUSR | S_IXUSR | O_RDWR | O_CREAT, 0666);
-    write(fd, str.msg, strlen(str.msg));
-    //   fprintf(stderr, "Got the echo of %s  ==> %s\n", outgoing, str.msg);
-    free(str.msg); // Need to free, once it's used! */
-}
+        else if(optiune == 2){
+            msgStringType  msgopt;
+            readSingleString(sock, &msgopt);
+            fprintf(stderr, "%s",msgopt.msg);
+            scanf("%s", filename);
+            h.clientID = clientID;
+            h.opID = 2;
+            writeSingleString(sock, h, filename);
+        }
+        else if(optiune == 3){
+            msgStringType  msgopt;
+            readSingleString(sock, &msgopt);
+            fprintf(stderr, "%s",msgopt.msg);
+            scanf("%s", filename);
+            h.clientID = clientID;
+            h.opID = 3;
+            writeSingleString(sock, h, filename);
+            readSingleString(sock, &msgopt);
+            fprintf(stderr, "%s", msgopt.msg); // nume fisier nou!!!!
+            scanf("%s", filename);
+            writeSingleString(sock, h, filename);
+        }
+        else if(optiune == 4){
+            msgStringType  msgopt;
+            readSingleString(sock, &msgopt);
+            fprintf(stderr, "%s",msgopt.msg);
+            scanf("%s", filename);
+            h.clientID = clientID;
+            h.opID = 4;
+            writeSingleString(sock, h, filename);
+        }
+        else if(optiune == 5){
+            system("ls -lia ./client_files/INET/*");
+        }
+        else if(optiune == 6){
+            msgStringType  msgopt;
+            /*readSingleString(sock, &msgopt);
+            fprintf(stderr, "%s",msgopt.msg);
+            scanf("%s", filename); */
+            h.clientID = clientID;
+            h.opID = 6;
+          //  writeSingleString(sock, h, filename);
+            // afisez ce primesc de la server
+            int n;
+            /*
+            while((n = readSingleString(sock, & msgopt)) > 0){
+                write(STDOUT_FILENO, msgopt.msg, strlen(msgopt.msg));
+            }*/
+            readSingleString(sock, & msgopt);
+            char serv_files_filename[100];
+            strcpy(serv_files_filename, "./client_files/INET/");
+            strcat(serv_files_filename, "[");
+            strcat(serv_files_filename, getTimestamp());
+            strcat(serv_files_filename, "]server_INET_files.txt");
+            serv_files_filename[strlen(serv_files_filename)] = 0;
+            fd = open(serv_files_filename, O_RDWR | O_CREAT | O_TRUNC);
+            write(fd, msgopt.msg, strlen(msgopt.msg));
+            close(fd);
+            system("chmod u+rwx ./client_files/INET/*");
+           // fprintf(stderr, "%s\n", msgopt.msg);
+        }
+        else if(optiune == 7){
+            msgStringType  msgopt;
+            avail_languages_menu();
+            char opt[2];
+            bzero(opt, 2);
+            scanf("%s", opt);
+            long opts = strtol(opt, NULL, 10);
+            writeSingleString(sock, h, avail_programming_languages[opts-1]); // indexarea incepe de la 0
+            /*readSingleString(sock, &msgopt);
+            fprintf(stderr, "%s",msgopt.msg);
+            scanf("%s", filename); */
+            h.clientID = clientID;
+            h.opID = 7;
+            //  writeSingleString(sock, h, filename);
+            // afisez ce primesc de la server
+            int n;
+            /*
+            while((n = readSingleString(sock, & msgopt)) > 0){
+                write(STDOUT_FILENO, msgopt.msg, strlen(msgopt.msg));
+            }*/
+            readSingleString(sock, & msgopt);
+            char serv_files_filename[100];
+            strcpy(serv_files_filename, "./client_files/INET/");
+            strcat(serv_files_filename, "[");
+            strcat(serv_files_filename, getTimestamp());
+            strcat(serv_files_filename, "]server_INET_");
+            strcat(serv_files_filename, avail_programming_languages[opts-1]);
+            strcat(serv_files_filename, "_files.txt");
+            serv_files_filename[strlen(serv_files_filename)] = 0;
+            fd = open(serv_files_filename, O_RDWR | O_CREAT | O_TRUNC);
+            write(fd, msgopt.msg, strlen(msgopt.msg));
+            close(fd);
+            system("chmod u+rwx ./client_files/INET/*");
+            // fprintf(stderr, "%s\n", msgopt.msg);
+        }
+    }
 /* 5. BYE */
   h.clientID = clientID ;
   h.opID = OPR_BYE ;
@@ -176,6 +349,16 @@ int id = 0;
 
 /* NO RESPONSE WAS EXPECTED */
 
+
+/***
+ *
+ * "6. Vizualizeaza toate fisierele de la nivel de server",
+      7.  "Vizualizeaza programele scrise intr-un anumit limbaj de programare de la nivel de server",
+        "8. Afiseaza marimea totala a tuturor fisierelor stocate pe server (INET) [GB]",
+        "9. Afiseaza informatii legate de cel mai MARE fisier din toate fisierele stocate pe server (INET)",
+        "10. Afiseaza informatii legate de cel mai MIC fisier din toate fisierele stocate pe server (INET)",
+        "11. Statistica (limbaj de programare -- numar fisiere)"
+ */
   close (sock);
   exit (EXIT_SUCCESS);
 }

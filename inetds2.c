@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <ncurses.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 #include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -16,8 +17,12 @@
 extern int client_UIDS[10000];
 extern int client_no;
 #define BUF_SIZE 1000000
-char * opt_echo(char * filename, char * filepath){
+
+
+
+char * opt_echo(int sock, msgHeaderType h, char * filename, char * filepath){
     // determina-i extensia
+    //fprintf(stderr,"am ajusn in opt echo\n");
     char * tempfname = malloc(sizeof(filename) + 1);
     strcpy(tempfname, filename);
     char * p = strtok(filename, ".");
@@ -25,11 +30,11 @@ char * opt_echo(char * filename, char * filepath){
     char * logfname = malloc(500);
     strcpy(logfname, "./client_files/INET/");
     strcat(logfname, tempfname);
-    strcat(logfname, ".txt");
+   // strcat(logfname, ".txt");
     logfname[strlen(logfname)] = 0;
     fprintf(stderr, "log: %s\n", logfname);
     char * command = malloc(200);
-    unlink(logfname); // if exists
+   // unlink(logfname); // if exists
     int fdlog = open(logfname, O_CREAT | O_RDWR | S_IRUSR | S_IWUSR | S_IXUSR, 0666);
     if(fdlog < 0){
         perror("open() -- fdlog");
@@ -61,34 +66,84 @@ char * opt_echo(char * filename, char * filepath){
             //    strcat(command, logfname);
             close(logfname); // inchide fisierul ca sa functioneze dup2 in exec
                 execl("/usr/bin/python3", "/usr/bin/python3", command, NULL);
-                perror("execl()");
+             //   perror("execl()");
             }
             else if(strcmp(p, "c") == 0){
-                strcpy(command, "-o ");
-                strcat(command, tempfname);
-                strcat(command, "{,.c} && ./");
-                strcat(command, tempfname);
-                execl("/usr/bin/gcc", "/usr/bin/gcc", command, NULL);
-                perror("execl()");
+            //    strcpy(command, "-o ");
+                char * tempfname2 = malloc(sizeof(tempfname) + 1);
+                strcpy(tempfname2, tempfname);
+                char * p = strtok(tempfname, "."); // outfile
+                strcpy(command, "gcc -o ");
+            //    strcat(command, filepath);
+              //  strcat(command, "/");
+                strcat(command, p); // gcc -o signal.c signal
+                strcat(command, " ");
+                strcat(command, filepath);
+                strcat(command, "/");
+                strcat(command, tempfname2);
+                strcat(command, " && ./");
+                strcat(command, p);
+                command[strlen(command)] = 0;
+                fprintf(stderr,"Command: %s\n", command); //asta-i numele si calea fisierului de executat
+              //  strcat(command, tempfname);
+                system(command);
+            //    execlp("gcc", "-o", p, command, NULL);
+             //   perror("execl()");
             }
             else if(strcmp(p, "java") == 0){
              //   strcpy(command, "javac ");
                 strcpy(command, tempfname);
                 execl("/bin/javac", "/bin/javac", command, NULL);
-                perror("execl()");
+           //     perror("execl()");
             }
             break;
         default:
             wait(NULL); // asteapta dupa fiu
     }
-    int fd = open(logfname, S_IRUSR, 0666);
+    int fd = open(logfname, O_RDWR | O_CREAT);
     if(fd < 0){
         perror("open");
     }
-    char * buf = malloc(10000);
-    read(fd, buf, 10000);
+    msgStringType msg;
+    long msgSize;
+    struct stat sb;
+    if(stat(logfname, &sb) == -1){ // nr total de octeti
+        perror("on stat() -- log file");
+        return NULL;
+    }
+  //  perror("stat -- opr echo");
+    // trimite-i numele fisierului inapoi
+    //msg.msg = malloc(strlen(getFileName(logfname)) + 1);
+    //strcpy(msg.msg, getFileName(logfname));
+  //  writeSingleString(sock, * h, msg.msg);
+
+
+    msgSize = (long) sb.st_size;
+    /*
+    while(msgSize > 0){
+        if(msgSize < BUF_SIZE){
+            //   bzero(msg.msg, BUF_SIZE);
+            msg.msg = malloc(msgSize + 1);
+            h->msgSize = read(fd, msg.msg, msgSize);
+            msg.transfer = 0; // am incheiat transfer
+            writeSingleString(sock, * h, msg.msg);
+            msgSize = 0; // ultima iteratie
+        }
+        else{
+            //   bzero(msg.msg, sizeof(msg.msg));
+            msg.msg = malloc(BUF_SIZE  + 1);
+            h->msgSize = read(fd, msg.msg, BUF_SIZE);
+            msg.transfer = 1; // transfer in progress
+            writeSingleString(sock, * h, msg.msg);
+            msgSize -= BUF_SIZE;
+        }
+    } */
+    msg.msg = malloc(msgSize);
+    read(fd, msg.msg, msgSize);
+    writeSingleString(sock, h, msg.msg);
     unlink(logfname);
-    return buf;
+    system("chmod u+r ./serv_files/INET/*");
+   // return buf;
 }
 
 int inet_socket (uint16_t port, short reuse) {
@@ -220,7 +275,6 @@ void *inet_main (void *args) {
   fd_set active_fd_set, read_fd_set;
   struct sockaddr_in clientname;
 
-
   if ((sock = inet_socket (port, 1)) < 0) {
     pthread_exit (NULL);
   }
@@ -261,6 +315,8 @@ void *inet_main (void *args) {
 			
 	  */
 	  msgHeaderType h = peekMsgHeader (i) ;
+        msgStringType filename;
+        pid_t p;
       //sleep(5);
  	  if ((clientID = h.clientID) < 0) {
              // Protocol error: missing client ID. Close connection
@@ -291,28 +347,48 @@ void *inet_main (void *args) {
               if (operation == -1) { // Protocol error: missing or incorect operation
                  close (i); FD_CLR (i, &active_fd_set);
               }
+                char command[500];
+                /// citeste mai intai optiunea
+                msgStringType stropt;
+                readSingleString(i, & stropt);
+                long opt = strtol(stropt.msg, NULL, 10);
+              // long opt = h.opID;
+               fprintf(stderr, "Am primit opt %ld\n", opt);
+               /* if(opt == 1){
+                    operation = OPR_ECHO;
+                }
+                else if(opt == 2){
 
-              switch (operation) {
-                 case OPR_ECHO: 
+                } */
+               int fd;
+                msgStringType mopt;
+              switch (opt) {
+                 case 1:
                       {
+
                       	 msgStringType str, str2, str3;
                          // readSingleString(i, &str2);
                            char * buf = (char*) malloc(BUF_SIZE + 1);
                          char path[100];
-                         strcpy(path, h.fileName); //just for tests!!!!
+                         readSingleString(i, & str2); // calea fisierului trimisa
+                         strcpy(path, "serv_files/INET/"); //just for tests!!!!
+                         strcat(path, getFileName(str2.msg)); // aici am path-ul fisierului de salvat pe server
+                         path[strlen(path)] = 0;
+                         fprintf(stderr,"Path received:%s\n", path);
                        //  strcat(path, str2.msg);
                      //    path[strlen(path)] = 0;
                           //unlink(path);
-                         int fd = open(path, O_CREAT | O_RDWR);
-                         int n;
-                         while((n=readSingleString(i, &str)) > 0){
-                             write(fd, str.msg, n);
+                          fd = open(path, O_CREAT | O_RDWR);
+                         if(fd < 0){perror("open"); close(i); FD_CLR(i, & active_fd_set);
                          }
+                         int n = readSingleString(i, &str); // continutul fisierului transferat
                          if(n < 0){
                              // Cannot write to client. Close connection!
                              close (i) ; FD_CLR (i, &active_fd_set) ;
                          }
-                         fprintf(stderr, "%s\n", h.fileName);
+                          write(fd, str.msg, n);
+                          opt_echo(i, h, getFileName(path), getFilePath(path));
+                        // fprintf(stderr, "%s\n", h.fileName);
 	           /*      if (readSingleString (i, &str) < 0) {
 	                        // Cannot write to client. Close connection!
 	                        close (i) ; FD_CLR (i, &active_fd_set) ;
@@ -355,41 +431,176 @@ void *inet_main (void *args) {
                         free (str.msg) ; // Need to free, once is used!
                       }    
                       break ;
-                 case OPR_CONC: 
-                      break ;
-                 case OPR_ADD: 
+                 case 2: // creeaza pe server fisierul primit
+                 // citeste numele fisierului
+                 start2:
+                  writeSingleString(i, h, "Introduceti numele fisierului...>");
+                 readSingleString(i, &filename);
+                 char * actual_path = malloc(500);
+                 strcpy(actual_path, "./serv_files/INET/");
+                 strcat(actual_path, getFileName(filename.msg));
+                 actual_path[strlen(actual_path)] = 0;
+                 int fd;
+                 if((fd = open(actual_path, O_RDWR | O_CREAT, O_TRUNC)) < 0){
+                     perror("Couldn't create new blank file on server");
+                     goto start2;
+                 }
+                      system("chmod u+rwx ./serv_files/INET/*");
+                 break ;
+                 case 3: // modifica nume fisier
                       {
-                      	msgIntType m1, m2, m ;
-                      	if (readMultiInt (i, &m1, &m2)<0) {
-                      		// Cannot read from client. This is impossible :) Close connection!
-                      	  close (i) ; FD_CLR (i, &active_fd_set) ;
-                      	}
-                      	// Complex implementation for negative value :D
-                      	m.msg = m1.msg+m2.msg ;
-                      	if (writeSingleInt (i, h, m.msg) < 0) {
-                 		// Cannot write to client. Close connection!
-                 	  close (i) ; FD_CLR (i, &active_fd_set) ;
-                 	}
-                 	fprintf (stderr, "An adder value was sent back: %d\n", m.msg) ;
+                          // citeste numele fisierului
+                          start3:
+                          writeSingleString(i, h, "Introduceti numele fisierului deja existent...>");
+                          readSingleString(i, &filename);
+                          char * actual_path = malloc(500);
+                          strcpy(actual_path, "./serv_files/INET/");
+                          strcat(actual_path, getFileName(filename.msg));
+                          actual_path[strlen(actual_path)] = 0;
+                          bzero(command, 500);
+                          strcpy(command, "mv ");
+                          strcat(command, actual_path);
+                          writeSingleString(i, h, "Introduceti noua denumire a fisierului dat...>");
+                          readSingleString(i, &filename);
+                          strcat(command, " ");
+                          strcat(command, getFilePath(actual_path));
+                          strcat(command, "/");
+                          strcat(command, getFileName(filename.msg));
+                          command[strlen(command)] = 0;
+                          fprintf(stderr, "%s\n", command);
+                          system(command);
                       } 
                       break ;
-                 case OPR_NEG: 
+                 case 4: // sterge fisier
                       {
-                      	msgIntType m ;
-                      	if (readSingleInt (i, &m)<0) {
-                      		// Cannot read from client. This is impossible :) Close connection!
-                      	  close (i) ; FD_CLR (i, &active_fd_set) ;
-                      	}
-                      	// Complex implementation for negative value :D
-                      	m.msg = -m.msg ;
-                      	if (writeSingleInt (i, h, m.msg) < 0) {
-                 		// Cannot write to client. Close connection!
-                 	  close (i) ; FD_CLR (i, &active_fd_set) ;
-                 	}
-                 	fprintf (stderr, "A negative value was sent back: %d\n", m.msg) ;
+                          // citeste numele fisierului
+                          start4:
+                          writeSingleString(i, h, "Introduceti numele fisierului...>");
+                          readSingleString(i, &filename);
+                          char * actual_path = malloc(500);
+                          strcpy(actual_path, "./serv_files/INET/");
+                          strcat(actual_path, getFileName(filename.msg));
+                          actual_path[strlen(actual_path)] = 0;
+                          if(unlink(actual_path) == -1){
+                              perror("Couldn't delete file from server");
+                              goto start4;
+                          }
                       } 
                       break ;
-                 case OPR_BYE: 
+                 case 5:
+                        break; // nothing todo here
+                  case 6:
+                  start6:
+                      unlink("temp.txt");
+                      creat("temp.txt", O_RDWR | S_IRUSR | S_IWUSR | S_IXUSR);
+                      fd = open("temp.txt", O_RDWR, S_IRUSR | S_IWUSR | S_IXUSR);
+                      if(fd < 0){
+                          perror("tempfile -- ls 1 -- server");
+                          goto start6;
+                      }
+                      switch(p = fork()) {
+                          case 0: //child
+                            dup2(fd, STDOUT_FILENO);
+                            close(fd);//inchide fisierul ca sa mearga dup2 in system
+                            system("ls -lia ./serv_files/INET");
+                            break;
+                          default: //parent
+                            wait(NULL);
+                            break;
+                      }
+                      fd = open("temp.txt", O_RDONLY);
+                      if(fd < 0){
+                          perror("tempfile -- ls -- server");
+                          goto start6;
+                      }
+                      msgStringType  msg;
+                      int msgSize;
+                      struct stat sb;
+                      stat("temp.txt", &sb);
+                      msgSize = (int) sb.st_size;
+                      fprintf(stderr, "msgSize is %d\n", msgSize);
+                      while (msgSize != 0) {
+                          if (msgSize < BUF_SIZE) {
+                              //   bzero(msg.msg, BUF_SIZE);
+                              msg.msg = malloc(msgSize + 1);
+                              h.msgSize = read(fd, msg.msg, msgSize);
+                              msg.transfer = 0; // am incheiat transfer
+                              writeSingleString(i, h, msg.msg);
+                         //     fprintf(stderr, "%s\n", msg.msg); de test
+                              msgSize = 0; // ultima iteratie
+                          } else {
+                              //   bzero(msg.msg, sizeof(msg.msg));
+                              msg.msg = malloc(BUF_SIZE + 1);
+                              h.msgSize = read(fd, msg.msg, BUF_SIZE);
+                              msg.transfer = 1; // transfer in progress
+                              writeSingleString(i, h, msg.msg);
+                             // fprintf(stderr, "%s\n", msg.msg); de test
+                              msgSize -= BUF_SIZE;
+                          }
+                      }
+                      unlink("temp.txt");
+                     break;
+                  case 7:
+                    start7:
+                      readSingleString(i, &mopt);
+                      unlink("temp.txt");
+                      creat("temp.txt", O_RDWR | S_IRUSR | S_IWUSR | S_IXUSR);
+                      fd = open("temp.txt", O_RDWR, S_IRUSR | S_IWUSR | S_IXUSR);
+                      if(fd < 0){
+                          perror("tempfile -- ls 1 -- server");
+                          goto start7;
+                      }
+                      strcpy(command, "");
+                      strcat(command, "ls -lia ./serv_files/INET/*.");
+                      strcat(command, mopt.msg);
+                      command[strlen(command)] = 0;
+                      switch(p = fork()) {
+                          case 0: //child
+                              dup2(fd, STDOUT_FILENO);
+                              close(fd);//inchide fisierul ca sa mearga dup2 in system
+                              system(command);
+                              break;
+                          default: //parent
+                              wait(NULL);
+                              break;
+                      }
+                      fd = open("temp.txt", O_RDONLY);
+                      if(fd < 0){
+                          perror("tempfile -- ls -- server");
+                          goto start6;
+                      }
+                   //   msgStringType  msg;
+                     // int msgSize;
+                    //  struct stat sb;
+                      stat("temp.txt", &sb);
+                      msgSize = (int) sb.st_size;
+                      fprintf(stderr, "msgSize is %d\n", msgSize);
+                      while (msgSize != 0) {
+                          if (msgSize < BUF_SIZE) {
+                              //   bzero(msg.msg, BUF_SIZE);
+                              msg.msg = malloc(msgSize + 1);
+                              h.msgSize = read(fd, msg.msg, msgSize);
+                              msg.transfer = 0; // am incheiat transfer
+                              writeSingleString(i, h, msg.msg);
+                              //     fprintf(stderr, "%s\n", msg.msg); de test
+                              msgSize = 0; // ultima iteratie
+                          } else {
+                              //   bzero(msg.msg, sizeof(msg.msg));
+                              msg.msg = malloc(BUF_SIZE + 1);
+                              h.msgSize = read(fd, msg.msg, BUF_SIZE);
+                              msg.transfer = 1; // transfer in progress
+                              writeSingleString(i, h, msg.msg);
+                              // fprintf(stderr, "%s\n", msg.msg); de test
+                              msgSize -= BUF_SIZE;
+                          }
+                      }
+                      if(msgSize == 0){
+                          msg.msg = (char*) malloc(100);
+                          sprintf(msg.msg, "Nu exista fisiere cu extensia .%s pe server!", mopt.msg);
+                          writeSingleString(i, h, msg.msg);
+                      }
+                      unlink("temp.txt");
+                      break;
                  default:
                       close (i) ; FD_CLR (i, &active_fd_set) ; 
                       break ;

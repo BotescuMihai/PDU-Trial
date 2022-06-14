@@ -20,6 +20,17 @@ char * getTimestamp(){
     return asctime(localtime(&ltime));
 }
 
+char * getFileUID(char * type){
+    char * UID = malloc(100);
+    strcpy(UID, "./client_files/");
+    strcat(UID, type);
+    strcat(UID, "/log_[");
+    strcat(UID, getTimestamp());
+    strcat(UID, "].txt");
+    UID[strlen(UID)] = 0;
+    return UID;
+}
+
 char * getFileName(char * name){
     char* ts2 = strdup(name);
     return basename(ts2);

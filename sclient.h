@@ -16,13 +16,6 @@ typedef struct byeStruct {
   long id 1 ;
 } ns__byeType ;
 
-struct xsd__base64Binary {
-    unsigned char *__ptr; // pointer to binary data
-    int __size;           // size of the binary data
-    char *id;             // NULL to generate an id or assign this member variable a unique UUID
-    char *type;           // MIME type of the data
-    char *options;        // DIME options or an optional description of the MIME attachment
-};
 
 
 //int ns__webmethod(struct xsd__base64Binary *data, struct xsd__base64Binary *result);
@@ -31,10 +24,10 @@ typedef char * ns__stringType  ;
 typedef long ns__longType  ;
 
 int ns__connect (ns__longType *connect) ; // NO REQUEST!
-/*
+
 int ns__echo (ns__stringType echoRequest 1, ns__stringType *echo) ;
-*/
-int ns__echo(struct xsd__base64Binary *data, struct xsd__base64Binary *result);
+
+//int ns__echo(struct xsd__base64Binary *data, struct xsd__base64Binary *result);
 
 int ns__concat (ns__concatType concatRequest 1, ns__stringType *concat) ;
 
