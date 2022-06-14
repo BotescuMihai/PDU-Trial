@@ -2,56 +2,56 @@
 <wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/operations/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="operations" targetNamespace="http://www.example.org/operations/">
   <wsdl:types>
     <xsd:schema targetNamespace="http://www.example.org/operations/"> 
-      <xsd:element name="store_file">
+      <xsd:element name="storeFile">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="in" type="xsd:string"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="store_fileResponse">
+      <xsd:element name="storeFileResponse">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="out" type="xsd:string"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="create_file">
+      <xsd:element name="createFile">
       	<xsd:complexType>
       		<xsd:sequence>
       			<xsd:element name="in" type="xsd:string"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
-      <xsd:element name="create_fileResponse">
+      <xsd:element name="createFileResponse">
       	<xsd:complexType>
       		<xsd:sequence>
       			<xsd:element name="out" type="xsd:string"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
-      <xsd:element name="modify_file">
+      <xsd:element name="modifyFile">
       	<xsd:complexType>
       		<xsd:sequence>
       			<xsd:element name="in" type="xsd:string"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
-      <xsd:element name="modify_fileResponse">
+      <xsd:element name="modifyFileResponse">
       	<xsd:complexType>
       		<xsd:sequence>
       			<xsd:element name="out" type="xsd:string"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
-      <xsd:element name="remove_file">
+      <xsd:element name="removeFile">
       	<xsd:complexType>
       		<xsd:sequence>
       			<xsd:element name="in" type="xsd:string"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
-      <xsd:element name="remove_fileResponse">
+      <xsd:element name="removeFileResponse">
       	<xsd:complexType>
       		<xsd:sequence>
       			<xsd:element name="out" type="xsd:string"></xsd:element>
@@ -72,7 +72,7 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
-      <xsd:element name="client_log_files">
+      <xsd:element name="clientLogFiles">
       	<xsd:complexType>
       		<xsd:sequence>
       			<xsd:element name="in" type="xsd:string"></xsd:element>
@@ -86,7 +86,91 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
-      <xsd:element name="client_log_filesResponse1">
+      <xsd:element name="clientLogFilesResponse1">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="servFiles">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="in" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="servFilesResponse1">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="filesInCertainProgLanguage">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="in" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="filesInCertainProgLanguageResponse1">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="largestServFile">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="in" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="largestServFileResponse1">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="smallestServFile">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="in" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="smallestServFileResponse1">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="filesStatistics">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="in" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="filesStatisticsResponse1">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="totalServFilesSize">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="in" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="totalServFilesSizeResponse1">
       	<xsd:complexType>
       		<xsd:sequence>
       			<xsd:element name="out" type="xsd:string"></xsd:element>
@@ -95,29 +179,29 @@
       </xsd:element>
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="store_fileRequest">
-    <wsdl:part element="tns:store_file" name="parameters"/>
+  <wsdl:message name="storeFileRequest">
+    <wsdl:part element="tns:storeFile" name="parameters"/>
   </wsdl:message>
-  <wsdl:message name="store_fileResponse">
-    <wsdl:part element="tns:store_fileResponse" name="parameters"/>
+  <wsdl:message name="storeFileResponse">
+    <wsdl:part element="tns:storeFileResponse" name="parameters"/>
   </wsdl:message>
-  <wsdl:message name="create_fileRequest">
-  	<wsdl:part name="parameters" element="tns:create_file"></wsdl:part>
+  <wsdl:message name="createFileRequest">
+  	<wsdl:part name="parameters" element="tns:createFile"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="create_fileResponse">
-  	<wsdl:part name="parameters" element="tns:create_fileResponse"></wsdl:part>
+  <wsdl:message name="createFileResponse">
+  	<wsdl:part name="parameters" element="tns:createFileResponse"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="modify_fileRequest">
-  	<wsdl:part name="parameters" element="tns:modify_file"></wsdl:part>
+  <wsdl:message name="modifyFileRequest">
+  	<wsdl:part name="parameters" element="tns:modifyFile"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="modify_fileResponse">
-  	<wsdl:part name="parameters" element="tns:modify_fileResponse"></wsdl:part>
+  <wsdl:message name="modifyFileResponse">
+  	<wsdl:part name="parameters" element="tns:modifyFileResponse"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="remove_fileRequest">
-  	<wsdl:part name="parameters" element="tns:remove_file"></wsdl:part>
+  <wsdl:message name="removeFileRequest">
+  	<wsdl:part name="parameters" element="tns:removeFile"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="remove_fileResponse">
-  	<wsdl:part name="parameters" element="tns:remove_fileResponse"></wsdl:part>
+  <wsdl:message name="removeFileResponse">
+  	<wsdl:part name="parameters" element="tns:removeFileResponse"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="store_exec_fileRequest">
   	<wsdl:part name="parameters" element="tns:store_exec_file"></wsdl:part>
@@ -125,51 +209,107 @@
   <wsdl:message name="store_exec_fileResponse">
   	<wsdl:part name="parameters" element="tns:store_exec_fileResponse"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="client_log_filesRequest">
-  	<wsdl:part name="parameters" element="tns:client_log_files"></wsdl:part>
+  <wsdl:message name="clientLogFilesRequest">
+  	<wsdl:part name="parameters" element="tns:clientLogFiles"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="NewOperationResponse">
   	<wsdl:part name="parameters" element="tns:NewOperationResponse"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="client_log_filesResponse1">
-  	<wsdl:part name="parameters" element="tns:client_log_filesResponse1"></wsdl:part>
+  <wsdl:message name="clientLogFilesResponse1">
+  	<wsdl:part name="parameters" element="tns:clientLogFilesResponse1"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="serv_filesRequest">
   	<wsdl:part name="parameters" element="tns:NewOperation"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="serv_filesRequest">
   	<wsdl:part name="parameters" element="tns:NewOperation"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="servFilesRequest">
+  	<wsdl:part name="parameters" element="tns:servFiles"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="servFilesResponse1">
+  	<wsdl:part name="parameters" element="tns:servFilesResponse1"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="filesInCertainProgLanguageRequest">
+  	<wsdl:part name="parameters" element="tns:filesInCertainProgLanguage"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="filesInCertainProgLanguageResponse1">
+  	<wsdl:part name="parameters" element="tns:filesInCertainProgLanguageResponse1"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="largestServFileRequest">
+  	<wsdl:part name="parameters" element="tns:largestServFile"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="largestServFileResponse1">
+  	<wsdl:part name="parameters" element="tns:largestServFileResponse1"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="smallestServFileRequest">
+  	<wsdl:part name="parameters" element="tns:smallestServFile"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="smallestServFileResponse1">
+  	<wsdl:part name="parameters" element="tns:smallestServFileResponse1"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="filesStatisticsRequest">
+  	<wsdl:part name="parameters" element="tns:filesStatistics"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="filesStatisticsResponse1">
+  	<wsdl:part name="parameters" element="tns:filesStatisticsResponse1"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="totalServFilesSizeRequest">
+  	<wsdl:part name="parameters" element="tns:totalServFilesSize"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="totalServFilesSizeResponse1">
+  	<wsdl:part name="parameters" element="tns:totalServFilesSizeResponse1"></wsdl:part>
   </wsdl:message>
   <wsdl:portType name="operations">
-    <wsdl:operation name="store_file">
-      <wsdl:input message="tns:store_fileRequest"/>
-      <wsdl:output message="tns:store_fileResponse"/>
+    <wsdl:operation name="storeFile">
+      <wsdl:input message="tns:storeFileRequest"/>
+      <wsdl:output message="tns:storeFileResponse"/>
     </wsdl:operation>
-    <wsdl:operation name="create_file">
-    	<wsdl:input message="tns:create_fileRequest"></wsdl:input>
-    	<wsdl:output message="tns:create_fileResponse"></wsdl:output>
+    <wsdl:operation name="createFile">
+    	<wsdl:input message="tns:createFileRequest"></wsdl:input>
+    	<wsdl:output message="tns:createFileResponse"></wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="modify_file">
-    	<wsdl:input message="tns:modify_fileRequest"></wsdl:input>
-    	<wsdl:output message="tns:modify_fileResponse"></wsdl:output>
+    <wsdl:operation name="modifyFile">
+    	<wsdl:input message="tns:modifyFileRequest"></wsdl:input>
+    	<wsdl:output message="tns:modifyFileResponse"></wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="remove_file">
-    	<wsdl:input message="tns:remove_fileRequest"></wsdl:input>
-    	<wsdl:output message="tns:remove_fileResponse"></wsdl:output>
+    <wsdl:operation name="removeFile">
+    	<wsdl:input message="tns:removeFileRequest"></wsdl:input>
+    	<wsdl:output message="tns:removeFileResponse"></wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="store_exec_file">
-    	<wsdl:input message="tns:store_exec_fileRequest"></wsdl:input>
-    	<wsdl:output message="tns:store_exec_fileResponse"></wsdl:output>
+    <wsdl:operation name="clientLogFiles">
+    	<wsdl:input message="tns:clientLogFilesRequest"></wsdl:input>
+    	<wsdl:output message="tns:clientLogFilesResponse1"></wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="client_log_files">
-    	<wsdl:input message="tns:client_log_filesRequest"></wsdl:input>
-    	<wsdl:output message="tns:client_log_filesResponse1"></wsdl:output>
+    <wsdl:operation name="servFiles">
+    	<wsdl:input message="tns:servFilesRequest"></wsdl:input>
+    	<wsdl:output message="tns:servFilesResponse1"></wsdl:output>
     </wsdl:operation>
-    </wsdl:portType>
+    <wsdl:operation name="filesInCertainProgLanguage">
+    	<wsdl:input message="tns:filesInCertainProgLanguageRequest"></wsdl:input>
+    	<wsdl:output message="tns:filesInCertainProgLanguageResponse1"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="largestServFile">
+    	<wsdl:input message="tns:largestServFileRequest"></wsdl:input>
+    	<wsdl:output message="tns:largestServFileResponse1"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="smallestServFile">
+    	<wsdl:input message="tns:smallestServFileRequest"></wsdl:input>
+    	<wsdl:output message="tns:smallestServFileResponse1"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="filesStatistics">
+    	<wsdl:input message="tns:filesStatisticsRequest"></wsdl:input>
+    	<wsdl:output message="tns:filesStatisticsResponse1"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="totalServFilesSize">
+    	<wsdl:input message="tns:totalServFilesSizeRequest"></wsdl:input>
+    	<wsdl:output message="tns:totalServFilesSizeResponse1"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
   <wsdl:binding name="operationsSOAP" type="tns:operations">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="store_file">
-      <soap:operation soapAction="http://www.example.org/operations/store_file"/>
+    <wsdl:operation name="storeFile">
+      <soap:operation soapAction="http://www.example.org/operations/storeFile"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>

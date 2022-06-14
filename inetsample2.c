@@ -7,6 +7,8 @@
 #include <sys/select.h>
 #include <sys/stat.h>
 #include <netinet/in.h>
+#include <sys/dirent.h>
+#include <sys/un.h>
 #include <netdb.h>
 #include <arpa/inet.h>
 #include "proto.h"
@@ -339,6 +341,43 @@ char opt[2];
             close(fd);
             system("chmod u+rwx ./client_files/INET/*");
             // fprintf(stderr, "%s\n", msgopt.msg);
+        }
+        else if(optiune == 8){
+           /* msgStringType msgopt;
+            msgopt.msg = malloc(3);
+            strcpy(msgopt.msg, "8");
+            writeSingleString(sock, h, msgopt.msg); // trimite optiunea -- ii trimisa mai sus*/
+            msgStringType msgrecv;
+            readSingleString(sock, & msgrecv);
+            fprintf(stderr, "Toate fisierele ocupa in total %s GB pe server-ul de INET\n", msgrecv.msg);
+        }
+        else if(optiune == 9){
+            // optiunea e trimisa deja
+            msgStringType  msg;
+            readSingleString(sock, &msg);
+            int fd = open("./client_files/INET/largest_INET_sv_file_info.txt", O_RDWR | O_CREAT, O_TRUNC);
+            write(fd, msg.msg, strlen(msg.msg));
+            close(fd);
+            system("chmod u+rwx ./client_files/INET/*");
+        }
+        else if(optiune == 10){
+            // optiunea e trimisa deja
+            msgStringType  msg;
+            readSingleString(sock, &msg);
+            int fd = open("./client_files/INET/smallest_INET_sv_file_info.txt", O_RDWR | O_CREAT, O_TRUNC);
+            write(fd, msg.msg, strlen(msg.msg));
+            close(fd);
+            system("chmod u+rwx ./client_files/INET/*");
+        }
+        else if(optiune == 11){
+            // optiunea e trimisa deja
+            msgStringType  msg;
+            readSingleString(sock, &msg);
+            unlink("./client_files/INET/INET_server_programming_languages_statistics.json");
+            int fd = open("./client_files/INET/INET_server_programming_languages_statistics.json", O_RDWR | O_CREAT, O_TRUNC);
+            write(fd, msg.msg, strlen(msg.msg)+1);
+            close(fd);
+            system("chmod u+rwx ./client_files/INET/*");
         }
     }
 /* 5. BYE */

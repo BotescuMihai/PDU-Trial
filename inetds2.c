@@ -6,7 +6,11 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include <stddef.h>
 #include <sys/socket.h>
+#include <math.h>
+#include <sys/un.h>
+#include <dirent.h>
 #include <sys/select.h>
 #include <netinet/in.h>
 #include <netdb.h>
@@ -292,7 +296,10 @@ void *inet_main (void *args) {
     if (select (FD_SETSIZE, &read_fd_set, NULL, NULL, NULL) < 0) {
       pthread_exit (NULL);
     }
-    
+      DIR * dptr;
+      struct dirent *sdir;
+      long size = 0;
+      char str[100];
     /* Service all the sockets with input pending. */
     for (i = 0; i < FD_SETSIZE; ++i)
       if (FD_ISSET (i, &read_fd_set)) {
@@ -361,7 +368,11 @@ void *inet_main (void *args) {
 
                 } */
                int fd;
+                long maxsize = 0;
+                char maxfile[100];
+                char filecontent[500];
                 msgStringType mopt;
+                int lbs[5]={0}; // C -- 0, C++ -- 1, JAVA -- 2, PY -- 3, Oth -- 4
               switch (opt) {
                  case 1:
                       {
@@ -601,7 +612,311 @@ void *inet_main (void *args) {
                       }
                       unlink("temp.txt");
                       break;
-                 default:
+                  case 8:
+                      // calculez suma totala a fisierelor in GB de pe tot server-ul INET
+                      //struct stat sb;
+                      dptr = opendir("./serv_files/INET");
+                      while((sdir = readdir(dptr)) != NULL){
+                          if(sdir->d_type == 4){
+                              if(sdir->d_name[0] == '.'){
+                                  // . sau ..
+                                  stat(sdir->d_name,&sb);
+                                  //size=buf.st_size;
+                                //  pf("size=%d\n",size);
+                              }
+                          }
+                          else
+                          {
+                              strcpy(str,"./serv_files/INET");
+                              strcat(str,"/");
+                              strcat(str,sdir->d_name);
+                              fprintf(stderr, "%s\n", str);
+                              stat(str,&sb);
+                              size+=sb.st_size;
+                          }
+                      }
+                 double res = 9.31 * pow(10, -9) * size;
+                 char result[30];
+                 sprintf(result, "%.15lf", res);
+                 fprintf(stderr, "%s GB\n", result);
+                 result[strlen(result)] = 0;
+                      writeSingleString(i, h, result); // trimite-i inapoi rezultatul
+                 break;
+                  case 9: // informatii legate de cel mai mare fisier, aici avem transfer de fisiere
+                        // optiunea e trimisa deja, caut cel mai mare fisier
+                      dptr = opendir("./serv_files/INET");
+                      while((sdir = readdir(dptr)) != NULL){
+                          if(sdir->d_type == 4){
+                              if(sdir->d_name[0] == '.'){
+                                  // . sau ..
+                                  stat(sdir->d_name,&sb);
+                                  //size=buf.st_size;
+                                  //  pf("size=%d\n",size);
+                              }
+                          }
+                          else
+                          {
+                              strcpy(str,"./serv_files/INET");
+                              strcat(str,"/");
+                              strcat(str,sdir->d_name);
+                          //    fprintf(stderr, "%s\n", str);
+                              stat(str,&sb); // dimensiunea fisierului
+                              if(sb.st_size > maxsize) {
+                                  maxsize = sb.st_size;
+                                  strcpy(maxfile, str); // ii salvez si calea
+                              }
+                          }
+                      }
+                      // acum afisez informatiile legate de fisier
+                      switch(p = fork()){
+                          case 0: // child
+                             creat("temp.txt", O_RDWR | S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH); // creeaza fisierul
+                             fd = open("temp.txt", O_RDWR);
+                             dup2(fd, STDOUT_FILENO);
+                            // close(fd); //ca sa mearga dup2 in system
+                             fprintf(stdout, "\t\t[Informatii generale legate de fisierul %s]\n", maxfile);
+                             fprintf(stdout, "\t\t");
+                             for(int i=0;i<sizeof("[Informatii generale legate de fisierul ") + sizeof(maxfile) + 1; i++)
+                                 fprintf(stdout, "=");
+                             fprintf(stdout,"\n");
+                             strcpy(command, "ls -lia ");
+                             strcat(command,maxfile);
+                             system(command); // afiseaza informatii generale
+                              fprintf(stdout,"\n");
+                              fprintf(stdout, "\t\t[Informatii legate de continuturile din iNOD pentru fisierul %s]\n", maxfile);
+                              fprintf(stdout, "\t\t");
+                              for(int i=0;i<sizeof("[Informatii legate de continuturile din iNOD pentru fisierul ") + sizeof(maxfile) + 1; i++)
+                                  fprintf(stdout, "=");
+                              fprintf(stdout,"\n");
+                              strcpy(command, "stat -s ");
+                              strcat(command,maxfile);
+                              system(command); // afiseaza informatii legate de continuturile din INOD
+                              fprintf(stdout,"\n");
+                              fprintf(stdout, "\t\t[Continutul fisierului %s]\n", maxfile);
+                              fprintf(stdout, "\t\t");
+                              for(int i=0;i<sizeof("[Continutul fisierului ") + sizeof(maxfile) + 1; i++)
+                                  fprintf(stdout, "=");
+                              fprintf(stdout,"\n");
+                             strcpy(command, "cat -b ");
+                             strcat(command, maxfile);
+                             system(command); // afiseaza-i continutul
+                              fprintf(stdout,"\n");
+                          default:
+                              wait(NULL);
+                              break;
+                      }
+                      close(fd); // inchide fisierul
+                      // acum citeste din fisier si trimite inapoi la client
+                      fd = open("temp.txt", O_RDWR);
+                      stat("temp.txt", &sb);
+                      msgSize = (int) sb.st_size;
+                      fprintf(stderr, "msgSize is %d\n", msgSize);
+                      while (msgSize != 0) {
+                          if (msgSize < BUF_SIZE) {
+                              //   bzero(msg.msg, BUF_SIZE);
+                              msg.msg = malloc(msgSize + 1);
+                              h.msgSize = read(fd, msg.msg, msgSize);
+                              msg.transfer = 0; // am incheiat transfer
+                              writeSingleString(i, h, msg.msg);
+                              //     fprintf(stderr, "%s\n", msg.msg); de test
+                              msgSize = 0; // ultima iteratie
+                          } else {
+                              //   bzero(msg.msg, sizeof(msg.msg));
+                              msg.msg = malloc(BUF_SIZE + 1);
+                              h.msgSize = read(fd, msg.msg, BUF_SIZE);
+                              msg.transfer = 1; // transfer in progress
+                              writeSingleString(i, h, msg.msg);
+                              // fprintf(stderr, "%s\n", msg.msg); de test
+                              msgSize -= BUF_SIZE;
+                          }
+                      }
+                      if(msgSize == 0){
+                          msg.msg = (char*) malloc(100);
+                          strcpy(msg.msg, "Nu exista fisiere pe server-ul INET!");
+                          writeSingleString(i, h, msg.msg);
+                      }
+                      unlink("temp.txt");  // sterge fisierul temporar, nu mai avem nevoie de el
+                      break;
+                  case 10:
+                      // optiunea e trimisa deja, caut cel mai mare fisier
+                      maxsize = 9223372036854775807; //valoarea max pt longs
+                      dptr = opendir("./serv_files/INET");
+                      while((sdir = readdir(dptr)) != NULL){
+                          if(sdir->d_type == 4){
+                              if(sdir->d_name[0] == '.'){
+                                  // . sau ..
+                                  stat(sdir->d_name,&sb);
+                                  //size=buf.st_size;
+                                  //  pf("size=%d\n",size);
+                              }
+                          }
+                          else
+                          {
+                              strcpy(str,"./serv_files/INET");
+                              strcat(str,"/");
+                              strcat(str,sdir->d_name);
+                              //    fprintf(stderr, "%s\n", str);
+                              stat(str,&sb); // dimensiunea fisierului
+                              if(sb.st_size < maxsize && sb.st_size > 0) { // sa nu fie fisier gol
+                                  maxsize = sb.st_size;
+                                  strcpy(maxfile, str); // ii salvez si calea
+                              }
+                          }
+                      }
+                      // acum afisez informatiile legate de fisier
+                      switch(p = fork()){
+                          case 0: // child
+                              creat("temp.txt", O_RDWR | S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH); // creeaza fisierul
+                              fd = open("temp.txt", O_RDWR);
+                              dup2(fd, STDOUT_FILENO);
+                              // close(fd); //ca sa mearga dup2 in system
+                              fprintf(stdout, "\t\t[Informatii generale legate de fisierul %s]\n", maxfile);
+                              fprintf(stdout, "\t\t");
+                              for(int i=0;i<sizeof("[Informatii generale legate de fisierul ") + sizeof(maxfile) + 1; i++)
+                                  fprintf(stdout, "=");
+                              fprintf(stdout,"\n");
+                              strcpy(command, "ls -lia ");
+                              strcat(command,maxfile);
+                              system(command); // afiseaza informatii generale
+                              fprintf(stdout,"\n");
+                              fprintf(stdout, "\t\t[Informatii legate de continuturile din iNOD pentru fisierul %s]\n", maxfile);
+                              fprintf(stdout, "\t\t");
+                              for(int i=0;i<sizeof("[Informatii legate de continuturile din iNOD pentru fisierul ") + sizeof(maxfile) + 1; i++)
+                                  fprintf(stdout, "=");
+                              fprintf(stdout,"\n");
+                              strcpy(command, "stat -s ");
+                              strcat(command,maxfile);
+                              system(command); // afiseaza informatii legate de continuturile din INOD
+                              fprintf(stdout,"\n");
+                              fprintf(stdout, "\t\t[Continutul fisierului %s]\n", maxfile);
+                              fprintf(stdout, "\t\t");
+                              for(int i=0;i<sizeof("[Continutul fisierului ") + sizeof(maxfile) + 1; i++)
+                                  fprintf(stdout, "=");
+                              fprintf(stdout,"\n");
+                              strcpy(command, "cat -b ");
+                              strcat(command, maxfile);
+                              system(command); // afiseaza-i continutul
+                              fprintf(stdout,"\n");
+                          default:
+                              wait(NULL);
+                              break;
+                      }
+                      close(fd); // inchide fisierul
+                      // acum citeste din fisier si trimite inapoi la client
+                      fd = open("temp.txt", O_RDWR);
+                      stat("temp.txt", &sb);
+                      msgSize = (int) sb.st_size;
+                      fprintf(stderr, "msgSize is %d\n", msgSize);
+                      while (msgSize != 0) {
+                          if (msgSize < BUF_SIZE) {
+                              //   bzero(msg.msg, BUF_SIZE);
+                              msg.msg = malloc(msgSize + 1);
+                              h.msgSize = read(fd, msg.msg, msgSize);
+                              msg.transfer = 0; // am incheiat transfer
+                              writeSingleString(i, h, msg.msg);
+                              //     fprintf(stderr, "%s\n", msg.msg); de test
+                              msgSize = 0; // ultima iteratie
+                          } else {
+                              //   bzero(msg.msg, sizeof(msg.msg));
+                              msg.msg = malloc(BUF_SIZE + 1);
+                              h.msgSize = read(fd, msg.msg, BUF_SIZE);
+                              msg.transfer = 1; // transfer in progress
+                              writeSingleString(i, h, msg.msg);
+                              // fprintf(stderr, "%s\n", msg.msg); de test
+                              msgSize -= BUF_SIZE;
+                          }
+                      }
+                      if(msgSize == 0){
+                          msg.msg = (char*) malloc(100);
+                          strcpy(msg.msg, "Nu exista fisiere pe server-ul INET!");
+                          writeSingleString(i, h, msg.msg);
+                      }
+                      unlink("temp.txt");  // sterge fisierul temporar, nu mai avem nevoie de el
+                      break;
+                  case 11: // statistica lb de programare -- nr de fisiere
+                      dptr = opendir("./serv_files/INET");
+                      while((sdir = readdir(dptr)) != NULL){
+                          if(sdir->d_type == 4){
+                              if(sdir->d_name[0] == '.'){
+                                  // . sau ..
+                                  stat(sdir->d_name,&sb);
+                                  //size=buf.st_size;
+                                  //  pf("size=%d\n",size);
+                              }
+                          }
+                          else
+                          {
+                              strcpy(str,"./serv_files/INET");
+                              strcat(str,"/");
+                              strcat(str,sdir->d_name);
+                              //    fprintf(stderr, "%s\n", str);
+                              if(strstr(str, ".c") && str[strlen(str)-1] == 'c'){ // .C
+                                  lbs[0] ++ ;
+                              }
+                              else if(strstr(str, ".cpp")){ // .CPP
+                                  lbs[1] ++ ;
+                              }
+                              else if(strstr(str, ".java")){ // .JAVA
+                                  lbs[2] ++ ;
+                              }
+                              else if(strstr(str, ".py")) { // python
+                                  lbs[3] ++ ;
+                              }
+                              else lbs[4] ++ ; // unknown language ?
+                          }
+                      }
+                      // acum afisez informatiile legate de fisier
+                      switch(p = fork()){
+                          case 0: // child
+                              creat("temp.txt", O_RDWR | S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH); // creeaza fisierul
+                              fd = open("temp.txt", O_RDWR);
+                              dup2(fd, STDOUT_FILENO);
+                              sprintf(filecontent, "{\n\t\t'C':%d,\n"
+                                                   "\t\t'C++':%d,\n"
+                                                   "\t\t'Java':%d,\n"
+                                                   "\t\t'Python':%d,\n"
+                                                   "\t\t'others':%d\n"
+                                                   "}",
+                                                   lbs[0], lbs[1], lbs[2], lbs[3], lbs[4]);
+                          //    strcat(filecontent, "}");
+                              fprintf(stdout, "%s\n", filecontent);
+                          default:
+                              wait(NULL);
+                              break;
+                      }
+                      close(fd); // inchide fisierul
+                      // acum citeste din fisier si trimite inapoi la client
+                      fd = open("temp.txt", O_RDWR);
+                      stat("temp.txt", &sb);
+                      msgSize = (int) sb.st_size;
+                      fprintf(stderr, "msgSize is %d\n", msgSize);
+                      while (msgSize != 0) {
+                          if (msgSize < BUF_SIZE) {
+                              //   bzero(msg.msg, BUF_SIZE);
+                              msg.msg = malloc(msgSize + 1);
+                              h.msgSize = read(fd, msg.msg, msgSize);
+                              msg.transfer = 0; // am incheiat transfer
+                              writeSingleString(i, h, msg.msg);
+                              //     fprintf(stderr, "%s\n", msg.msg); de test
+                              msgSize = 0; // ultima iteratie
+                          } else {
+                              //   bzero(msg.msg, sizeof(msg.msg));
+                              msg.msg = malloc(BUF_SIZE + 1);
+                              h.msgSize = read(fd, msg.msg, BUF_SIZE);
+                              msg.transfer = 1; // transfer in progress
+                              writeSingleString(i, h, msg.msg);
+                              // fprintf(stderr, "%s\n", msg.msg); de test
+                              msgSize -= BUF_SIZE;
+                          }
+                      }
+                      if(msgSize == 0){
+                          msg.msg = (char*) malloc(100);
+                          strcpy(msg.msg, "Nu exista fisiere pe server-ul INET!");
+                          writeSingleString(i, h, msg.msg);
+                      }
+                      unlink("temp.txt");  // sterge fisierul temporar, nu mai avem nevoie de el
+                      break;
+                      default:
                       close (i) ; FD_CLR (i, &active_fd_set) ; 
                       break ;
               } 

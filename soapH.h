@@ -382,96 +382,660 @@ SOAP_FMAC3 struct SOAP_ENV__Header * SOAP_FMAC4 soap_get_SOAP_ENV__Header(struct
 
 #endif
 
-#ifndef SOAP_TYPE___ns1__store_USCOREfile_DEFINED
-#define SOAP_TYPE___ns1__store_USCOREfile_DEFINED
-SOAP_FMAC3 void SOAP_FMAC4 soap_default___ns1__store_USCOREfile(struct soap*, struct __ns1__store_USCOREfile *);
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___ns1__store_USCOREfile(struct soap*, const struct __ns1__store_USCOREfile *);
-SOAP_FMAC3 int SOAP_FMAC4 soap_out___ns1__store_USCOREfile(struct soap*, const char*, int, const struct __ns1__store_USCOREfile *, const char*);
-SOAP_FMAC3 struct __ns1__store_USCOREfile * SOAP_FMAC4 soap_in___ns1__store_USCOREfile(struct soap*, const char*, struct __ns1__store_USCOREfile *, const char*);
+#ifndef SOAP_TYPE___ns1__storeFile_DEFINED
+#define SOAP_TYPE___ns1__storeFile_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___ns1__storeFile(struct soap*, struct __ns1__storeFile *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___ns1__storeFile(struct soap*, const struct __ns1__storeFile *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___ns1__storeFile(struct soap*, const char*, int, const struct __ns1__storeFile *, const char*);
+SOAP_FMAC3 struct __ns1__storeFile * SOAP_FMAC4 soap_in___ns1__storeFile(struct soap*, const char*, struct __ns1__storeFile *, const char*);
 
-SOAP_FMAC3 struct __ns1__store_USCOREfile * SOAP_FMAC4 soap_new___ns1__store_USCOREfile(struct soap *soap, int n);
-SOAP_FMAC3 int SOAP_FMAC4 soap_put___ns1__store_USCOREfile(struct soap*, const struct __ns1__store_USCOREfile *, const char*, const char*);
+SOAP_FMAC3 struct __ns1__storeFile * SOAP_FMAC4 soap_new___ns1__storeFile(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___ns1__storeFile(struct soap*, const struct __ns1__storeFile *, const char*, const char*);
 
-#ifndef soap_write___ns1__store_USCOREfile
-#define soap_write___ns1__store_USCOREfile(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize___ns1__store_USCOREfile(soap, data), 0) || soap_put___ns1__store_USCOREfile(soap, data, "-ns1:store_file", "") || soap_end_send(soap), (soap)->error )
+#ifndef soap_write___ns1__storeFile
+#define soap_write___ns1__storeFile(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize___ns1__storeFile(soap, data), 0) || soap_put___ns1__storeFile(soap, data, "-ns1:storeFile", "") || soap_end_send(soap), (soap)->error )
 #endif
 
 
-#ifndef soap_PUT___ns1__store_USCOREfile
-#define soap_PUT___ns1__store_USCOREfile(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize___ns1__store_USCOREfile(soap, data), 0) || soap_put___ns1__store_USCOREfile(soap, data, "-ns1:store_file", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#ifndef soap_PUT___ns1__storeFile
+#define soap_PUT___ns1__storeFile(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize___ns1__storeFile(soap, data), 0) || soap_put___ns1__storeFile(soap, data, "-ns1:storeFile", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
 #endif
 
 
-#ifndef soap_PATCH___ns1__store_USCOREfile
-#define soap_PATCH___ns1__store_USCOREfile(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize___ns1__store_USCOREfile(soap, data), 0) || soap_put___ns1__store_USCOREfile(soap, data, "-ns1:store_file", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#ifndef soap_PATCH___ns1__storeFile
+#define soap_PATCH___ns1__storeFile(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize___ns1__storeFile(soap, data), 0) || soap_put___ns1__storeFile(soap, data, "-ns1:storeFile", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
 #endif
 
 
-#ifndef soap_POST_send___ns1__store_USCOREfile
-#define soap_POST_send___ns1__store_USCOREfile(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize___ns1__store_USCOREfile(soap, data), 0) || soap_put___ns1__store_USCOREfile(soap, data, "-ns1:store_file", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#ifndef soap_POST_send___ns1__storeFile
+#define soap_POST_send___ns1__storeFile(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize___ns1__storeFile(soap, data), 0) || soap_put___ns1__storeFile(soap, data, "-ns1:storeFile", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
 #endif
 
-SOAP_FMAC3 struct __ns1__store_USCOREfile * SOAP_FMAC4 soap_get___ns1__store_USCOREfile(struct soap*, struct __ns1__store_USCOREfile *, const char*, const char*);
+SOAP_FMAC3 struct __ns1__storeFile * SOAP_FMAC4 soap_get___ns1__storeFile(struct soap*, struct __ns1__storeFile *, const char*, const char*);
 
-#ifndef soap_read___ns1__store_USCOREfile
-#define soap_read___ns1__store_USCOREfile(soap, data) ( ((data) ? (soap_default___ns1__store_USCOREfile(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get___ns1__store_USCOREfile(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
-#endif
-
-
-#ifndef soap_GET___ns1__store_USCOREfile
-#define soap_GET___ns1__store_USCOREfile(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read___ns1__store_USCOREfile(soap, (data)), soap_closesock(soap) )
+#ifndef soap_read___ns1__storeFile
+#define soap_read___ns1__storeFile(soap, data) ( ((data) ? (soap_default___ns1__storeFile(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get___ns1__storeFile(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
 #endif
 
 
-#ifndef soap_POST_recv___ns1__store_USCOREfile
-#define soap_POST_recv___ns1__store_USCOREfile(soap, data) ( soap_read___ns1__store_USCOREfile(soap, (data)) || soap_closesock(soap), (soap)->error )
+#ifndef soap_GET___ns1__storeFile
+#define soap_GET___ns1__storeFile(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read___ns1__storeFile(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv___ns1__storeFile
+#define soap_POST_recv___ns1__storeFile(soap, data) ( soap_read___ns1__storeFile(soap, (data)) || soap_closesock(soap), (soap)->error )
 #endif
 
 #endif
 
-#ifndef SOAP_TYPE__ns1__client_USCORElog_USCOREfilesResponse1_DEFINED
-#define SOAP_TYPE__ns1__client_USCORElog_USCOREfilesResponse1_DEFINED
-SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__client_USCORElog_USCOREfilesResponse1(struct soap*, struct _ns1__client_USCORElog_USCOREfilesResponse1 *);
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__client_USCORElog_USCOREfilesResponse1(struct soap*, const struct _ns1__client_USCORElog_USCOREfilesResponse1 *);
-SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__client_USCORElog_USCOREfilesResponse1(struct soap*, const char*, int, const struct _ns1__client_USCORElog_USCOREfilesResponse1 *, const char*);
-SOAP_FMAC3 struct _ns1__client_USCORElog_USCOREfilesResponse1 * SOAP_FMAC4 soap_in__ns1__client_USCORElog_USCOREfilesResponse1(struct soap*, const char*, struct _ns1__client_USCORElog_USCOREfilesResponse1 *, const char*);
+#ifndef SOAP_TYPE__ns1__totalServFilesSizeResponse1_DEFINED
+#define SOAP_TYPE__ns1__totalServFilesSizeResponse1_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__totalServFilesSizeResponse1(struct soap*, struct _ns1__totalServFilesSizeResponse1 *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__totalServFilesSizeResponse1(struct soap*, const struct _ns1__totalServFilesSizeResponse1 *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__totalServFilesSizeResponse1(struct soap*, const char*, int, const struct _ns1__totalServFilesSizeResponse1 *, const char*);
+SOAP_FMAC3 struct _ns1__totalServFilesSizeResponse1 * SOAP_FMAC4 soap_in__ns1__totalServFilesSizeResponse1(struct soap*, const char*, struct _ns1__totalServFilesSizeResponse1 *, const char*);
 
-SOAP_FMAC3 struct _ns1__client_USCORElog_USCOREfilesResponse1 * SOAP_FMAC4 soap_new__ns1__client_USCORElog_USCOREfilesResponse1(struct soap *soap, int n);
-SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__client_USCORElog_USCOREfilesResponse1(struct soap*, const struct _ns1__client_USCORElog_USCOREfilesResponse1 *, const char*, const char*);
+SOAP_FMAC3 struct _ns1__totalServFilesSizeResponse1 * SOAP_FMAC4 soap_new__ns1__totalServFilesSizeResponse1(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__totalServFilesSizeResponse1(struct soap*, const struct _ns1__totalServFilesSizeResponse1 *, const char*, const char*);
 
-#ifndef soap_write__ns1__client_USCORElog_USCOREfilesResponse1
-#define soap_write__ns1__client_USCORElog_USCOREfilesResponse1(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__client_USCORElog_USCOREfilesResponse1(soap, data), 0) || soap_put__ns1__client_USCORElog_USCOREfilesResponse1(soap, data, "ns1:client_log_filesResponse1", "") || soap_end_send(soap), (soap)->error )
+#ifndef soap_write__ns1__totalServFilesSizeResponse1
+#define soap_write__ns1__totalServFilesSizeResponse1(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__totalServFilesSizeResponse1(soap, data), 0) || soap_put__ns1__totalServFilesSizeResponse1(soap, data, "ns1:totalServFilesSizeResponse1", "") || soap_end_send(soap), (soap)->error )
 #endif
 
 
-#ifndef soap_PUT__ns1__client_USCORElog_USCOREfilesResponse1
-#define soap_PUT__ns1__client_USCORElog_USCOREfilesResponse1(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__client_USCORElog_USCOREfilesResponse1(soap, data), 0) || soap_put__ns1__client_USCORElog_USCOREfilesResponse1(soap, data, "ns1:client_log_filesResponse1", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#ifndef soap_PUT__ns1__totalServFilesSizeResponse1
+#define soap_PUT__ns1__totalServFilesSizeResponse1(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__totalServFilesSizeResponse1(soap, data), 0) || soap_put__ns1__totalServFilesSizeResponse1(soap, data, "ns1:totalServFilesSizeResponse1", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
 #endif
 
 
-#ifndef soap_PATCH__ns1__client_USCORElog_USCOREfilesResponse1
-#define soap_PATCH__ns1__client_USCORElog_USCOREfilesResponse1(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__client_USCORElog_USCOREfilesResponse1(soap, data), 0) || soap_put__ns1__client_USCORElog_USCOREfilesResponse1(soap, data, "ns1:client_log_filesResponse1", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#ifndef soap_PATCH__ns1__totalServFilesSizeResponse1
+#define soap_PATCH__ns1__totalServFilesSizeResponse1(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__totalServFilesSizeResponse1(soap, data), 0) || soap_put__ns1__totalServFilesSizeResponse1(soap, data, "ns1:totalServFilesSizeResponse1", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
 #endif
 
 
-#ifndef soap_POST_send__ns1__client_USCORElog_USCOREfilesResponse1
-#define soap_POST_send__ns1__client_USCORElog_USCOREfilesResponse1(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__client_USCORElog_USCOREfilesResponse1(soap, data), 0) || soap_put__ns1__client_USCORElog_USCOREfilesResponse1(soap, data, "ns1:client_log_filesResponse1", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#ifndef soap_POST_send__ns1__totalServFilesSizeResponse1
+#define soap_POST_send__ns1__totalServFilesSizeResponse1(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__totalServFilesSizeResponse1(soap, data), 0) || soap_put__ns1__totalServFilesSizeResponse1(soap, data, "ns1:totalServFilesSizeResponse1", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
 #endif
 
-SOAP_FMAC3 struct _ns1__client_USCORElog_USCOREfilesResponse1 * SOAP_FMAC4 soap_get__ns1__client_USCORElog_USCOREfilesResponse1(struct soap*, struct _ns1__client_USCORElog_USCOREfilesResponse1 *, const char*, const char*);
+SOAP_FMAC3 struct _ns1__totalServFilesSizeResponse1 * SOAP_FMAC4 soap_get__ns1__totalServFilesSizeResponse1(struct soap*, struct _ns1__totalServFilesSizeResponse1 *, const char*, const char*);
 
-#ifndef soap_read__ns1__client_USCORElog_USCOREfilesResponse1
-#define soap_read__ns1__client_USCORElog_USCOREfilesResponse1(soap, data) ( ((data) ? (soap_default__ns1__client_USCORElog_USCOREfilesResponse1(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__client_USCORElog_USCOREfilesResponse1(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
-#endif
-
-
-#ifndef soap_GET__ns1__client_USCORElog_USCOREfilesResponse1
-#define soap_GET__ns1__client_USCORElog_USCOREfilesResponse1(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__client_USCORElog_USCOREfilesResponse1(soap, (data)), soap_closesock(soap) )
+#ifndef soap_read__ns1__totalServFilesSizeResponse1
+#define soap_read__ns1__totalServFilesSizeResponse1(soap, data) ( ((data) ? (soap_default__ns1__totalServFilesSizeResponse1(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__totalServFilesSizeResponse1(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
 #endif
 
 
-#ifndef soap_POST_recv__ns1__client_USCORElog_USCOREfilesResponse1
-#define soap_POST_recv__ns1__client_USCORElog_USCOREfilesResponse1(soap, data) ( soap_read__ns1__client_USCORElog_USCOREfilesResponse1(soap, (data)) || soap_closesock(soap), (soap)->error )
+#ifndef soap_GET__ns1__totalServFilesSizeResponse1
+#define soap_GET__ns1__totalServFilesSizeResponse1(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__totalServFilesSizeResponse1(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv__ns1__totalServFilesSizeResponse1
+#define soap_POST_recv__ns1__totalServFilesSizeResponse1(soap, data) ( soap_read__ns1__totalServFilesSizeResponse1(soap, (data)) || soap_closesock(soap), (soap)->error )
+#endif
+
+#endif
+
+#ifndef SOAP_TYPE__ns1__totalServFilesSize_DEFINED
+#define SOAP_TYPE__ns1__totalServFilesSize_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__totalServFilesSize(struct soap*, struct _ns1__totalServFilesSize *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__totalServFilesSize(struct soap*, const struct _ns1__totalServFilesSize *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__totalServFilesSize(struct soap*, const char*, int, const struct _ns1__totalServFilesSize *, const char*);
+SOAP_FMAC3 struct _ns1__totalServFilesSize * SOAP_FMAC4 soap_in__ns1__totalServFilesSize(struct soap*, const char*, struct _ns1__totalServFilesSize *, const char*);
+
+SOAP_FMAC3 struct _ns1__totalServFilesSize * SOAP_FMAC4 soap_new__ns1__totalServFilesSize(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__totalServFilesSize(struct soap*, const struct _ns1__totalServFilesSize *, const char*, const char*);
+
+#ifndef soap_write__ns1__totalServFilesSize
+#define soap_write__ns1__totalServFilesSize(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__totalServFilesSize(soap, data), 0) || soap_put__ns1__totalServFilesSize(soap, data, "ns1:totalServFilesSize", "") || soap_end_send(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_PUT__ns1__totalServFilesSize
+#define soap_PUT__ns1__totalServFilesSize(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__totalServFilesSize(soap, data), 0) || soap_put__ns1__totalServFilesSize(soap, data, "ns1:totalServFilesSize", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_PATCH__ns1__totalServFilesSize
+#define soap_PATCH__ns1__totalServFilesSize(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__totalServFilesSize(soap, data), 0) || soap_put__ns1__totalServFilesSize(soap, data, "ns1:totalServFilesSize", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_send__ns1__totalServFilesSize
+#define soap_POST_send__ns1__totalServFilesSize(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__totalServFilesSize(soap, data), 0) || soap_put__ns1__totalServFilesSize(soap, data, "ns1:totalServFilesSize", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#endif
+
+SOAP_FMAC3 struct _ns1__totalServFilesSize * SOAP_FMAC4 soap_get__ns1__totalServFilesSize(struct soap*, struct _ns1__totalServFilesSize *, const char*, const char*);
+
+#ifndef soap_read__ns1__totalServFilesSize
+#define soap_read__ns1__totalServFilesSize(soap, data) ( ((data) ? (soap_default__ns1__totalServFilesSize(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__totalServFilesSize(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_GET__ns1__totalServFilesSize
+#define soap_GET__ns1__totalServFilesSize(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__totalServFilesSize(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv__ns1__totalServFilesSize
+#define soap_POST_recv__ns1__totalServFilesSize(soap, data) ( soap_read__ns1__totalServFilesSize(soap, (data)) || soap_closesock(soap), (soap)->error )
+#endif
+
+#endif
+
+#ifndef SOAP_TYPE__ns1__filesStatisticsResponse1_DEFINED
+#define SOAP_TYPE__ns1__filesStatisticsResponse1_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__filesStatisticsResponse1(struct soap*, struct _ns1__filesStatisticsResponse1 *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__filesStatisticsResponse1(struct soap*, const struct _ns1__filesStatisticsResponse1 *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__filesStatisticsResponse1(struct soap*, const char*, int, const struct _ns1__filesStatisticsResponse1 *, const char*);
+SOAP_FMAC3 struct _ns1__filesStatisticsResponse1 * SOAP_FMAC4 soap_in__ns1__filesStatisticsResponse1(struct soap*, const char*, struct _ns1__filesStatisticsResponse1 *, const char*);
+
+SOAP_FMAC3 struct _ns1__filesStatisticsResponse1 * SOAP_FMAC4 soap_new__ns1__filesStatisticsResponse1(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__filesStatisticsResponse1(struct soap*, const struct _ns1__filesStatisticsResponse1 *, const char*, const char*);
+
+#ifndef soap_write__ns1__filesStatisticsResponse1
+#define soap_write__ns1__filesStatisticsResponse1(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__filesStatisticsResponse1(soap, data), 0) || soap_put__ns1__filesStatisticsResponse1(soap, data, "ns1:filesStatisticsResponse1", "") || soap_end_send(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_PUT__ns1__filesStatisticsResponse1
+#define soap_PUT__ns1__filesStatisticsResponse1(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__filesStatisticsResponse1(soap, data), 0) || soap_put__ns1__filesStatisticsResponse1(soap, data, "ns1:filesStatisticsResponse1", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_PATCH__ns1__filesStatisticsResponse1
+#define soap_PATCH__ns1__filesStatisticsResponse1(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__filesStatisticsResponse1(soap, data), 0) || soap_put__ns1__filesStatisticsResponse1(soap, data, "ns1:filesStatisticsResponse1", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_send__ns1__filesStatisticsResponse1
+#define soap_POST_send__ns1__filesStatisticsResponse1(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__filesStatisticsResponse1(soap, data), 0) || soap_put__ns1__filesStatisticsResponse1(soap, data, "ns1:filesStatisticsResponse1", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#endif
+
+SOAP_FMAC3 struct _ns1__filesStatisticsResponse1 * SOAP_FMAC4 soap_get__ns1__filesStatisticsResponse1(struct soap*, struct _ns1__filesStatisticsResponse1 *, const char*, const char*);
+
+#ifndef soap_read__ns1__filesStatisticsResponse1
+#define soap_read__ns1__filesStatisticsResponse1(soap, data) ( ((data) ? (soap_default__ns1__filesStatisticsResponse1(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__filesStatisticsResponse1(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_GET__ns1__filesStatisticsResponse1
+#define soap_GET__ns1__filesStatisticsResponse1(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__filesStatisticsResponse1(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv__ns1__filesStatisticsResponse1
+#define soap_POST_recv__ns1__filesStatisticsResponse1(soap, data) ( soap_read__ns1__filesStatisticsResponse1(soap, (data)) || soap_closesock(soap), (soap)->error )
+#endif
+
+#endif
+
+#ifndef SOAP_TYPE__ns1__filesStatistics_DEFINED
+#define SOAP_TYPE__ns1__filesStatistics_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__filesStatistics(struct soap*, struct _ns1__filesStatistics *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__filesStatistics(struct soap*, const struct _ns1__filesStatistics *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__filesStatistics(struct soap*, const char*, int, const struct _ns1__filesStatistics *, const char*);
+SOAP_FMAC3 struct _ns1__filesStatistics * SOAP_FMAC4 soap_in__ns1__filesStatistics(struct soap*, const char*, struct _ns1__filesStatistics *, const char*);
+
+SOAP_FMAC3 struct _ns1__filesStatistics * SOAP_FMAC4 soap_new__ns1__filesStatistics(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__filesStatistics(struct soap*, const struct _ns1__filesStatistics *, const char*, const char*);
+
+#ifndef soap_write__ns1__filesStatistics
+#define soap_write__ns1__filesStatistics(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__filesStatistics(soap, data), 0) || soap_put__ns1__filesStatistics(soap, data, "ns1:filesStatistics", "") || soap_end_send(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_PUT__ns1__filesStatistics
+#define soap_PUT__ns1__filesStatistics(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__filesStatistics(soap, data), 0) || soap_put__ns1__filesStatistics(soap, data, "ns1:filesStatistics", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_PATCH__ns1__filesStatistics
+#define soap_PATCH__ns1__filesStatistics(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__filesStatistics(soap, data), 0) || soap_put__ns1__filesStatistics(soap, data, "ns1:filesStatistics", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_send__ns1__filesStatistics
+#define soap_POST_send__ns1__filesStatistics(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__filesStatistics(soap, data), 0) || soap_put__ns1__filesStatistics(soap, data, "ns1:filesStatistics", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#endif
+
+SOAP_FMAC3 struct _ns1__filesStatistics * SOAP_FMAC4 soap_get__ns1__filesStatistics(struct soap*, struct _ns1__filesStatistics *, const char*, const char*);
+
+#ifndef soap_read__ns1__filesStatistics
+#define soap_read__ns1__filesStatistics(soap, data) ( ((data) ? (soap_default__ns1__filesStatistics(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__filesStatistics(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_GET__ns1__filesStatistics
+#define soap_GET__ns1__filesStatistics(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__filesStatistics(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv__ns1__filesStatistics
+#define soap_POST_recv__ns1__filesStatistics(soap, data) ( soap_read__ns1__filesStatistics(soap, (data)) || soap_closesock(soap), (soap)->error )
+#endif
+
+#endif
+
+#ifndef SOAP_TYPE__ns1__smallestServFileResponse1_DEFINED
+#define SOAP_TYPE__ns1__smallestServFileResponse1_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__smallestServFileResponse1(struct soap*, struct _ns1__smallestServFileResponse1 *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__smallestServFileResponse1(struct soap*, const struct _ns1__smallestServFileResponse1 *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__smallestServFileResponse1(struct soap*, const char*, int, const struct _ns1__smallestServFileResponse1 *, const char*);
+SOAP_FMAC3 struct _ns1__smallestServFileResponse1 * SOAP_FMAC4 soap_in__ns1__smallestServFileResponse1(struct soap*, const char*, struct _ns1__smallestServFileResponse1 *, const char*);
+
+SOAP_FMAC3 struct _ns1__smallestServFileResponse1 * SOAP_FMAC4 soap_new__ns1__smallestServFileResponse1(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__smallestServFileResponse1(struct soap*, const struct _ns1__smallestServFileResponse1 *, const char*, const char*);
+
+#ifndef soap_write__ns1__smallestServFileResponse1
+#define soap_write__ns1__smallestServFileResponse1(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__smallestServFileResponse1(soap, data), 0) || soap_put__ns1__smallestServFileResponse1(soap, data, "ns1:smallestServFileResponse1", "") || soap_end_send(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_PUT__ns1__smallestServFileResponse1
+#define soap_PUT__ns1__smallestServFileResponse1(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__smallestServFileResponse1(soap, data), 0) || soap_put__ns1__smallestServFileResponse1(soap, data, "ns1:smallestServFileResponse1", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_PATCH__ns1__smallestServFileResponse1
+#define soap_PATCH__ns1__smallestServFileResponse1(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__smallestServFileResponse1(soap, data), 0) || soap_put__ns1__smallestServFileResponse1(soap, data, "ns1:smallestServFileResponse1", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_send__ns1__smallestServFileResponse1
+#define soap_POST_send__ns1__smallestServFileResponse1(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__smallestServFileResponse1(soap, data), 0) || soap_put__ns1__smallestServFileResponse1(soap, data, "ns1:smallestServFileResponse1", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#endif
+
+SOAP_FMAC3 struct _ns1__smallestServFileResponse1 * SOAP_FMAC4 soap_get__ns1__smallestServFileResponse1(struct soap*, struct _ns1__smallestServFileResponse1 *, const char*, const char*);
+
+#ifndef soap_read__ns1__smallestServFileResponse1
+#define soap_read__ns1__smallestServFileResponse1(soap, data) ( ((data) ? (soap_default__ns1__smallestServFileResponse1(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__smallestServFileResponse1(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_GET__ns1__smallestServFileResponse1
+#define soap_GET__ns1__smallestServFileResponse1(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__smallestServFileResponse1(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv__ns1__smallestServFileResponse1
+#define soap_POST_recv__ns1__smallestServFileResponse1(soap, data) ( soap_read__ns1__smallestServFileResponse1(soap, (data)) || soap_closesock(soap), (soap)->error )
+#endif
+
+#endif
+
+#ifndef SOAP_TYPE__ns1__smallestServFile_DEFINED
+#define SOAP_TYPE__ns1__smallestServFile_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__smallestServFile(struct soap*, struct _ns1__smallestServFile *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__smallestServFile(struct soap*, const struct _ns1__smallestServFile *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__smallestServFile(struct soap*, const char*, int, const struct _ns1__smallestServFile *, const char*);
+SOAP_FMAC3 struct _ns1__smallestServFile * SOAP_FMAC4 soap_in__ns1__smallestServFile(struct soap*, const char*, struct _ns1__smallestServFile *, const char*);
+
+SOAP_FMAC3 struct _ns1__smallestServFile * SOAP_FMAC4 soap_new__ns1__smallestServFile(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__smallestServFile(struct soap*, const struct _ns1__smallestServFile *, const char*, const char*);
+
+#ifndef soap_write__ns1__smallestServFile
+#define soap_write__ns1__smallestServFile(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__smallestServFile(soap, data), 0) || soap_put__ns1__smallestServFile(soap, data, "ns1:smallestServFile", "") || soap_end_send(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_PUT__ns1__smallestServFile
+#define soap_PUT__ns1__smallestServFile(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__smallestServFile(soap, data), 0) || soap_put__ns1__smallestServFile(soap, data, "ns1:smallestServFile", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_PATCH__ns1__smallestServFile
+#define soap_PATCH__ns1__smallestServFile(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__smallestServFile(soap, data), 0) || soap_put__ns1__smallestServFile(soap, data, "ns1:smallestServFile", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_send__ns1__smallestServFile
+#define soap_POST_send__ns1__smallestServFile(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__smallestServFile(soap, data), 0) || soap_put__ns1__smallestServFile(soap, data, "ns1:smallestServFile", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#endif
+
+SOAP_FMAC3 struct _ns1__smallestServFile * SOAP_FMAC4 soap_get__ns1__smallestServFile(struct soap*, struct _ns1__smallestServFile *, const char*, const char*);
+
+#ifndef soap_read__ns1__smallestServFile
+#define soap_read__ns1__smallestServFile(soap, data) ( ((data) ? (soap_default__ns1__smallestServFile(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__smallestServFile(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_GET__ns1__smallestServFile
+#define soap_GET__ns1__smallestServFile(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__smallestServFile(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv__ns1__smallestServFile
+#define soap_POST_recv__ns1__smallestServFile(soap, data) ( soap_read__ns1__smallestServFile(soap, (data)) || soap_closesock(soap), (soap)->error )
+#endif
+
+#endif
+
+#ifndef SOAP_TYPE__ns1__largestServFileResponse1_DEFINED
+#define SOAP_TYPE__ns1__largestServFileResponse1_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__largestServFileResponse1(struct soap*, struct _ns1__largestServFileResponse1 *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__largestServFileResponse1(struct soap*, const struct _ns1__largestServFileResponse1 *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__largestServFileResponse1(struct soap*, const char*, int, const struct _ns1__largestServFileResponse1 *, const char*);
+SOAP_FMAC3 struct _ns1__largestServFileResponse1 * SOAP_FMAC4 soap_in__ns1__largestServFileResponse1(struct soap*, const char*, struct _ns1__largestServFileResponse1 *, const char*);
+
+SOAP_FMAC3 struct _ns1__largestServFileResponse1 * SOAP_FMAC4 soap_new__ns1__largestServFileResponse1(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__largestServFileResponse1(struct soap*, const struct _ns1__largestServFileResponse1 *, const char*, const char*);
+
+#ifndef soap_write__ns1__largestServFileResponse1
+#define soap_write__ns1__largestServFileResponse1(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__largestServFileResponse1(soap, data), 0) || soap_put__ns1__largestServFileResponse1(soap, data, "ns1:largestServFileResponse1", "") || soap_end_send(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_PUT__ns1__largestServFileResponse1
+#define soap_PUT__ns1__largestServFileResponse1(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__largestServFileResponse1(soap, data), 0) || soap_put__ns1__largestServFileResponse1(soap, data, "ns1:largestServFileResponse1", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_PATCH__ns1__largestServFileResponse1
+#define soap_PATCH__ns1__largestServFileResponse1(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__largestServFileResponse1(soap, data), 0) || soap_put__ns1__largestServFileResponse1(soap, data, "ns1:largestServFileResponse1", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_send__ns1__largestServFileResponse1
+#define soap_POST_send__ns1__largestServFileResponse1(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__largestServFileResponse1(soap, data), 0) || soap_put__ns1__largestServFileResponse1(soap, data, "ns1:largestServFileResponse1", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#endif
+
+SOAP_FMAC3 struct _ns1__largestServFileResponse1 * SOAP_FMAC4 soap_get__ns1__largestServFileResponse1(struct soap*, struct _ns1__largestServFileResponse1 *, const char*, const char*);
+
+#ifndef soap_read__ns1__largestServFileResponse1
+#define soap_read__ns1__largestServFileResponse1(soap, data) ( ((data) ? (soap_default__ns1__largestServFileResponse1(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__largestServFileResponse1(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_GET__ns1__largestServFileResponse1
+#define soap_GET__ns1__largestServFileResponse1(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__largestServFileResponse1(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv__ns1__largestServFileResponse1
+#define soap_POST_recv__ns1__largestServFileResponse1(soap, data) ( soap_read__ns1__largestServFileResponse1(soap, (data)) || soap_closesock(soap), (soap)->error )
+#endif
+
+#endif
+
+#ifndef SOAP_TYPE__ns1__largestServFile_DEFINED
+#define SOAP_TYPE__ns1__largestServFile_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__largestServFile(struct soap*, struct _ns1__largestServFile *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__largestServFile(struct soap*, const struct _ns1__largestServFile *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__largestServFile(struct soap*, const char*, int, const struct _ns1__largestServFile *, const char*);
+SOAP_FMAC3 struct _ns1__largestServFile * SOAP_FMAC4 soap_in__ns1__largestServFile(struct soap*, const char*, struct _ns1__largestServFile *, const char*);
+
+SOAP_FMAC3 struct _ns1__largestServFile * SOAP_FMAC4 soap_new__ns1__largestServFile(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__largestServFile(struct soap*, const struct _ns1__largestServFile *, const char*, const char*);
+
+#ifndef soap_write__ns1__largestServFile
+#define soap_write__ns1__largestServFile(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__largestServFile(soap, data), 0) || soap_put__ns1__largestServFile(soap, data, "ns1:largestServFile", "") || soap_end_send(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_PUT__ns1__largestServFile
+#define soap_PUT__ns1__largestServFile(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__largestServFile(soap, data), 0) || soap_put__ns1__largestServFile(soap, data, "ns1:largestServFile", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_PATCH__ns1__largestServFile
+#define soap_PATCH__ns1__largestServFile(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__largestServFile(soap, data), 0) || soap_put__ns1__largestServFile(soap, data, "ns1:largestServFile", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_send__ns1__largestServFile
+#define soap_POST_send__ns1__largestServFile(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__largestServFile(soap, data), 0) || soap_put__ns1__largestServFile(soap, data, "ns1:largestServFile", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#endif
+
+SOAP_FMAC3 struct _ns1__largestServFile * SOAP_FMAC4 soap_get__ns1__largestServFile(struct soap*, struct _ns1__largestServFile *, const char*, const char*);
+
+#ifndef soap_read__ns1__largestServFile
+#define soap_read__ns1__largestServFile(soap, data) ( ((data) ? (soap_default__ns1__largestServFile(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__largestServFile(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_GET__ns1__largestServFile
+#define soap_GET__ns1__largestServFile(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__largestServFile(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv__ns1__largestServFile
+#define soap_POST_recv__ns1__largestServFile(soap, data) ( soap_read__ns1__largestServFile(soap, (data)) || soap_closesock(soap), (soap)->error )
+#endif
+
+#endif
+
+#ifndef SOAP_TYPE__ns1__filesInCertainProgLanguageResponse1_DEFINED
+#define SOAP_TYPE__ns1__filesInCertainProgLanguageResponse1_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__filesInCertainProgLanguageResponse1(struct soap*, struct _ns1__filesInCertainProgLanguageResponse1 *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__filesInCertainProgLanguageResponse1(struct soap*, const struct _ns1__filesInCertainProgLanguageResponse1 *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__filesInCertainProgLanguageResponse1(struct soap*, const char*, int, const struct _ns1__filesInCertainProgLanguageResponse1 *, const char*);
+SOAP_FMAC3 struct _ns1__filesInCertainProgLanguageResponse1 * SOAP_FMAC4 soap_in__ns1__filesInCertainProgLanguageResponse1(struct soap*, const char*, struct _ns1__filesInCertainProgLanguageResponse1 *, const char*);
+
+SOAP_FMAC3 struct _ns1__filesInCertainProgLanguageResponse1 * SOAP_FMAC4 soap_new__ns1__filesInCertainProgLanguageResponse1(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__filesInCertainProgLanguageResponse1(struct soap*, const struct _ns1__filesInCertainProgLanguageResponse1 *, const char*, const char*);
+
+#ifndef soap_write__ns1__filesInCertainProgLanguageResponse1
+#define soap_write__ns1__filesInCertainProgLanguageResponse1(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__filesInCertainProgLanguageResponse1(soap, data), 0) || soap_put__ns1__filesInCertainProgLanguageResponse1(soap, data, "ns1:filesInCertainProgLanguageResponse1", "") || soap_end_send(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_PUT__ns1__filesInCertainProgLanguageResponse1
+#define soap_PUT__ns1__filesInCertainProgLanguageResponse1(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__filesInCertainProgLanguageResponse1(soap, data), 0) || soap_put__ns1__filesInCertainProgLanguageResponse1(soap, data, "ns1:filesInCertainProgLanguageResponse1", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_PATCH__ns1__filesInCertainProgLanguageResponse1
+#define soap_PATCH__ns1__filesInCertainProgLanguageResponse1(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__filesInCertainProgLanguageResponse1(soap, data), 0) || soap_put__ns1__filesInCertainProgLanguageResponse1(soap, data, "ns1:filesInCertainProgLanguageResponse1", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_send__ns1__filesInCertainProgLanguageResponse1
+#define soap_POST_send__ns1__filesInCertainProgLanguageResponse1(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__filesInCertainProgLanguageResponse1(soap, data), 0) || soap_put__ns1__filesInCertainProgLanguageResponse1(soap, data, "ns1:filesInCertainProgLanguageResponse1", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#endif
+
+SOAP_FMAC3 struct _ns1__filesInCertainProgLanguageResponse1 * SOAP_FMAC4 soap_get__ns1__filesInCertainProgLanguageResponse1(struct soap*, struct _ns1__filesInCertainProgLanguageResponse1 *, const char*, const char*);
+
+#ifndef soap_read__ns1__filesInCertainProgLanguageResponse1
+#define soap_read__ns1__filesInCertainProgLanguageResponse1(soap, data) ( ((data) ? (soap_default__ns1__filesInCertainProgLanguageResponse1(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__filesInCertainProgLanguageResponse1(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_GET__ns1__filesInCertainProgLanguageResponse1
+#define soap_GET__ns1__filesInCertainProgLanguageResponse1(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__filesInCertainProgLanguageResponse1(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv__ns1__filesInCertainProgLanguageResponse1
+#define soap_POST_recv__ns1__filesInCertainProgLanguageResponse1(soap, data) ( soap_read__ns1__filesInCertainProgLanguageResponse1(soap, (data)) || soap_closesock(soap), (soap)->error )
+#endif
+
+#endif
+
+#ifndef SOAP_TYPE__ns1__filesInCertainProgLanguage_DEFINED
+#define SOAP_TYPE__ns1__filesInCertainProgLanguage_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__filesInCertainProgLanguage(struct soap*, struct _ns1__filesInCertainProgLanguage *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__filesInCertainProgLanguage(struct soap*, const struct _ns1__filesInCertainProgLanguage *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__filesInCertainProgLanguage(struct soap*, const char*, int, const struct _ns1__filesInCertainProgLanguage *, const char*);
+SOAP_FMAC3 struct _ns1__filesInCertainProgLanguage * SOAP_FMAC4 soap_in__ns1__filesInCertainProgLanguage(struct soap*, const char*, struct _ns1__filesInCertainProgLanguage *, const char*);
+
+SOAP_FMAC3 struct _ns1__filesInCertainProgLanguage * SOAP_FMAC4 soap_new__ns1__filesInCertainProgLanguage(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__filesInCertainProgLanguage(struct soap*, const struct _ns1__filesInCertainProgLanguage *, const char*, const char*);
+
+#ifndef soap_write__ns1__filesInCertainProgLanguage
+#define soap_write__ns1__filesInCertainProgLanguage(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__filesInCertainProgLanguage(soap, data), 0) || soap_put__ns1__filesInCertainProgLanguage(soap, data, "ns1:filesInCertainProgLanguage", "") || soap_end_send(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_PUT__ns1__filesInCertainProgLanguage
+#define soap_PUT__ns1__filesInCertainProgLanguage(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__filesInCertainProgLanguage(soap, data), 0) || soap_put__ns1__filesInCertainProgLanguage(soap, data, "ns1:filesInCertainProgLanguage", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_PATCH__ns1__filesInCertainProgLanguage
+#define soap_PATCH__ns1__filesInCertainProgLanguage(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__filesInCertainProgLanguage(soap, data), 0) || soap_put__ns1__filesInCertainProgLanguage(soap, data, "ns1:filesInCertainProgLanguage", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_send__ns1__filesInCertainProgLanguage
+#define soap_POST_send__ns1__filesInCertainProgLanguage(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__filesInCertainProgLanguage(soap, data), 0) || soap_put__ns1__filesInCertainProgLanguage(soap, data, "ns1:filesInCertainProgLanguage", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#endif
+
+SOAP_FMAC3 struct _ns1__filesInCertainProgLanguage * SOAP_FMAC4 soap_get__ns1__filesInCertainProgLanguage(struct soap*, struct _ns1__filesInCertainProgLanguage *, const char*, const char*);
+
+#ifndef soap_read__ns1__filesInCertainProgLanguage
+#define soap_read__ns1__filesInCertainProgLanguage(soap, data) ( ((data) ? (soap_default__ns1__filesInCertainProgLanguage(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__filesInCertainProgLanguage(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_GET__ns1__filesInCertainProgLanguage
+#define soap_GET__ns1__filesInCertainProgLanguage(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__filesInCertainProgLanguage(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv__ns1__filesInCertainProgLanguage
+#define soap_POST_recv__ns1__filesInCertainProgLanguage(soap, data) ( soap_read__ns1__filesInCertainProgLanguage(soap, (data)) || soap_closesock(soap), (soap)->error )
+#endif
+
+#endif
+
+#ifndef SOAP_TYPE__ns1__servFilesResponse1_DEFINED
+#define SOAP_TYPE__ns1__servFilesResponse1_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__servFilesResponse1(struct soap*, struct _ns1__servFilesResponse1 *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__servFilesResponse1(struct soap*, const struct _ns1__servFilesResponse1 *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__servFilesResponse1(struct soap*, const char*, int, const struct _ns1__servFilesResponse1 *, const char*);
+SOAP_FMAC3 struct _ns1__servFilesResponse1 * SOAP_FMAC4 soap_in__ns1__servFilesResponse1(struct soap*, const char*, struct _ns1__servFilesResponse1 *, const char*);
+
+SOAP_FMAC3 struct _ns1__servFilesResponse1 * SOAP_FMAC4 soap_new__ns1__servFilesResponse1(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__servFilesResponse1(struct soap*, const struct _ns1__servFilesResponse1 *, const char*, const char*);
+
+#ifndef soap_write__ns1__servFilesResponse1
+#define soap_write__ns1__servFilesResponse1(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__servFilesResponse1(soap, data), 0) || soap_put__ns1__servFilesResponse1(soap, data, "ns1:servFilesResponse1", "") || soap_end_send(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_PUT__ns1__servFilesResponse1
+#define soap_PUT__ns1__servFilesResponse1(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__servFilesResponse1(soap, data), 0) || soap_put__ns1__servFilesResponse1(soap, data, "ns1:servFilesResponse1", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_PATCH__ns1__servFilesResponse1
+#define soap_PATCH__ns1__servFilesResponse1(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__servFilesResponse1(soap, data), 0) || soap_put__ns1__servFilesResponse1(soap, data, "ns1:servFilesResponse1", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_send__ns1__servFilesResponse1
+#define soap_POST_send__ns1__servFilesResponse1(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__servFilesResponse1(soap, data), 0) || soap_put__ns1__servFilesResponse1(soap, data, "ns1:servFilesResponse1", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#endif
+
+SOAP_FMAC3 struct _ns1__servFilesResponse1 * SOAP_FMAC4 soap_get__ns1__servFilesResponse1(struct soap*, struct _ns1__servFilesResponse1 *, const char*, const char*);
+
+#ifndef soap_read__ns1__servFilesResponse1
+#define soap_read__ns1__servFilesResponse1(soap, data) ( ((data) ? (soap_default__ns1__servFilesResponse1(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__servFilesResponse1(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_GET__ns1__servFilesResponse1
+#define soap_GET__ns1__servFilesResponse1(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__servFilesResponse1(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv__ns1__servFilesResponse1
+#define soap_POST_recv__ns1__servFilesResponse1(soap, data) ( soap_read__ns1__servFilesResponse1(soap, (data)) || soap_closesock(soap), (soap)->error )
+#endif
+
+#endif
+
+#ifndef SOAP_TYPE__ns1__servFiles_DEFINED
+#define SOAP_TYPE__ns1__servFiles_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__servFiles(struct soap*, struct _ns1__servFiles *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__servFiles(struct soap*, const struct _ns1__servFiles *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__servFiles(struct soap*, const char*, int, const struct _ns1__servFiles *, const char*);
+SOAP_FMAC3 struct _ns1__servFiles * SOAP_FMAC4 soap_in__ns1__servFiles(struct soap*, const char*, struct _ns1__servFiles *, const char*);
+
+SOAP_FMAC3 struct _ns1__servFiles * SOAP_FMAC4 soap_new__ns1__servFiles(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__servFiles(struct soap*, const struct _ns1__servFiles *, const char*, const char*);
+
+#ifndef soap_write__ns1__servFiles
+#define soap_write__ns1__servFiles(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__servFiles(soap, data), 0) || soap_put__ns1__servFiles(soap, data, "ns1:servFiles", "") || soap_end_send(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_PUT__ns1__servFiles
+#define soap_PUT__ns1__servFiles(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__servFiles(soap, data), 0) || soap_put__ns1__servFiles(soap, data, "ns1:servFiles", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_PATCH__ns1__servFiles
+#define soap_PATCH__ns1__servFiles(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__servFiles(soap, data), 0) || soap_put__ns1__servFiles(soap, data, "ns1:servFiles", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_send__ns1__servFiles
+#define soap_POST_send__ns1__servFiles(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__servFiles(soap, data), 0) || soap_put__ns1__servFiles(soap, data, "ns1:servFiles", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#endif
+
+SOAP_FMAC3 struct _ns1__servFiles * SOAP_FMAC4 soap_get__ns1__servFiles(struct soap*, struct _ns1__servFiles *, const char*, const char*);
+
+#ifndef soap_read__ns1__servFiles
+#define soap_read__ns1__servFiles(soap, data) ( ((data) ? (soap_default__ns1__servFiles(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__servFiles(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_GET__ns1__servFiles
+#define soap_GET__ns1__servFiles(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__servFiles(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv__ns1__servFiles
+#define soap_POST_recv__ns1__servFiles(soap, data) ( soap_read__ns1__servFiles(soap, (data)) || soap_closesock(soap), (soap)->error )
+#endif
+
+#endif
+
+#ifndef SOAP_TYPE__ns1__clientLogFilesResponse1_DEFINED
+#define SOAP_TYPE__ns1__clientLogFilesResponse1_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__clientLogFilesResponse1(struct soap*, struct _ns1__clientLogFilesResponse1 *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__clientLogFilesResponse1(struct soap*, const struct _ns1__clientLogFilesResponse1 *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__clientLogFilesResponse1(struct soap*, const char*, int, const struct _ns1__clientLogFilesResponse1 *, const char*);
+SOAP_FMAC3 struct _ns1__clientLogFilesResponse1 * SOAP_FMAC4 soap_in__ns1__clientLogFilesResponse1(struct soap*, const char*, struct _ns1__clientLogFilesResponse1 *, const char*);
+
+SOAP_FMAC3 struct _ns1__clientLogFilesResponse1 * SOAP_FMAC4 soap_new__ns1__clientLogFilesResponse1(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__clientLogFilesResponse1(struct soap*, const struct _ns1__clientLogFilesResponse1 *, const char*, const char*);
+
+#ifndef soap_write__ns1__clientLogFilesResponse1
+#define soap_write__ns1__clientLogFilesResponse1(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__clientLogFilesResponse1(soap, data), 0) || soap_put__ns1__clientLogFilesResponse1(soap, data, "ns1:clientLogFilesResponse1", "") || soap_end_send(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_PUT__ns1__clientLogFilesResponse1
+#define soap_PUT__ns1__clientLogFilesResponse1(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__clientLogFilesResponse1(soap, data), 0) || soap_put__ns1__clientLogFilesResponse1(soap, data, "ns1:clientLogFilesResponse1", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_PATCH__ns1__clientLogFilesResponse1
+#define soap_PATCH__ns1__clientLogFilesResponse1(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__clientLogFilesResponse1(soap, data), 0) || soap_put__ns1__clientLogFilesResponse1(soap, data, "ns1:clientLogFilesResponse1", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_send__ns1__clientLogFilesResponse1
+#define soap_POST_send__ns1__clientLogFilesResponse1(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__clientLogFilesResponse1(soap, data), 0) || soap_put__ns1__clientLogFilesResponse1(soap, data, "ns1:clientLogFilesResponse1", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#endif
+
+SOAP_FMAC3 struct _ns1__clientLogFilesResponse1 * SOAP_FMAC4 soap_get__ns1__clientLogFilesResponse1(struct soap*, struct _ns1__clientLogFilesResponse1 *, const char*, const char*);
+
+#ifndef soap_read__ns1__clientLogFilesResponse1
+#define soap_read__ns1__clientLogFilesResponse1(soap, data) ( ((data) ? (soap_default__ns1__clientLogFilesResponse1(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__clientLogFilesResponse1(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_GET__ns1__clientLogFilesResponse1
+#define soap_GET__ns1__clientLogFilesResponse1(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__clientLogFilesResponse1(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv__ns1__clientLogFilesResponse1
+#define soap_POST_recv__ns1__clientLogFilesResponse1(soap, data) ( soap_read__ns1__clientLogFilesResponse1(soap, (data)) || soap_closesock(soap), (soap)->error )
 #endif
 
 #endif
@@ -523,49 +1087,49 @@ SOAP_FMAC3 struct _ns1__NewOperationResponse * SOAP_FMAC4 soap_get__ns1__NewOper
 
 #endif
 
-#ifndef SOAP_TYPE__ns1__client_USCORElog_USCOREfiles_DEFINED
-#define SOAP_TYPE__ns1__client_USCORElog_USCOREfiles_DEFINED
-SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__client_USCORElog_USCOREfiles(struct soap*, struct _ns1__client_USCORElog_USCOREfiles *);
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__client_USCORElog_USCOREfiles(struct soap*, const struct _ns1__client_USCORElog_USCOREfiles *);
-SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__client_USCORElog_USCOREfiles(struct soap*, const char*, int, const struct _ns1__client_USCORElog_USCOREfiles *, const char*);
-SOAP_FMAC3 struct _ns1__client_USCORElog_USCOREfiles * SOAP_FMAC4 soap_in__ns1__client_USCORElog_USCOREfiles(struct soap*, const char*, struct _ns1__client_USCORElog_USCOREfiles *, const char*);
+#ifndef SOAP_TYPE__ns1__clientLogFiles_DEFINED
+#define SOAP_TYPE__ns1__clientLogFiles_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__clientLogFiles(struct soap*, struct _ns1__clientLogFiles *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__clientLogFiles(struct soap*, const struct _ns1__clientLogFiles *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__clientLogFiles(struct soap*, const char*, int, const struct _ns1__clientLogFiles *, const char*);
+SOAP_FMAC3 struct _ns1__clientLogFiles * SOAP_FMAC4 soap_in__ns1__clientLogFiles(struct soap*, const char*, struct _ns1__clientLogFiles *, const char*);
 
-SOAP_FMAC3 struct _ns1__client_USCORElog_USCOREfiles * SOAP_FMAC4 soap_new__ns1__client_USCORElog_USCOREfiles(struct soap *soap, int n);
-SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__client_USCORElog_USCOREfiles(struct soap*, const struct _ns1__client_USCORElog_USCOREfiles *, const char*, const char*);
+SOAP_FMAC3 struct _ns1__clientLogFiles * SOAP_FMAC4 soap_new__ns1__clientLogFiles(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__clientLogFiles(struct soap*, const struct _ns1__clientLogFiles *, const char*, const char*);
 
-#ifndef soap_write__ns1__client_USCORElog_USCOREfiles
-#define soap_write__ns1__client_USCORElog_USCOREfiles(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__client_USCORElog_USCOREfiles(soap, data), 0) || soap_put__ns1__client_USCORElog_USCOREfiles(soap, data, "ns1:client_log_files", "") || soap_end_send(soap), (soap)->error )
+#ifndef soap_write__ns1__clientLogFiles
+#define soap_write__ns1__clientLogFiles(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__clientLogFiles(soap, data), 0) || soap_put__ns1__clientLogFiles(soap, data, "ns1:clientLogFiles", "") || soap_end_send(soap), (soap)->error )
 #endif
 
 
-#ifndef soap_PUT__ns1__client_USCORElog_USCOREfiles
-#define soap_PUT__ns1__client_USCORElog_USCOREfiles(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__client_USCORElog_USCOREfiles(soap, data), 0) || soap_put__ns1__client_USCORElog_USCOREfiles(soap, data, "ns1:client_log_files", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#ifndef soap_PUT__ns1__clientLogFiles
+#define soap_PUT__ns1__clientLogFiles(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__clientLogFiles(soap, data), 0) || soap_put__ns1__clientLogFiles(soap, data, "ns1:clientLogFiles", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
 #endif
 
 
-#ifndef soap_PATCH__ns1__client_USCORElog_USCOREfiles
-#define soap_PATCH__ns1__client_USCORElog_USCOREfiles(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__client_USCORElog_USCOREfiles(soap, data), 0) || soap_put__ns1__client_USCORElog_USCOREfiles(soap, data, "ns1:client_log_files", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#ifndef soap_PATCH__ns1__clientLogFiles
+#define soap_PATCH__ns1__clientLogFiles(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__clientLogFiles(soap, data), 0) || soap_put__ns1__clientLogFiles(soap, data, "ns1:clientLogFiles", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
 #endif
 
 
-#ifndef soap_POST_send__ns1__client_USCORElog_USCOREfiles
-#define soap_POST_send__ns1__client_USCORElog_USCOREfiles(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__client_USCORElog_USCOREfiles(soap, data), 0) || soap_put__ns1__client_USCORElog_USCOREfiles(soap, data, "ns1:client_log_files", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#ifndef soap_POST_send__ns1__clientLogFiles
+#define soap_POST_send__ns1__clientLogFiles(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__clientLogFiles(soap, data), 0) || soap_put__ns1__clientLogFiles(soap, data, "ns1:clientLogFiles", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
 #endif
 
-SOAP_FMAC3 struct _ns1__client_USCORElog_USCOREfiles * SOAP_FMAC4 soap_get__ns1__client_USCORElog_USCOREfiles(struct soap*, struct _ns1__client_USCORElog_USCOREfiles *, const char*, const char*);
+SOAP_FMAC3 struct _ns1__clientLogFiles * SOAP_FMAC4 soap_get__ns1__clientLogFiles(struct soap*, struct _ns1__clientLogFiles *, const char*, const char*);
 
-#ifndef soap_read__ns1__client_USCORElog_USCOREfiles
-#define soap_read__ns1__client_USCORElog_USCOREfiles(soap, data) ( ((data) ? (soap_default__ns1__client_USCORElog_USCOREfiles(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__client_USCORElog_USCOREfiles(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
-#endif
-
-
-#ifndef soap_GET__ns1__client_USCORElog_USCOREfiles
-#define soap_GET__ns1__client_USCORElog_USCOREfiles(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__client_USCORElog_USCOREfiles(soap, (data)), soap_closesock(soap) )
+#ifndef soap_read__ns1__clientLogFiles
+#define soap_read__ns1__clientLogFiles(soap, data) ( ((data) ? (soap_default__ns1__clientLogFiles(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__clientLogFiles(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
 #endif
 
 
-#ifndef soap_POST_recv__ns1__client_USCORElog_USCOREfiles
-#define soap_POST_recv__ns1__client_USCORElog_USCOREfiles(soap, data) ( soap_read__ns1__client_USCORElog_USCOREfiles(soap, (data)) || soap_closesock(soap), (soap)->error )
+#ifndef soap_GET__ns1__clientLogFiles
+#define soap_GET__ns1__clientLogFiles(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__clientLogFiles(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv__ns1__clientLogFiles
+#define soap_POST_recv__ns1__clientLogFiles(soap, data) ( soap_read__ns1__clientLogFiles(soap, (data)) || soap_closesock(soap), (soap)->error )
 #endif
 
 #endif
@@ -664,378 +1228,378 @@ SOAP_FMAC3 struct _ns1__store_USCOREexec_USCOREfile * SOAP_FMAC4 soap_get__ns1__
 
 #endif
 
-#ifndef SOAP_TYPE__ns1__remove_USCOREfileResponse_DEFINED
-#define SOAP_TYPE__ns1__remove_USCOREfileResponse_DEFINED
-SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__remove_USCOREfileResponse(struct soap*, struct _ns1__remove_USCOREfileResponse *);
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__remove_USCOREfileResponse(struct soap*, const struct _ns1__remove_USCOREfileResponse *);
-SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__remove_USCOREfileResponse(struct soap*, const char*, int, const struct _ns1__remove_USCOREfileResponse *, const char*);
-SOAP_FMAC3 struct _ns1__remove_USCOREfileResponse * SOAP_FMAC4 soap_in__ns1__remove_USCOREfileResponse(struct soap*, const char*, struct _ns1__remove_USCOREfileResponse *, const char*);
+#ifndef SOAP_TYPE__ns1__removeFileResponse_DEFINED
+#define SOAP_TYPE__ns1__removeFileResponse_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__removeFileResponse(struct soap*, struct _ns1__removeFileResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__removeFileResponse(struct soap*, const struct _ns1__removeFileResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__removeFileResponse(struct soap*, const char*, int, const struct _ns1__removeFileResponse *, const char*);
+SOAP_FMAC3 struct _ns1__removeFileResponse * SOAP_FMAC4 soap_in__ns1__removeFileResponse(struct soap*, const char*, struct _ns1__removeFileResponse *, const char*);
 
-SOAP_FMAC3 struct _ns1__remove_USCOREfileResponse * SOAP_FMAC4 soap_new__ns1__remove_USCOREfileResponse(struct soap *soap, int n);
-SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__remove_USCOREfileResponse(struct soap*, const struct _ns1__remove_USCOREfileResponse *, const char*, const char*);
+SOAP_FMAC3 struct _ns1__removeFileResponse * SOAP_FMAC4 soap_new__ns1__removeFileResponse(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__removeFileResponse(struct soap*, const struct _ns1__removeFileResponse *, const char*, const char*);
 
-#ifndef soap_write__ns1__remove_USCOREfileResponse
-#define soap_write__ns1__remove_USCOREfileResponse(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__remove_USCOREfileResponse(soap, data), 0) || soap_put__ns1__remove_USCOREfileResponse(soap, data, "ns1:remove_fileResponse", "") || soap_end_send(soap), (soap)->error )
+#ifndef soap_write__ns1__removeFileResponse
+#define soap_write__ns1__removeFileResponse(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__removeFileResponse(soap, data), 0) || soap_put__ns1__removeFileResponse(soap, data, "ns1:removeFileResponse", "") || soap_end_send(soap), (soap)->error )
 #endif
 
 
-#ifndef soap_PUT__ns1__remove_USCOREfileResponse
-#define soap_PUT__ns1__remove_USCOREfileResponse(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__remove_USCOREfileResponse(soap, data), 0) || soap_put__ns1__remove_USCOREfileResponse(soap, data, "ns1:remove_fileResponse", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#ifndef soap_PUT__ns1__removeFileResponse
+#define soap_PUT__ns1__removeFileResponse(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__removeFileResponse(soap, data), 0) || soap_put__ns1__removeFileResponse(soap, data, "ns1:removeFileResponse", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
 #endif
 
 
-#ifndef soap_PATCH__ns1__remove_USCOREfileResponse
-#define soap_PATCH__ns1__remove_USCOREfileResponse(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__remove_USCOREfileResponse(soap, data), 0) || soap_put__ns1__remove_USCOREfileResponse(soap, data, "ns1:remove_fileResponse", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#ifndef soap_PATCH__ns1__removeFileResponse
+#define soap_PATCH__ns1__removeFileResponse(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__removeFileResponse(soap, data), 0) || soap_put__ns1__removeFileResponse(soap, data, "ns1:removeFileResponse", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
 #endif
 
 
-#ifndef soap_POST_send__ns1__remove_USCOREfileResponse
-#define soap_POST_send__ns1__remove_USCOREfileResponse(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__remove_USCOREfileResponse(soap, data), 0) || soap_put__ns1__remove_USCOREfileResponse(soap, data, "ns1:remove_fileResponse", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#ifndef soap_POST_send__ns1__removeFileResponse
+#define soap_POST_send__ns1__removeFileResponse(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__removeFileResponse(soap, data), 0) || soap_put__ns1__removeFileResponse(soap, data, "ns1:removeFileResponse", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
 #endif
 
-SOAP_FMAC3 struct _ns1__remove_USCOREfileResponse * SOAP_FMAC4 soap_get__ns1__remove_USCOREfileResponse(struct soap*, struct _ns1__remove_USCOREfileResponse *, const char*, const char*);
+SOAP_FMAC3 struct _ns1__removeFileResponse * SOAP_FMAC4 soap_get__ns1__removeFileResponse(struct soap*, struct _ns1__removeFileResponse *, const char*, const char*);
 
-#ifndef soap_read__ns1__remove_USCOREfileResponse
-#define soap_read__ns1__remove_USCOREfileResponse(soap, data) ( ((data) ? (soap_default__ns1__remove_USCOREfileResponse(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__remove_USCOREfileResponse(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
-#endif
-
-
-#ifndef soap_GET__ns1__remove_USCOREfileResponse
-#define soap_GET__ns1__remove_USCOREfileResponse(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__remove_USCOREfileResponse(soap, (data)), soap_closesock(soap) )
+#ifndef soap_read__ns1__removeFileResponse
+#define soap_read__ns1__removeFileResponse(soap, data) ( ((data) ? (soap_default__ns1__removeFileResponse(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__removeFileResponse(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
 #endif
 
 
-#ifndef soap_POST_recv__ns1__remove_USCOREfileResponse
-#define soap_POST_recv__ns1__remove_USCOREfileResponse(soap, data) ( soap_read__ns1__remove_USCOREfileResponse(soap, (data)) || soap_closesock(soap), (soap)->error )
-#endif
-
-#endif
-
-#ifndef SOAP_TYPE__ns1__remove_USCOREfile_DEFINED
-#define SOAP_TYPE__ns1__remove_USCOREfile_DEFINED
-SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__remove_USCOREfile(struct soap*, struct _ns1__remove_USCOREfile *);
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__remove_USCOREfile(struct soap*, const struct _ns1__remove_USCOREfile *);
-SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__remove_USCOREfile(struct soap*, const char*, int, const struct _ns1__remove_USCOREfile *, const char*);
-SOAP_FMAC3 struct _ns1__remove_USCOREfile * SOAP_FMAC4 soap_in__ns1__remove_USCOREfile(struct soap*, const char*, struct _ns1__remove_USCOREfile *, const char*);
-
-SOAP_FMAC3 struct _ns1__remove_USCOREfile * SOAP_FMAC4 soap_new__ns1__remove_USCOREfile(struct soap *soap, int n);
-SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__remove_USCOREfile(struct soap*, const struct _ns1__remove_USCOREfile *, const char*, const char*);
-
-#ifndef soap_write__ns1__remove_USCOREfile
-#define soap_write__ns1__remove_USCOREfile(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__remove_USCOREfile(soap, data), 0) || soap_put__ns1__remove_USCOREfile(soap, data, "ns1:remove_file", "") || soap_end_send(soap), (soap)->error )
+#ifndef soap_GET__ns1__removeFileResponse
+#define soap_GET__ns1__removeFileResponse(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__removeFileResponse(soap, (data)), soap_closesock(soap) )
 #endif
 
 
-#ifndef soap_PUT__ns1__remove_USCOREfile
-#define soap_PUT__ns1__remove_USCOREfile(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__remove_USCOREfile(soap, data), 0) || soap_put__ns1__remove_USCOREfile(soap, data, "ns1:remove_file", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
-#endif
-
-
-#ifndef soap_PATCH__ns1__remove_USCOREfile
-#define soap_PATCH__ns1__remove_USCOREfile(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__remove_USCOREfile(soap, data), 0) || soap_put__ns1__remove_USCOREfile(soap, data, "ns1:remove_file", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
-#endif
-
-
-#ifndef soap_POST_send__ns1__remove_USCOREfile
-#define soap_POST_send__ns1__remove_USCOREfile(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__remove_USCOREfile(soap, data), 0) || soap_put__ns1__remove_USCOREfile(soap, data, "ns1:remove_file", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
-#endif
-
-SOAP_FMAC3 struct _ns1__remove_USCOREfile * SOAP_FMAC4 soap_get__ns1__remove_USCOREfile(struct soap*, struct _ns1__remove_USCOREfile *, const char*, const char*);
-
-#ifndef soap_read__ns1__remove_USCOREfile
-#define soap_read__ns1__remove_USCOREfile(soap, data) ( ((data) ? (soap_default__ns1__remove_USCOREfile(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__remove_USCOREfile(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
-#endif
-
-
-#ifndef soap_GET__ns1__remove_USCOREfile
-#define soap_GET__ns1__remove_USCOREfile(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__remove_USCOREfile(soap, (data)), soap_closesock(soap) )
-#endif
-
-
-#ifndef soap_POST_recv__ns1__remove_USCOREfile
-#define soap_POST_recv__ns1__remove_USCOREfile(soap, data) ( soap_read__ns1__remove_USCOREfile(soap, (data)) || soap_closesock(soap), (soap)->error )
+#ifndef soap_POST_recv__ns1__removeFileResponse
+#define soap_POST_recv__ns1__removeFileResponse(soap, data) ( soap_read__ns1__removeFileResponse(soap, (data)) || soap_closesock(soap), (soap)->error )
 #endif
 
 #endif
 
-#ifndef SOAP_TYPE__ns1__modify_USCOREfileResponse_DEFINED
-#define SOAP_TYPE__ns1__modify_USCOREfileResponse_DEFINED
-SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__modify_USCOREfileResponse(struct soap*, struct _ns1__modify_USCOREfileResponse *);
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__modify_USCOREfileResponse(struct soap*, const struct _ns1__modify_USCOREfileResponse *);
-SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__modify_USCOREfileResponse(struct soap*, const char*, int, const struct _ns1__modify_USCOREfileResponse *, const char*);
-SOAP_FMAC3 struct _ns1__modify_USCOREfileResponse * SOAP_FMAC4 soap_in__ns1__modify_USCOREfileResponse(struct soap*, const char*, struct _ns1__modify_USCOREfileResponse *, const char*);
+#ifndef SOAP_TYPE__ns1__removeFile_DEFINED
+#define SOAP_TYPE__ns1__removeFile_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__removeFile(struct soap*, struct _ns1__removeFile *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__removeFile(struct soap*, const struct _ns1__removeFile *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__removeFile(struct soap*, const char*, int, const struct _ns1__removeFile *, const char*);
+SOAP_FMAC3 struct _ns1__removeFile * SOAP_FMAC4 soap_in__ns1__removeFile(struct soap*, const char*, struct _ns1__removeFile *, const char*);
 
-SOAP_FMAC3 struct _ns1__modify_USCOREfileResponse * SOAP_FMAC4 soap_new__ns1__modify_USCOREfileResponse(struct soap *soap, int n);
-SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__modify_USCOREfileResponse(struct soap*, const struct _ns1__modify_USCOREfileResponse *, const char*, const char*);
+SOAP_FMAC3 struct _ns1__removeFile * SOAP_FMAC4 soap_new__ns1__removeFile(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__removeFile(struct soap*, const struct _ns1__removeFile *, const char*, const char*);
 
-#ifndef soap_write__ns1__modify_USCOREfileResponse
-#define soap_write__ns1__modify_USCOREfileResponse(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__modify_USCOREfileResponse(soap, data), 0) || soap_put__ns1__modify_USCOREfileResponse(soap, data, "ns1:modify_fileResponse", "") || soap_end_send(soap), (soap)->error )
+#ifndef soap_write__ns1__removeFile
+#define soap_write__ns1__removeFile(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__removeFile(soap, data), 0) || soap_put__ns1__removeFile(soap, data, "ns1:removeFile", "") || soap_end_send(soap), (soap)->error )
 #endif
 
 
-#ifndef soap_PUT__ns1__modify_USCOREfileResponse
-#define soap_PUT__ns1__modify_USCOREfileResponse(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__modify_USCOREfileResponse(soap, data), 0) || soap_put__ns1__modify_USCOREfileResponse(soap, data, "ns1:modify_fileResponse", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#ifndef soap_PUT__ns1__removeFile
+#define soap_PUT__ns1__removeFile(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__removeFile(soap, data), 0) || soap_put__ns1__removeFile(soap, data, "ns1:removeFile", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
 #endif
 
 
-#ifndef soap_PATCH__ns1__modify_USCOREfileResponse
-#define soap_PATCH__ns1__modify_USCOREfileResponse(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__modify_USCOREfileResponse(soap, data), 0) || soap_put__ns1__modify_USCOREfileResponse(soap, data, "ns1:modify_fileResponse", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#ifndef soap_PATCH__ns1__removeFile
+#define soap_PATCH__ns1__removeFile(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__removeFile(soap, data), 0) || soap_put__ns1__removeFile(soap, data, "ns1:removeFile", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
 #endif
 
 
-#ifndef soap_POST_send__ns1__modify_USCOREfileResponse
-#define soap_POST_send__ns1__modify_USCOREfileResponse(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__modify_USCOREfileResponse(soap, data), 0) || soap_put__ns1__modify_USCOREfileResponse(soap, data, "ns1:modify_fileResponse", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#ifndef soap_POST_send__ns1__removeFile
+#define soap_POST_send__ns1__removeFile(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__removeFile(soap, data), 0) || soap_put__ns1__removeFile(soap, data, "ns1:removeFile", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
 #endif
 
-SOAP_FMAC3 struct _ns1__modify_USCOREfileResponse * SOAP_FMAC4 soap_get__ns1__modify_USCOREfileResponse(struct soap*, struct _ns1__modify_USCOREfileResponse *, const char*, const char*);
+SOAP_FMAC3 struct _ns1__removeFile * SOAP_FMAC4 soap_get__ns1__removeFile(struct soap*, struct _ns1__removeFile *, const char*, const char*);
 
-#ifndef soap_read__ns1__modify_USCOREfileResponse
-#define soap_read__ns1__modify_USCOREfileResponse(soap, data) ( ((data) ? (soap_default__ns1__modify_USCOREfileResponse(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__modify_USCOREfileResponse(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
-#endif
-
-
-#ifndef soap_GET__ns1__modify_USCOREfileResponse
-#define soap_GET__ns1__modify_USCOREfileResponse(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__modify_USCOREfileResponse(soap, (data)), soap_closesock(soap) )
+#ifndef soap_read__ns1__removeFile
+#define soap_read__ns1__removeFile(soap, data) ( ((data) ? (soap_default__ns1__removeFile(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__removeFile(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
 #endif
 
 
-#ifndef soap_POST_recv__ns1__modify_USCOREfileResponse
-#define soap_POST_recv__ns1__modify_USCOREfileResponse(soap, data) ( soap_read__ns1__modify_USCOREfileResponse(soap, (data)) || soap_closesock(soap), (soap)->error )
-#endif
-
-#endif
-
-#ifndef SOAP_TYPE__ns1__modify_USCOREfile_DEFINED
-#define SOAP_TYPE__ns1__modify_USCOREfile_DEFINED
-SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__modify_USCOREfile(struct soap*, struct _ns1__modify_USCOREfile *);
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__modify_USCOREfile(struct soap*, const struct _ns1__modify_USCOREfile *);
-SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__modify_USCOREfile(struct soap*, const char*, int, const struct _ns1__modify_USCOREfile *, const char*);
-SOAP_FMAC3 struct _ns1__modify_USCOREfile * SOAP_FMAC4 soap_in__ns1__modify_USCOREfile(struct soap*, const char*, struct _ns1__modify_USCOREfile *, const char*);
-
-SOAP_FMAC3 struct _ns1__modify_USCOREfile * SOAP_FMAC4 soap_new__ns1__modify_USCOREfile(struct soap *soap, int n);
-SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__modify_USCOREfile(struct soap*, const struct _ns1__modify_USCOREfile *, const char*, const char*);
-
-#ifndef soap_write__ns1__modify_USCOREfile
-#define soap_write__ns1__modify_USCOREfile(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__modify_USCOREfile(soap, data), 0) || soap_put__ns1__modify_USCOREfile(soap, data, "ns1:modify_file", "") || soap_end_send(soap), (soap)->error )
+#ifndef soap_GET__ns1__removeFile
+#define soap_GET__ns1__removeFile(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__removeFile(soap, (data)), soap_closesock(soap) )
 #endif
 
 
-#ifndef soap_PUT__ns1__modify_USCOREfile
-#define soap_PUT__ns1__modify_USCOREfile(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__modify_USCOREfile(soap, data), 0) || soap_put__ns1__modify_USCOREfile(soap, data, "ns1:modify_file", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
-#endif
-
-
-#ifndef soap_PATCH__ns1__modify_USCOREfile
-#define soap_PATCH__ns1__modify_USCOREfile(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__modify_USCOREfile(soap, data), 0) || soap_put__ns1__modify_USCOREfile(soap, data, "ns1:modify_file", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
-#endif
-
-
-#ifndef soap_POST_send__ns1__modify_USCOREfile
-#define soap_POST_send__ns1__modify_USCOREfile(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__modify_USCOREfile(soap, data), 0) || soap_put__ns1__modify_USCOREfile(soap, data, "ns1:modify_file", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
-#endif
-
-SOAP_FMAC3 struct _ns1__modify_USCOREfile * SOAP_FMAC4 soap_get__ns1__modify_USCOREfile(struct soap*, struct _ns1__modify_USCOREfile *, const char*, const char*);
-
-#ifndef soap_read__ns1__modify_USCOREfile
-#define soap_read__ns1__modify_USCOREfile(soap, data) ( ((data) ? (soap_default__ns1__modify_USCOREfile(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__modify_USCOREfile(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
-#endif
-
-
-#ifndef soap_GET__ns1__modify_USCOREfile
-#define soap_GET__ns1__modify_USCOREfile(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__modify_USCOREfile(soap, (data)), soap_closesock(soap) )
-#endif
-
-
-#ifndef soap_POST_recv__ns1__modify_USCOREfile
-#define soap_POST_recv__ns1__modify_USCOREfile(soap, data) ( soap_read__ns1__modify_USCOREfile(soap, (data)) || soap_closesock(soap), (soap)->error )
+#ifndef soap_POST_recv__ns1__removeFile
+#define soap_POST_recv__ns1__removeFile(soap, data) ( soap_read__ns1__removeFile(soap, (data)) || soap_closesock(soap), (soap)->error )
 #endif
 
 #endif
 
-#ifndef SOAP_TYPE__ns1__create_USCOREfileResponse_DEFINED
-#define SOAP_TYPE__ns1__create_USCOREfileResponse_DEFINED
-SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__create_USCOREfileResponse(struct soap*, struct _ns1__create_USCOREfileResponse *);
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__create_USCOREfileResponse(struct soap*, const struct _ns1__create_USCOREfileResponse *);
-SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__create_USCOREfileResponse(struct soap*, const char*, int, const struct _ns1__create_USCOREfileResponse *, const char*);
-SOAP_FMAC3 struct _ns1__create_USCOREfileResponse * SOAP_FMAC4 soap_in__ns1__create_USCOREfileResponse(struct soap*, const char*, struct _ns1__create_USCOREfileResponse *, const char*);
+#ifndef SOAP_TYPE__ns1__modifyFileResponse_DEFINED
+#define SOAP_TYPE__ns1__modifyFileResponse_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__modifyFileResponse(struct soap*, struct _ns1__modifyFileResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__modifyFileResponse(struct soap*, const struct _ns1__modifyFileResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__modifyFileResponse(struct soap*, const char*, int, const struct _ns1__modifyFileResponse *, const char*);
+SOAP_FMAC3 struct _ns1__modifyFileResponse * SOAP_FMAC4 soap_in__ns1__modifyFileResponse(struct soap*, const char*, struct _ns1__modifyFileResponse *, const char*);
 
-SOAP_FMAC3 struct _ns1__create_USCOREfileResponse * SOAP_FMAC4 soap_new__ns1__create_USCOREfileResponse(struct soap *soap, int n);
-SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__create_USCOREfileResponse(struct soap*, const struct _ns1__create_USCOREfileResponse *, const char*, const char*);
+SOAP_FMAC3 struct _ns1__modifyFileResponse * SOAP_FMAC4 soap_new__ns1__modifyFileResponse(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__modifyFileResponse(struct soap*, const struct _ns1__modifyFileResponse *, const char*, const char*);
 
-#ifndef soap_write__ns1__create_USCOREfileResponse
-#define soap_write__ns1__create_USCOREfileResponse(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__create_USCOREfileResponse(soap, data), 0) || soap_put__ns1__create_USCOREfileResponse(soap, data, "ns1:create_fileResponse", "") || soap_end_send(soap), (soap)->error )
+#ifndef soap_write__ns1__modifyFileResponse
+#define soap_write__ns1__modifyFileResponse(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__modifyFileResponse(soap, data), 0) || soap_put__ns1__modifyFileResponse(soap, data, "ns1:modifyFileResponse", "") || soap_end_send(soap), (soap)->error )
 #endif
 
 
-#ifndef soap_PUT__ns1__create_USCOREfileResponse
-#define soap_PUT__ns1__create_USCOREfileResponse(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__create_USCOREfileResponse(soap, data), 0) || soap_put__ns1__create_USCOREfileResponse(soap, data, "ns1:create_fileResponse", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#ifndef soap_PUT__ns1__modifyFileResponse
+#define soap_PUT__ns1__modifyFileResponse(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__modifyFileResponse(soap, data), 0) || soap_put__ns1__modifyFileResponse(soap, data, "ns1:modifyFileResponse", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
 #endif
 
 
-#ifndef soap_PATCH__ns1__create_USCOREfileResponse
-#define soap_PATCH__ns1__create_USCOREfileResponse(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__create_USCOREfileResponse(soap, data), 0) || soap_put__ns1__create_USCOREfileResponse(soap, data, "ns1:create_fileResponse", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#ifndef soap_PATCH__ns1__modifyFileResponse
+#define soap_PATCH__ns1__modifyFileResponse(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__modifyFileResponse(soap, data), 0) || soap_put__ns1__modifyFileResponse(soap, data, "ns1:modifyFileResponse", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
 #endif
 
 
-#ifndef soap_POST_send__ns1__create_USCOREfileResponse
-#define soap_POST_send__ns1__create_USCOREfileResponse(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__create_USCOREfileResponse(soap, data), 0) || soap_put__ns1__create_USCOREfileResponse(soap, data, "ns1:create_fileResponse", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#ifndef soap_POST_send__ns1__modifyFileResponse
+#define soap_POST_send__ns1__modifyFileResponse(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__modifyFileResponse(soap, data), 0) || soap_put__ns1__modifyFileResponse(soap, data, "ns1:modifyFileResponse", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
 #endif
 
-SOAP_FMAC3 struct _ns1__create_USCOREfileResponse * SOAP_FMAC4 soap_get__ns1__create_USCOREfileResponse(struct soap*, struct _ns1__create_USCOREfileResponse *, const char*, const char*);
+SOAP_FMAC3 struct _ns1__modifyFileResponse * SOAP_FMAC4 soap_get__ns1__modifyFileResponse(struct soap*, struct _ns1__modifyFileResponse *, const char*, const char*);
 
-#ifndef soap_read__ns1__create_USCOREfileResponse
-#define soap_read__ns1__create_USCOREfileResponse(soap, data) ( ((data) ? (soap_default__ns1__create_USCOREfileResponse(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__create_USCOREfileResponse(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
-#endif
-
-
-#ifndef soap_GET__ns1__create_USCOREfileResponse
-#define soap_GET__ns1__create_USCOREfileResponse(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__create_USCOREfileResponse(soap, (data)), soap_closesock(soap) )
+#ifndef soap_read__ns1__modifyFileResponse
+#define soap_read__ns1__modifyFileResponse(soap, data) ( ((data) ? (soap_default__ns1__modifyFileResponse(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__modifyFileResponse(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
 #endif
 
 
-#ifndef soap_POST_recv__ns1__create_USCOREfileResponse
-#define soap_POST_recv__ns1__create_USCOREfileResponse(soap, data) ( soap_read__ns1__create_USCOREfileResponse(soap, (data)) || soap_closesock(soap), (soap)->error )
-#endif
-
-#endif
-
-#ifndef SOAP_TYPE__ns1__create_USCOREfile_DEFINED
-#define SOAP_TYPE__ns1__create_USCOREfile_DEFINED
-SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__create_USCOREfile(struct soap*, struct _ns1__create_USCOREfile *);
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__create_USCOREfile(struct soap*, const struct _ns1__create_USCOREfile *);
-SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__create_USCOREfile(struct soap*, const char*, int, const struct _ns1__create_USCOREfile *, const char*);
-SOAP_FMAC3 struct _ns1__create_USCOREfile * SOAP_FMAC4 soap_in__ns1__create_USCOREfile(struct soap*, const char*, struct _ns1__create_USCOREfile *, const char*);
-
-SOAP_FMAC3 struct _ns1__create_USCOREfile * SOAP_FMAC4 soap_new__ns1__create_USCOREfile(struct soap *soap, int n);
-SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__create_USCOREfile(struct soap*, const struct _ns1__create_USCOREfile *, const char*, const char*);
-
-#ifndef soap_write__ns1__create_USCOREfile
-#define soap_write__ns1__create_USCOREfile(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__create_USCOREfile(soap, data), 0) || soap_put__ns1__create_USCOREfile(soap, data, "ns1:create_file", "") || soap_end_send(soap), (soap)->error )
+#ifndef soap_GET__ns1__modifyFileResponse
+#define soap_GET__ns1__modifyFileResponse(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__modifyFileResponse(soap, (data)), soap_closesock(soap) )
 #endif
 
 
-#ifndef soap_PUT__ns1__create_USCOREfile
-#define soap_PUT__ns1__create_USCOREfile(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__create_USCOREfile(soap, data), 0) || soap_put__ns1__create_USCOREfile(soap, data, "ns1:create_file", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
-#endif
-
-
-#ifndef soap_PATCH__ns1__create_USCOREfile
-#define soap_PATCH__ns1__create_USCOREfile(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__create_USCOREfile(soap, data), 0) || soap_put__ns1__create_USCOREfile(soap, data, "ns1:create_file", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
-#endif
-
-
-#ifndef soap_POST_send__ns1__create_USCOREfile
-#define soap_POST_send__ns1__create_USCOREfile(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__create_USCOREfile(soap, data), 0) || soap_put__ns1__create_USCOREfile(soap, data, "ns1:create_file", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
-#endif
-
-SOAP_FMAC3 struct _ns1__create_USCOREfile * SOAP_FMAC4 soap_get__ns1__create_USCOREfile(struct soap*, struct _ns1__create_USCOREfile *, const char*, const char*);
-
-#ifndef soap_read__ns1__create_USCOREfile
-#define soap_read__ns1__create_USCOREfile(soap, data) ( ((data) ? (soap_default__ns1__create_USCOREfile(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__create_USCOREfile(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
-#endif
-
-
-#ifndef soap_GET__ns1__create_USCOREfile
-#define soap_GET__ns1__create_USCOREfile(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__create_USCOREfile(soap, (data)), soap_closesock(soap) )
-#endif
-
-
-#ifndef soap_POST_recv__ns1__create_USCOREfile
-#define soap_POST_recv__ns1__create_USCOREfile(soap, data) ( soap_read__ns1__create_USCOREfile(soap, (data)) || soap_closesock(soap), (soap)->error )
+#ifndef soap_POST_recv__ns1__modifyFileResponse
+#define soap_POST_recv__ns1__modifyFileResponse(soap, data) ( soap_read__ns1__modifyFileResponse(soap, (data)) || soap_closesock(soap), (soap)->error )
 #endif
 
 #endif
 
-#ifndef SOAP_TYPE__ns1__store_USCOREfileResponse_DEFINED
-#define SOAP_TYPE__ns1__store_USCOREfileResponse_DEFINED
-SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__store_USCOREfileResponse(struct soap*, struct _ns1__store_USCOREfileResponse *);
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__store_USCOREfileResponse(struct soap*, const struct _ns1__store_USCOREfileResponse *);
-SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__store_USCOREfileResponse(struct soap*, const char*, int, const struct _ns1__store_USCOREfileResponse *, const char*);
-SOAP_FMAC3 struct _ns1__store_USCOREfileResponse * SOAP_FMAC4 soap_in__ns1__store_USCOREfileResponse(struct soap*, const char*, struct _ns1__store_USCOREfileResponse *, const char*);
+#ifndef SOAP_TYPE__ns1__modifyFile_DEFINED
+#define SOAP_TYPE__ns1__modifyFile_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__modifyFile(struct soap*, struct _ns1__modifyFile *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__modifyFile(struct soap*, const struct _ns1__modifyFile *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__modifyFile(struct soap*, const char*, int, const struct _ns1__modifyFile *, const char*);
+SOAP_FMAC3 struct _ns1__modifyFile * SOAP_FMAC4 soap_in__ns1__modifyFile(struct soap*, const char*, struct _ns1__modifyFile *, const char*);
 
-SOAP_FMAC3 struct _ns1__store_USCOREfileResponse * SOAP_FMAC4 soap_new__ns1__store_USCOREfileResponse(struct soap *soap, int n);
-SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__store_USCOREfileResponse(struct soap*, const struct _ns1__store_USCOREfileResponse *, const char*, const char*);
+SOAP_FMAC3 struct _ns1__modifyFile * SOAP_FMAC4 soap_new__ns1__modifyFile(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__modifyFile(struct soap*, const struct _ns1__modifyFile *, const char*, const char*);
 
-#ifndef soap_write__ns1__store_USCOREfileResponse
-#define soap_write__ns1__store_USCOREfileResponse(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__store_USCOREfileResponse(soap, data), 0) || soap_put__ns1__store_USCOREfileResponse(soap, data, "ns1:store_fileResponse", "") || soap_end_send(soap), (soap)->error )
+#ifndef soap_write__ns1__modifyFile
+#define soap_write__ns1__modifyFile(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__modifyFile(soap, data), 0) || soap_put__ns1__modifyFile(soap, data, "ns1:modifyFile", "") || soap_end_send(soap), (soap)->error )
 #endif
 
 
-#ifndef soap_PUT__ns1__store_USCOREfileResponse
-#define soap_PUT__ns1__store_USCOREfileResponse(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__store_USCOREfileResponse(soap, data), 0) || soap_put__ns1__store_USCOREfileResponse(soap, data, "ns1:store_fileResponse", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#ifndef soap_PUT__ns1__modifyFile
+#define soap_PUT__ns1__modifyFile(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__modifyFile(soap, data), 0) || soap_put__ns1__modifyFile(soap, data, "ns1:modifyFile", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
 #endif
 
 
-#ifndef soap_PATCH__ns1__store_USCOREfileResponse
-#define soap_PATCH__ns1__store_USCOREfileResponse(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__store_USCOREfileResponse(soap, data), 0) || soap_put__ns1__store_USCOREfileResponse(soap, data, "ns1:store_fileResponse", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#ifndef soap_PATCH__ns1__modifyFile
+#define soap_PATCH__ns1__modifyFile(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__modifyFile(soap, data), 0) || soap_put__ns1__modifyFile(soap, data, "ns1:modifyFile", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
 #endif
 
 
-#ifndef soap_POST_send__ns1__store_USCOREfileResponse
-#define soap_POST_send__ns1__store_USCOREfileResponse(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__store_USCOREfileResponse(soap, data), 0) || soap_put__ns1__store_USCOREfileResponse(soap, data, "ns1:store_fileResponse", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#ifndef soap_POST_send__ns1__modifyFile
+#define soap_POST_send__ns1__modifyFile(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__modifyFile(soap, data), 0) || soap_put__ns1__modifyFile(soap, data, "ns1:modifyFile", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
 #endif
 
-SOAP_FMAC3 struct _ns1__store_USCOREfileResponse * SOAP_FMAC4 soap_get__ns1__store_USCOREfileResponse(struct soap*, struct _ns1__store_USCOREfileResponse *, const char*, const char*);
+SOAP_FMAC3 struct _ns1__modifyFile * SOAP_FMAC4 soap_get__ns1__modifyFile(struct soap*, struct _ns1__modifyFile *, const char*, const char*);
 
-#ifndef soap_read__ns1__store_USCOREfileResponse
-#define soap_read__ns1__store_USCOREfileResponse(soap, data) ( ((data) ? (soap_default__ns1__store_USCOREfileResponse(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__store_USCOREfileResponse(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
-#endif
-
-
-#ifndef soap_GET__ns1__store_USCOREfileResponse
-#define soap_GET__ns1__store_USCOREfileResponse(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__store_USCOREfileResponse(soap, (data)), soap_closesock(soap) )
+#ifndef soap_read__ns1__modifyFile
+#define soap_read__ns1__modifyFile(soap, data) ( ((data) ? (soap_default__ns1__modifyFile(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__modifyFile(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
 #endif
 
 
-#ifndef soap_POST_recv__ns1__store_USCOREfileResponse
-#define soap_POST_recv__ns1__store_USCOREfileResponse(soap, data) ( soap_read__ns1__store_USCOREfileResponse(soap, (data)) || soap_closesock(soap), (soap)->error )
+#ifndef soap_GET__ns1__modifyFile
+#define soap_GET__ns1__modifyFile(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__modifyFile(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv__ns1__modifyFile
+#define soap_POST_recv__ns1__modifyFile(soap, data) ( soap_read__ns1__modifyFile(soap, (data)) || soap_closesock(soap), (soap)->error )
 #endif
 
 #endif
 
-#ifndef SOAP_TYPE__ns1__store_USCOREfile_DEFINED
-#define SOAP_TYPE__ns1__store_USCOREfile_DEFINED
-SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__store_USCOREfile(struct soap*, struct _ns1__store_USCOREfile *);
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__store_USCOREfile(struct soap*, const struct _ns1__store_USCOREfile *);
-SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__store_USCOREfile(struct soap*, const char*, int, const struct _ns1__store_USCOREfile *, const char*);
-SOAP_FMAC3 struct _ns1__store_USCOREfile * SOAP_FMAC4 soap_in__ns1__store_USCOREfile(struct soap*, const char*, struct _ns1__store_USCOREfile *, const char*);
+#ifndef SOAP_TYPE__ns1__createFileResponse_DEFINED
+#define SOAP_TYPE__ns1__createFileResponse_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__createFileResponse(struct soap*, struct _ns1__createFileResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__createFileResponse(struct soap*, const struct _ns1__createFileResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__createFileResponse(struct soap*, const char*, int, const struct _ns1__createFileResponse *, const char*);
+SOAP_FMAC3 struct _ns1__createFileResponse * SOAP_FMAC4 soap_in__ns1__createFileResponse(struct soap*, const char*, struct _ns1__createFileResponse *, const char*);
 
-SOAP_FMAC3 struct _ns1__store_USCOREfile * SOAP_FMAC4 soap_new__ns1__store_USCOREfile(struct soap *soap, int n);
-SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__store_USCOREfile(struct soap*, const struct _ns1__store_USCOREfile *, const char*, const char*);
+SOAP_FMAC3 struct _ns1__createFileResponse * SOAP_FMAC4 soap_new__ns1__createFileResponse(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__createFileResponse(struct soap*, const struct _ns1__createFileResponse *, const char*, const char*);
 
-#ifndef soap_write__ns1__store_USCOREfile
-#define soap_write__ns1__store_USCOREfile(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__store_USCOREfile(soap, data), 0) || soap_put__ns1__store_USCOREfile(soap, data, "ns1:store_file", "") || soap_end_send(soap), (soap)->error )
+#ifndef soap_write__ns1__createFileResponse
+#define soap_write__ns1__createFileResponse(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__createFileResponse(soap, data), 0) || soap_put__ns1__createFileResponse(soap, data, "ns1:createFileResponse", "") || soap_end_send(soap), (soap)->error )
 #endif
 
 
-#ifndef soap_PUT__ns1__store_USCOREfile
-#define soap_PUT__ns1__store_USCOREfile(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__store_USCOREfile(soap, data), 0) || soap_put__ns1__store_USCOREfile(soap, data, "ns1:store_file", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#ifndef soap_PUT__ns1__createFileResponse
+#define soap_PUT__ns1__createFileResponse(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__createFileResponse(soap, data), 0) || soap_put__ns1__createFileResponse(soap, data, "ns1:createFileResponse", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
 #endif
 
 
-#ifndef soap_PATCH__ns1__store_USCOREfile
-#define soap_PATCH__ns1__store_USCOREfile(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__store_USCOREfile(soap, data), 0) || soap_put__ns1__store_USCOREfile(soap, data, "ns1:store_file", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#ifndef soap_PATCH__ns1__createFileResponse
+#define soap_PATCH__ns1__createFileResponse(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__createFileResponse(soap, data), 0) || soap_put__ns1__createFileResponse(soap, data, "ns1:createFileResponse", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
 #endif
 
 
-#ifndef soap_POST_send__ns1__store_USCOREfile
-#define soap_POST_send__ns1__store_USCOREfile(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__store_USCOREfile(soap, data), 0) || soap_put__ns1__store_USCOREfile(soap, data, "ns1:store_file", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#ifndef soap_POST_send__ns1__createFileResponse
+#define soap_POST_send__ns1__createFileResponse(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__createFileResponse(soap, data), 0) || soap_put__ns1__createFileResponse(soap, data, "ns1:createFileResponse", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
 #endif
 
-SOAP_FMAC3 struct _ns1__store_USCOREfile * SOAP_FMAC4 soap_get__ns1__store_USCOREfile(struct soap*, struct _ns1__store_USCOREfile *, const char*, const char*);
+SOAP_FMAC3 struct _ns1__createFileResponse * SOAP_FMAC4 soap_get__ns1__createFileResponse(struct soap*, struct _ns1__createFileResponse *, const char*, const char*);
 
-#ifndef soap_read__ns1__store_USCOREfile
-#define soap_read__ns1__store_USCOREfile(soap, data) ( ((data) ? (soap_default__ns1__store_USCOREfile(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__store_USCOREfile(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
-#endif
-
-
-#ifndef soap_GET__ns1__store_USCOREfile
-#define soap_GET__ns1__store_USCOREfile(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__store_USCOREfile(soap, (data)), soap_closesock(soap) )
+#ifndef soap_read__ns1__createFileResponse
+#define soap_read__ns1__createFileResponse(soap, data) ( ((data) ? (soap_default__ns1__createFileResponse(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__createFileResponse(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
 #endif
 
 
-#ifndef soap_POST_recv__ns1__store_USCOREfile
-#define soap_POST_recv__ns1__store_USCOREfile(soap, data) ( soap_read__ns1__store_USCOREfile(soap, (data)) || soap_closesock(soap), (soap)->error )
+#ifndef soap_GET__ns1__createFileResponse
+#define soap_GET__ns1__createFileResponse(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__createFileResponse(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv__ns1__createFileResponse
+#define soap_POST_recv__ns1__createFileResponse(soap, data) ( soap_read__ns1__createFileResponse(soap, (data)) || soap_closesock(soap), (soap)->error )
+#endif
+
+#endif
+
+#ifndef SOAP_TYPE__ns1__createFile_DEFINED
+#define SOAP_TYPE__ns1__createFile_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__createFile(struct soap*, struct _ns1__createFile *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__createFile(struct soap*, const struct _ns1__createFile *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__createFile(struct soap*, const char*, int, const struct _ns1__createFile *, const char*);
+SOAP_FMAC3 struct _ns1__createFile * SOAP_FMAC4 soap_in__ns1__createFile(struct soap*, const char*, struct _ns1__createFile *, const char*);
+
+SOAP_FMAC3 struct _ns1__createFile * SOAP_FMAC4 soap_new__ns1__createFile(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__createFile(struct soap*, const struct _ns1__createFile *, const char*, const char*);
+
+#ifndef soap_write__ns1__createFile
+#define soap_write__ns1__createFile(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__createFile(soap, data), 0) || soap_put__ns1__createFile(soap, data, "ns1:createFile", "") || soap_end_send(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_PUT__ns1__createFile
+#define soap_PUT__ns1__createFile(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__createFile(soap, data), 0) || soap_put__ns1__createFile(soap, data, "ns1:createFile", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_PATCH__ns1__createFile
+#define soap_PATCH__ns1__createFile(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__createFile(soap, data), 0) || soap_put__ns1__createFile(soap, data, "ns1:createFile", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_send__ns1__createFile
+#define soap_POST_send__ns1__createFile(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__createFile(soap, data), 0) || soap_put__ns1__createFile(soap, data, "ns1:createFile", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#endif
+
+SOAP_FMAC3 struct _ns1__createFile * SOAP_FMAC4 soap_get__ns1__createFile(struct soap*, struct _ns1__createFile *, const char*, const char*);
+
+#ifndef soap_read__ns1__createFile
+#define soap_read__ns1__createFile(soap, data) ( ((data) ? (soap_default__ns1__createFile(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__createFile(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_GET__ns1__createFile
+#define soap_GET__ns1__createFile(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__createFile(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv__ns1__createFile
+#define soap_POST_recv__ns1__createFile(soap, data) ( soap_read__ns1__createFile(soap, (data)) || soap_closesock(soap), (soap)->error )
+#endif
+
+#endif
+
+#ifndef SOAP_TYPE__ns1__storeFileResponse_DEFINED
+#define SOAP_TYPE__ns1__storeFileResponse_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__storeFileResponse(struct soap*, struct _ns1__storeFileResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__storeFileResponse(struct soap*, const struct _ns1__storeFileResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__storeFileResponse(struct soap*, const char*, int, const struct _ns1__storeFileResponse *, const char*);
+SOAP_FMAC3 struct _ns1__storeFileResponse * SOAP_FMAC4 soap_in__ns1__storeFileResponse(struct soap*, const char*, struct _ns1__storeFileResponse *, const char*);
+
+SOAP_FMAC3 struct _ns1__storeFileResponse * SOAP_FMAC4 soap_new__ns1__storeFileResponse(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__storeFileResponse(struct soap*, const struct _ns1__storeFileResponse *, const char*, const char*);
+
+#ifndef soap_write__ns1__storeFileResponse
+#define soap_write__ns1__storeFileResponse(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__storeFileResponse(soap, data), 0) || soap_put__ns1__storeFileResponse(soap, data, "ns1:storeFileResponse", "") || soap_end_send(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_PUT__ns1__storeFileResponse
+#define soap_PUT__ns1__storeFileResponse(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__storeFileResponse(soap, data), 0) || soap_put__ns1__storeFileResponse(soap, data, "ns1:storeFileResponse", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_PATCH__ns1__storeFileResponse
+#define soap_PATCH__ns1__storeFileResponse(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__storeFileResponse(soap, data), 0) || soap_put__ns1__storeFileResponse(soap, data, "ns1:storeFileResponse", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_send__ns1__storeFileResponse
+#define soap_POST_send__ns1__storeFileResponse(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__storeFileResponse(soap, data), 0) || soap_put__ns1__storeFileResponse(soap, data, "ns1:storeFileResponse", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#endif
+
+SOAP_FMAC3 struct _ns1__storeFileResponse * SOAP_FMAC4 soap_get__ns1__storeFileResponse(struct soap*, struct _ns1__storeFileResponse *, const char*, const char*);
+
+#ifndef soap_read__ns1__storeFileResponse
+#define soap_read__ns1__storeFileResponse(soap, data) ( ((data) ? (soap_default__ns1__storeFileResponse(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__storeFileResponse(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_GET__ns1__storeFileResponse
+#define soap_GET__ns1__storeFileResponse(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__storeFileResponse(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv__ns1__storeFileResponse
+#define soap_POST_recv__ns1__storeFileResponse(soap, data) ( soap_read__ns1__storeFileResponse(soap, (data)) || soap_closesock(soap), (soap)->error )
+#endif
+
+#endif
+
+#ifndef SOAP_TYPE__ns1__storeFile_DEFINED
+#define SOAP_TYPE__ns1__storeFile_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__ns1__storeFile(struct soap*, struct _ns1__storeFile *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__ns1__storeFile(struct soap*, const struct _ns1__storeFile *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__ns1__storeFile(struct soap*, const char*, int, const struct _ns1__storeFile *, const char*);
+SOAP_FMAC3 struct _ns1__storeFile * SOAP_FMAC4 soap_in__ns1__storeFile(struct soap*, const char*, struct _ns1__storeFile *, const char*);
+
+SOAP_FMAC3 struct _ns1__storeFile * SOAP_FMAC4 soap_new__ns1__storeFile(struct soap *soap, int n);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__ns1__storeFile(struct soap*, const struct _ns1__storeFile *, const char*, const char*);
+
+#ifndef soap_write__ns1__storeFile
+#define soap_write__ns1__storeFile(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || (soap_serialize__ns1__storeFile(soap, data), 0) || soap_put__ns1__storeFile(soap, data, "ns1:storeFile", "") || soap_end_send(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_PUT__ns1__storeFile
+#define soap_PUT__ns1__storeFile(soap, URL, data) ( soap_free_temp(soap), soap_PUT(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__storeFile(soap, data), 0) || soap_put__ns1__storeFile(soap, data, "ns1:storeFile", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_PATCH__ns1__storeFile
+#define soap_PATCH__ns1__storeFile(soap, URL, data) ( soap_free_temp(soap), soap_PATCH(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__storeFile(soap, data), 0) || soap_put__ns1__storeFile(soap, data, "ns1:storeFile", "") || soap_end_send(soap) || soap_recv_empty_response(soap), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_send__ns1__storeFile
+#define soap_POST_send__ns1__storeFile(soap, URL, data) ( soap_free_temp(soap), ( soap_POST(soap, URL, NULL, "text/xml; charset=utf-8") || (soap_serialize__ns1__storeFile(soap, data), 0) || soap_put__ns1__storeFile(soap, data, "ns1:storeFile", "") || soap_end_send(soap) ) && soap_closesock(soap), (soap)->error )
+#endif
+
+SOAP_FMAC3 struct _ns1__storeFile * SOAP_FMAC4 soap_get__ns1__storeFile(struct soap*, struct _ns1__storeFile *, const char*, const char*);
+
+#ifndef soap_read__ns1__storeFile
+#define soap_read__ns1__storeFile(soap, data) ( ((data) ? (soap_default__ns1__storeFile(soap, (data)), 0) : 0) || soap_begin_recv(soap) || !soap_get__ns1__storeFile(soap, (data), NULL, NULL) || soap_end_recv(soap), (soap)->error )
+#endif
+
+
+#ifndef soap_GET__ns1__storeFile
+#define soap_GET__ns1__storeFile(soap, URL, data) ( soap_GET(soap, URL, NULL) || soap_read__ns1__storeFile(soap, (data)), soap_closesock(soap) )
+#endif
+
+
+#ifndef soap_POST_recv__ns1__storeFile
+#define soap_POST_recv__ns1__storeFile(soap, data) ( soap_read__ns1__storeFile(soap, (data)) || soap_closesock(soap), (soap)->error )
 #endif
 
 #endif
@@ -1079,22 +1643,22 @@ SOAP_FMAC3 struct SOAP_ENV__Code ** SOAP_FMAC4 soap_get_PointerToSOAP_ENV__Code(
 
 #endif
 
-#ifndef SOAP_TYPE_PointerTo_ns1__store_USCOREfileResponse_DEFINED
-#define SOAP_TYPE_PointerTo_ns1__store_USCOREfileResponse_DEFINED
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_ns1__store_USCOREfileResponse(struct soap*, struct _ns1__store_USCOREfileResponse *const*);
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_ns1__store_USCOREfileResponse(struct soap*, const char *, int, struct _ns1__store_USCOREfileResponse *const*, const char *);
-SOAP_FMAC3 struct _ns1__store_USCOREfileResponse ** SOAP_FMAC4 soap_in_PointerTo_ns1__store_USCOREfileResponse(struct soap*, const char*, struct _ns1__store_USCOREfileResponse **, const char*);
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_ns1__store_USCOREfileResponse(struct soap*, struct _ns1__store_USCOREfileResponse *const*, const char*, const char*);
-SOAP_FMAC3 struct _ns1__store_USCOREfileResponse ** SOAP_FMAC4 soap_get_PointerTo_ns1__store_USCOREfileResponse(struct soap*, struct _ns1__store_USCOREfileResponse **, const char*, const char*);
+#ifndef SOAP_TYPE_PointerTo_ns1__storeFileResponse_DEFINED
+#define SOAP_TYPE_PointerTo_ns1__storeFileResponse_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_ns1__storeFileResponse(struct soap*, struct _ns1__storeFileResponse *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_ns1__storeFileResponse(struct soap*, const char *, int, struct _ns1__storeFileResponse *const*, const char *);
+SOAP_FMAC3 struct _ns1__storeFileResponse ** SOAP_FMAC4 soap_in_PointerTo_ns1__storeFileResponse(struct soap*, const char*, struct _ns1__storeFileResponse **, const char*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_ns1__storeFileResponse(struct soap*, struct _ns1__storeFileResponse *const*, const char*, const char*);
+SOAP_FMAC3 struct _ns1__storeFileResponse ** SOAP_FMAC4 soap_get_PointerTo_ns1__storeFileResponse(struct soap*, struct _ns1__storeFileResponse **, const char*, const char*);
 #endif
 
-#ifndef SOAP_TYPE_PointerTo_ns1__store_USCOREfile_DEFINED
-#define SOAP_TYPE_PointerTo_ns1__store_USCOREfile_DEFINED
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_ns1__store_USCOREfile(struct soap*, struct _ns1__store_USCOREfile *const*);
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_ns1__store_USCOREfile(struct soap*, const char *, int, struct _ns1__store_USCOREfile *const*, const char *);
-SOAP_FMAC3 struct _ns1__store_USCOREfile ** SOAP_FMAC4 soap_in_PointerTo_ns1__store_USCOREfile(struct soap*, const char*, struct _ns1__store_USCOREfile **, const char*);
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_ns1__store_USCOREfile(struct soap*, struct _ns1__store_USCOREfile *const*, const char*, const char*);
-SOAP_FMAC3 struct _ns1__store_USCOREfile ** SOAP_FMAC4 soap_get_PointerTo_ns1__store_USCOREfile(struct soap*, struct _ns1__store_USCOREfile **, const char*, const char*);
+#ifndef SOAP_TYPE_PointerTo_ns1__storeFile_DEFINED
+#define SOAP_TYPE_PointerTo_ns1__storeFile_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_ns1__storeFile(struct soap*, struct _ns1__storeFile *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_ns1__storeFile(struct soap*, const char *, int, struct _ns1__storeFile *const*, const char *);
+SOAP_FMAC3 struct _ns1__storeFile ** SOAP_FMAC4 soap_in_PointerTo_ns1__storeFile(struct soap*, const char*, struct _ns1__storeFile **, const char*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_ns1__storeFile(struct soap*, struct _ns1__storeFile *const*, const char*, const char*);
+SOAP_FMAC3 struct _ns1__storeFile ** SOAP_FMAC4 soap_get_PointerTo_ns1__storeFile(struct soap*, struct _ns1__storeFile **, const char*, const char*);
 #endif
 
 #ifndef SOAP_TYPE__QName_DEFINED

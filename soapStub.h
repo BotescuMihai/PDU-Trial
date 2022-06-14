@@ -34,96 +34,108 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
  *                                                                            *
 \******************************************************************************/
 
-struct _ns1__store_USCOREfile;	/* test.h:169 */
-struct _ns1__store_USCOREfileResponse;	/* test.h:185 */
-struct _ns1__create_USCOREfile;	/* test.h:201 */
-struct _ns1__create_USCOREfileResponse;	/* test.h:217 */
-struct _ns1__modify_USCOREfile;	/* test.h:233 */
-struct _ns1__modify_USCOREfileResponse;	/* test.h:249 */
-struct _ns1__remove_USCOREfile;	/* test.h:265 */
-struct _ns1__remove_USCOREfileResponse;	/* test.h:281 */
+struct _ns1__storeFile;	/* test.h:169 */
+struct _ns1__storeFileResponse;	/* test.h:185 */
+struct _ns1__createFile;	/* test.h:201 */
+struct _ns1__createFileResponse;	/* test.h:217 */
+struct _ns1__modifyFile;	/* test.h:233 */
+struct _ns1__modifyFileResponse;	/* test.h:249 */
+struct _ns1__removeFile;	/* test.h:265 */
+struct _ns1__removeFileResponse;	/* test.h:281 */
 struct _ns1__store_USCOREexec_USCOREfile;	/* test.h:297 */
 struct _ns1__store_USCOREexec_USCOREfileResponse;	/* test.h:313 */
-struct _ns1__client_USCORElog_USCOREfiles;	/* test.h:329 */
+struct _ns1__clientLogFiles;	/* test.h:329 */
 struct _ns1__NewOperationResponse;	/* test.h:345 */
-struct _ns1__client_USCORElog_USCOREfilesResponse1;	/* test.h:361 */
-struct __ns1__store_USCOREfile;	/* test.h:494 */
+struct _ns1__clientLogFilesResponse1;	/* test.h:361 */
+struct _ns1__servFiles;	/* test.h:377 */
+struct _ns1__servFilesResponse1;	/* test.h:393 */
+struct _ns1__filesInCertainProgLanguage;	/* test.h:409 */
+struct _ns1__filesInCertainProgLanguageResponse1;	/* test.h:425 */
+struct _ns1__largestServFile;	/* test.h:441 */
+struct _ns1__largestServFileResponse1;	/* test.h:457 */
+struct _ns1__smallestServFile;	/* test.h:473 */
+struct _ns1__smallestServFileResponse1;	/* test.h:489 */
+struct _ns1__filesStatistics;	/* test.h:505 */
+struct _ns1__filesStatisticsResponse1;	/* test.h:521 */
+struct _ns1__totalServFilesSize;	/* test.h:537 */
+struct _ns1__totalServFilesSizeResponse1;	/* test.h:553 */
+struct __ns1__storeFile;	/* test.h:686 */
 
 /* test.h:169 */
-#ifndef SOAP_TYPE__ns1__store_USCOREfile
-#define SOAP_TYPE__ns1__store_USCOREfile (7)
-/* complex XML schema type 'ns1:store_file': */
-struct _ns1__store_USCOREfile {
+#ifndef SOAP_TYPE__ns1__storeFile
+#define SOAP_TYPE__ns1__storeFile (7)
+/* complex XML schema type 'ns1:storeFile': */
+struct _ns1__storeFile {
         /** Required element 'in' of XML schema type 'xsd:string' */
         char *in;
 };
 #endif
 
 /* test.h:185 */
-#ifndef SOAP_TYPE__ns1__store_USCOREfileResponse
-#define SOAP_TYPE__ns1__store_USCOREfileResponse (8)
-/* complex XML schema type 'ns1:store_fileResponse': */
-struct _ns1__store_USCOREfileResponse {
+#ifndef SOAP_TYPE__ns1__storeFileResponse
+#define SOAP_TYPE__ns1__storeFileResponse (8)
+/* complex XML schema type 'ns1:storeFileResponse': */
+struct _ns1__storeFileResponse {
         /** Required element 'out' of XML schema type 'xsd:string' */
         char *out;
 };
 #endif
 
 /* test.h:201 */
-#ifndef SOAP_TYPE__ns1__create_USCOREfile
-#define SOAP_TYPE__ns1__create_USCOREfile (9)
-/* complex XML schema type 'ns1:create_file': */
-struct _ns1__create_USCOREfile {
+#ifndef SOAP_TYPE__ns1__createFile
+#define SOAP_TYPE__ns1__createFile (9)
+/* complex XML schema type 'ns1:createFile': */
+struct _ns1__createFile {
         /** Required element 'in' of XML schema type 'xsd:string' */
         char *in;
 };
 #endif
 
 /* test.h:217 */
-#ifndef SOAP_TYPE__ns1__create_USCOREfileResponse
-#define SOAP_TYPE__ns1__create_USCOREfileResponse (10)
-/* complex XML schema type 'ns1:create_fileResponse': */
-struct _ns1__create_USCOREfileResponse {
+#ifndef SOAP_TYPE__ns1__createFileResponse
+#define SOAP_TYPE__ns1__createFileResponse (10)
+/* complex XML schema type 'ns1:createFileResponse': */
+struct _ns1__createFileResponse {
         /** Required element 'out' of XML schema type 'xsd:string' */
         char *out;
 };
 #endif
 
 /* test.h:233 */
-#ifndef SOAP_TYPE__ns1__modify_USCOREfile
-#define SOAP_TYPE__ns1__modify_USCOREfile (11)
-/* complex XML schema type 'ns1:modify_file': */
-struct _ns1__modify_USCOREfile {
+#ifndef SOAP_TYPE__ns1__modifyFile
+#define SOAP_TYPE__ns1__modifyFile (11)
+/* complex XML schema type 'ns1:modifyFile': */
+struct _ns1__modifyFile {
         /** Required element 'in' of XML schema type 'xsd:string' */
         char *in;
 };
 #endif
 
 /* test.h:249 */
-#ifndef SOAP_TYPE__ns1__modify_USCOREfileResponse
-#define SOAP_TYPE__ns1__modify_USCOREfileResponse (12)
-/* complex XML schema type 'ns1:modify_fileResponse': */
-struct _ns1__modify_USCOREfileResponse {
+#ifndef SOAP_TYPE__ns1__modifyFileResponse
+#define SOAP_TYPE__ns1__modifyFileResponse (12)
+/* complex XML schema type 'ns1:modifyFileResponse': */
+struct _ns1__modifyFileResponse {
         /** Required element 'out' of XML schema type 'xsd:string' */
         char *out;
 };
 #endif
 
 /* test.h:265 */
-#ifndef SOAP_TYPE__ns1__remove_USCOREfile
-#define SOAP_TYPE__ns1__remove_USCOREfile (13)
-/* complex XML schema type 'ns1:remove_file': */
-struct _ns1__remove_USCOREfile {
+#ifndef SOAP_TYPE__ns1__removeFile
+#define SOAP_TYPE__ns1__removeFile (13)
+/* complex XML schema type 'ns1:removeFile': */
+struct _ns1__removeFile {
         /** Required element 'in' of XML schema type 'xsd:string' */
         char *in;
 };
 #endif
 
 /* test.h:281 */
-#ifndef SOAP_TYPE__ns1__remove_USCOREfileResponse
-#define SOAP_TYPE__ns1__remove_USCOREfileResponse (14)
-/* complex XML schema type 'ns1:remove_fileResponse': */
-struct _ns1__remove_USCOREfileResponse {
+#ifndef SOAP_TYPE__ns1__removeFileResponse
+#define SOAP_TYPE__ns1__removeFileResponse (14)
+/* complex XML schema type 'ns1:removeFileResponse': */
+struct _ns1__removeFileResponse {
         /** Required element 'out' of XML schema type 'xsd:string' */
         char *out;
 };
@@ -150,10 +162,10 @@ struct _ns1__store_USCOREexec_USCOREfileResponse {
 #endif
 
 /* test.h:329 */
-#ifndef SOAP_TYPE__ns1__client_USCORElog_USCOREfiles
-#define SOAP_TYPE__ns1__client_USCORElog_USCOREfiles (17)
-/* complex XML schema type 'ns1:client_log_files': */
-struct _ns1__client_USCORElog_USCOREfiles {
+#ifndef SOAP_TYPE__ns1__clientLogFiles
+#define SOAP_TYPE__ns1__clientLogFiles (17)
+/* complex XML schema type 'ns1:clientLogFiles': */
+struct _ns1__clientLogFiles {
         /** Required element 'in' of XML schema type 'xsd:string' */
         char *in;
 };
@@ -170,29 +182,149 @@ struct _ns1__NewOperationResponse {
 #endif
 
 /* test.h:361 */
-#ifndef SOAP_TYPE__ns1__client_USCORElog_USCOREfilesResponse1
-#define SOAP_TYPE__ns1__client_USCORElog_USCOREfilesResponse1 (19)
-/* complex XML schema type 'ns1:client_log_filesResponse1': */
-struct _ns1__client_USCORElog_USCOREfilesResponse1 {
+#ifndef SOAP_TYPE__ns1__clientLogFilesResponse1
+#define SOAP_TYPE__ns1__clientLogFilesResponse1 (19)
+/* complex XML schema type 'ns1:clientLogFilesResponse1': */
+struct _ns1__clientLogFilesResponse1 {
         /** Required element 'out' of XML schema type 'xsd:string' */
         char *out;
 };
 #endif
 
-/* test.h:494 */
-#ifndef SOAP_TYPE___ns1__store_USCOREfile
-#define SOAP_TYPE___ns1__store_USCOREfile (23)
-/* Wrapper: */
-struct __ns1__store_USCOREfile {
-        /** Optional element 'ns1:store_file' of XML schema type 'ns1:store_file' */
-        struct _ns1__store_USCOREfile *ns1__store_USCOREfile;
+/* test.h:377 */
+#ifndef SOAP_TYPE__ns1__servFiles
+#define SOAP_TYPE__ns1__servFiles (20)
+/* complex XML schema type 'ns1:servFiles': */
+struct _ns1__servFiles {
+        /** Required element 'in' of XML schema type 'xsd:string' */
+        char *in;
 };
 #endif
 
-/* test.h:750 */
+/* test.h:393 */
+#ifndef SOAP_TYPE__ns1__servFilesResponse1
+#define SOAP_TYPE__ns1__servFilesResponse1 (21)
+/* complex XML schema type 'ns1:servFilesResponse1': */
+struct _ns1__servFilesResponse1 {
+        /** Required element 'out' of XML schema type 'xsd:string' */
+        char *out;
+};
+#endif
+
+/* test.h:409 */
+#ifndef SOAP_TYPE__ns1__filesInCertainProgLanguage
+#define SOAP_TYPE__ns1__filesInCertainProgLanguage (22)
+/* complex XML schema type 'ns1:filesInCertainProgLanguage': */
+struct _ns1__filesInCertainProgLanguage {
+        /** Required element 'in' of XML schema type 'xsd:string' */
+        char *in;
+};
+#endif
+
+/* test.h:425 */
+#ifndef SOAP_TYPE__ns1__filesInCertainProgLanguageResponse1
+#define SOAP_TYPE__ns1__filesInCertainProgLanguageResponse1 (23)
+/* complex XML schema type 'ns1:filesInCertainProgLanguageResponse1': */
+struct _ns1__filesInCertainProgLanguageResponse1 {
+        /** Required element 'out' of XML schema type 'xsd:string' */
+        char *out;
+};
+#endif
+
+/* test.h:441 */
+#ifndef SOAP_TYPE__ns1__largestServFile
+#define SOAP_TYPE__ns1__largestServFile (24)
+/* complex XML schema type 'ns1:largestServFile': */
+struct _ns1__largestServFile {
+        /** Required element 'in' of XML schema type 'xsd:string' */
+        char *in;
+};
+#endif
+
+/* test.h:457 */
+#ifndef SOAP_TYPE__ns1__largestServFileResponse1
+#define SOAP_TYPE__ns1__largestServFileResponse1 (25)
+/* complex XML schema type 'ns1:largestServFileResponse1': */
+struct _ns1__largestServFileResponse1 {
+        /** Required element 'out' of XML schema type 'xsd:string' */
+        char *out;
+};
+#endif
+
+/* test.h:473 */
+#ifndef SOAP_TYPE__ns1__smallestServFile
+#define SOAP_TYPE__ns1__smallestServFile (26)
+/* complex XML schema type 'ns1:smallestServFile': */
+struct _ns1__smallestServFile {
+        /** Required element 'in' of XML schema type 'xsd:string' */
+        char *in;
+};
+#endif
+
+/* test.h:489 */
+#ifndef SOAP_TYPE__ns1__smallestServFileResponse1
+#define SOAP_TYPE__ns1__smallestServFileResponse1 (27)
+/* complex XML schema type 'ns1:smallestServFileResponse1': */
+struct _ns1__smallestServFileResponse1 {
+        /** Required element 'out' of XML schema type 'xsd:string' */
+        char *out;
+};
+#endif
+
+/* test.h:505 */
+#ifndef SOAP_TYPE__ns1__filesStatistics
+#define SOAP_TYPE__ns1__filesStatistics (28)
+/* complex XML schema type 'ns1:filesStatistics': */
+struct _ns1__filesStatistics {
+        /** Required element 'in' of XML schema type 'xsd:string' */
+        char *in;
+};
+#endif
+
+/* test.h:521 */
+#ifndef SOAP_TYPE__ns1__filesStatisticsResponse1
+#define SOAP_TYPE__ns1__filesStatisticsResponse1 (29)
+/* complex XML schema type 'ns1:filesStatisticsResponse1': */
+struct _ns1__filesStatisticsResponse1 {
+        /** Required element 'out' of XML schema type 'xsd:string' */
+        char *out;
+};
+#endif
+
+/* test.h:537 */
+#ifndef SOAP_TYPE__ns1__totalServFilesSize
+#define SOAP_TYPE__ns1__totalServFilesSize (30)
+/* complex XML schema type 'ns1:totalServFilesSize': */
+struct _ns1__totalServFilesSize {
+        /** Required element 'in' of XML schema type 'xsd:string' */
+        char *in;
+};
+#endif
+
+/* test.h:553 */
+#ifndef SOAP_TYPE__ns1__totalServFilesSizeResponse1
+#define SOAP_TYPE__ns1__totalServFilesSizeResponse1 (31)
+/* complex XML schema type 'ns1:totalServFilesSizeResponse1': */
+struct _ns1__totalServFilesSizeResponse1 {
+        /** Required element 'out' of XML schema type 'xsd:string' */
+        char *out;
+};
+#endif
+
+/* test.h:686 */
+#ifndef SOAP_TYPE___ns1__storeFile
+#define SOAP_TYPE___ns1__storeFile (35)
+/* Wrapper: */
+struct __ns1__storeFile {
+        /** Optional element 'ns1:storeFile' of XML schema type 'ns1:storeFile' */
+        struct _ns1__storeFile *ns1__storeFile;
+};
+#endif
+
+/* test.h:1122 */
 #ifndef WITH_NOGLOBAL
 #ifndef SOAP_TYPE_SOAP_ENV__Header
-#define SOAP_TYPE_SOAP_ENV__Header (24)
+#define SOAP_TYPE_SOAP_ENV__Header (36)
 /* SOAP_ENV__Header: */
 struct SOAP_ENV__Header {
 #ifdef WITH_NOEMPTYSTRUCT
@@ -202,10 +334,10 @@ struct SOAP_ENV__Header {
 #endif
 #endif
 
-/* test.h:750 */
+/* test.h:1122 */
 #ifndef WITH_NOGLOBAL
 #ifndef SOAP_TYPE_SOAP_ENV__Code
-#define SOAP_TYPE_SOAP_ENV__Code (25)
+#define SOAP_TYPE_SOAP_ENV__Code (37)
 /* Type SOAP_ENV__Code is a recursive data type, (in)directly referencing itself through its (base or derived class) members */
 /* SOAP_ENV__Code: */
 struct SOAP_ENV__Code {
@@ -217,10 +349,10 @@ struct SOAP_ENV__Code {
 #endif
 #endif
 
-/* test.h:750 */
+/* test.h:1122 */
 #ifndef WITH_NOGLOBAL
 #ifndef SOAP_TYPE_SOAP_ENV__Detail
-#define SOAP_TYPE_SOAP_ENV__Detail (27)
+#define SOAP_TYPE_SOAP_ENV__Detail (39)
 /* SOAP_ENV__Detail: */
 struct SOAP_ENV__Detail {
         char *__any;
@@ -232,10 +364,10 @@ struct SOAP_ENV__Detail {
 #endif
 #endif
 
-/* test.h:750 */
+/* test.h:1122 */
 #ifndef WITH_NOGLOBAL
 #ifndef SOAP_TYPE_SOAP_ENV__Reason
-#define SOAP_TYPE_SOAP_ENV__Reason (30)
+#define SOAP_TYPE_SOAP_ENV__Reason (42)
 /* SOAP_ENV__Reason: */
 struct SOAP_ENV__Reason {
         /** Optional element 'SOAP-ENV:Text' of XML schema type 'xsd:string' */
@@ -244,10 +376,10 @@ struct SOAP_ENV__Reason {
 #endif
 #endif
 
-/* test.h:750 */
+/* test.h:1122 */
 #ifndef WITH_NOGLOBAL
 #ifndef SOAP_TYPE_SOAP_ENV__Fault
-#define SOAP_TYPE_SOAP_ENV__Fault (31)
+#define SOAP_TYPE_SOAP_ENV__Fault (43)
 /* SOAP_ENV__Fault: */
 struct SOAP_ENV__Fault {
         /** Optional element 'faultcode' of XML schema type 'xsd:QName' */
@@ -310,32 +442,92 @@ typedef char *_QName;
 
 /* struct SOAP_ENV__Fault has binding name 'SOAP_ENV__Fault' for type '' */
 #ifndef SOAP_TYPE_SOAP_ENV__Fault
-#define SOAP_TYPE_SOAP_ENV__Fault (31)
+#define SOAP_TYPE_SOAP_ENV__Fault (43)
 #endif
 
 /* struct SOAP_ENV__Reason has binding name 'SOAP_ENV__Reason' for type '' */
 #ifndef SOAP_TYPE_SOAP_ENV__Reason
-#define SOAP_TYPE_SOAP_ENV__Reason (30)
+#define SOAP_TYPE_SOAP_ENV__Reason (42)
 #endif
 
 /* struct SOAP_ENV__Detail has binding name 'SOAP_ENV__Detail' for type '' */
 #ifndef SOAP_TYPE_SOAP_ENV__Detail
-#define SOAP_TYPE_SOAP_ENV__Detail (27)
+#define SOAP_TYPE_SOAP_ENV__Detail (39)
 #endif
 
 /* struct SOAP_ENV__Code has binding name 'SOAP_ENV__Code' for type '' */
 #ifndef SOAP_TYPE_SOAP_ENV__Code
-#define SOAP_TYPE_SOAP_ENV__Code (25)
+#define SOAP_TYPE_SOAP_ENV__Code (37)
 #endif
 
 /* struct SOAP_ENV__Header has binding name 'SOAP_ENV__Header' for type '' */
 #ifndef SOAP_TYPE_SOAP_ENV__Header
-#define SOAP_TYPE_SOAP_ENV__Header (24)
+#define SOAP_TYPE_SOAP_ENV__Header (36)
 #endif
 
-/* struct _ns1__client_USCORElog_USCOREfilesResponse1 has binding name '_ns1__client_USCORElog_USCOREfilesResponse1' for type '' */
-#ifndef SOAP_TYPE__ns1__client_USCORElog_USCOREfilesResponse1
-#define SOAP_TYPE__ns1__client_USCORElog_USCOREfilesResponse1 (19)
+/* struct _ns1__totalServFilesSizeResponse1 has binding name '_ns1__totalServFilesSizeResponse1' for type '' */
+#ifndef SOAP_TYPE__ns1__totalServFilesSizeResponse1
+#define SOAP_TYPE__ns1__totalServFilesSizeResponse1 (31)
+#endif
+
+/* struct _ns1__totalServFilesSize has binding name '_ns1__totalServFilesSize' for type '' */
+#ifndef SOAP_TYPE__ns1__totalServFilesSize
+#define SOAP_TYPE__ns1__totalServFilesSize (30)
+#endif
+
+/* struct _ns1__filesStatisticsResponse1 has binding name '_ns1__filesStatisticsResponse1' for type '' */
+#ifndef SOAP_TYPE__ns1__filesStatisticsResponse1
+#define SOAP_TYPE__ns1__filesStatisticsResponse1 (29)
+#endif
+
+/* struct _ns1__filesStatistics has binding name '_ns1__filesStatistics' for type '' */
+#ifndef SOAP_TYPE__ns1__filesStatistics
+#define SOAP_TYPE__ns1__filesStatistics (28)
+#endif
+
+/* struct _ns1__smallestServFileResponse1 has binding name '_ns1__smallestServFileResponse1' for type '' */
+#ifndef SOAP_TYPE__ns1__smallestServFileResponse1
+#define SOAP_TYPE__ns1__smallestServFileResponse1 (27)
+#endif
+
+/* struct _ns1__smallestServFile has binding name '_ns1__smallestServFile' for type '' */
+#ifndef SOAP_TYPE__ns1__smallestServFile
+#define SOAP_TYPE__ns1__smallestServFile (26)
+#endif
+
+/* struct _ns1__largestServFileResponse1 has binding name '_ns1__largestServFileResponse1' for type '' */
+#ifndef SOAP_TYPE__ns1__largestServFileResponse1
+#define SOAP_TYPE__ns1__largestServFileResponse1 (25)
+#endif
+
+/* struct _ns1__largestServFile has binding name '_ns1__largestServFile' for type '' */
+#ifndef SOAP_TYPE__ns1__largestServFile
+#define SOAP_TYPE__ns1__largestServFile (24)
+#endif
+
+/* struct _ns1__filesInCertainProgLanguageResponse1 has binding name '_ns1__filesInCertainProgLanguageResponse1' for type '' */
+#ifndef SOAP_TYPE__ns1__filesInCertainProgLanguageResponse1
+#define SOAP_TYPE__ns1__filesInCertainProgLanguageResponse1 (23)
+#endif
+
+/* struct _ns1__filesInCertainProgLanguage has binding name '_ns1__filesInCertainProgLanguage' for type '' */
+#ifndef SOAP_TYPE__ns1__filesInCertainProgLanguage
+#define SOAP_TYPE__ns1__filesInCertainProgLanguage (22)
+#endif
+
+/* struct _ns1__servFilesResponse1 has binding name '_ns1__servFilesResponse1' for type '' */
+#ifndef SOAP_TYPE__ns1__servFilesResponse1
+#define SOAP_TYPE__ns1__servFilesResponse1 (21)
+#endif
+
+/* struct _ns1__servFiles has binding name '_ns1__servFiles' for type '' */
+#ifndef SOAP_TYPE__ns1__servFiles
+#define SOAP_TYPE__ns1__servFiles (20)
+#endif
+
+/* struct _ns1__clientLogFilesResponse1 has binding name '_ns1__clientLogFilesResponse1' for type '' */
+#ifndef SOAP_TYPE__ns1__clientLogFilesResponse1
+#define SOAP_TYPE__ns1__clientLogFilesResponse1 (19)
 #endif
 
 /* struct _ns1__NewOperationResponse has binding name '_ns1__NewOperationResponse' for type '' */
@@ -343,9 +535,9 @@ typedef char *_QName;
 #define SOAP_TYPE__ns1__NewOperationResponse (18)
 #endif
 
-/* struct _ns1__client_USCORElog_USCOREfiles has binding name '_ns1__client_USCORElog_USCOREfiles' for type '' */
-#ifndef SOAP_TYPE__ns1__client_USCORElog_USCOREfiles
-#define SOAP_TYPE__ns1__client_USCORElog_USCOREfiles (17)
+/* struct _ns1__clientLogFiles has binding name '_ns1__clientLogFiles' for type '' */
+#ifndef SOAP_TYPE__ns1__clientLogFiles
+#define SOAP_TYPE__ns1__clientLogFiles (17)
 #endif
 
 /* struct _ns1__store_USCOREexec_USCOREfileResponse has binding name '_ns1__store_USCOREexec_USCOREfileResponse' for type '' */
@@ -358,69 +550,69 @@ typedef char *_QName;
 #define SOAP_TYPE__ns1__store_USCOREexec_USCOREfile (15)
 #endif
 
-/* struct _ns1__remove_USCOREfileResponse has binding name '_ns1__remove_USCOREfileResponse' for type '' */
-#ifndef SOAP_TYPE__ns1__remove_USCOREfileResponse
-#define SOAP_TYPE__ns1__remove_USCOREfileResponse (14)
+/* struct _ns1__removeFileResponse has binding name '_ns1__removeFileResponse' for type '' */
+#ifndef SOAP_TYPE__ns1__removeFileResponse
+#define SOAP_TYPE__ns1__removeFileResponse (14)
 #endif
 
-/* struct _ns1__remove_USCOREfile has binding name '_ns1__remove_USCOREfile' for type '' */
-#ifndef SOAP_TYPE__ns1__remove_USCOREfile
-#define SOAP_TYPE__ns1__remove_USCOREfile (13)
+/* struct _ns1__removeFile has binding name '_ns1__removeFile' for type '' */
+#ifndef SOAP_TYPE__ns1__removeFile
+#define SOAP_TYPE__ns1__removeFile (13)
 #endif
 
-/* struct _ns1__modify_USCOREfileResponse has binding name '_ns1__modify_USCOREfileResponse' for type '' */
-#ifndef SOAP_TYPE__ns1__modify_USCOREfileResponse
-#define SOAP_TYPE__ns1__modify_USCOREfileResponse (12)
+/* struct _ns1__modifyFileResponse has binding name '_ns1__modifyFileResponse' for type '' */
+#ifndef SOAP_TYPE__ns1__modifyFileResponse
+#define SOAP_TYPE__ns1__modifyFileResponse (12)
 #endif
 
-/* struct _ns1__modify_USCOREfile has binding name '_ns1__modify_USCOREfile' for type '' */
-#ifndef SOAP_TYPE__ns1__modify_USCOREfile
-#define SOAP_TYPE__ns1__modify_USCOREfile (11)
+/* struct _ns1__modifyFile has binding name '_ns1__modifyFile' for type '' */
+#ifndef SOAP_TYPE__ns1__modifyFile
+#define SOAP_TYPE__ns1__modifyFile (11)
 #endif
 
-/* struct _ns1__create_USCOREfileResponse has binding name '_ns1__create_USCOREfileResponse' for type '' */
-#ifndef SOAP_TYPE__ns1__create_USCOREfileResponse
-#define SOAP_TYPE__ns1__create_USCOREfileResponse (10)
+/* struct _ns1__createFileResponse has binding name '_ns1__createFileResponse' for type '' */
+#ifndef SOAP_TYPE__ns1__createFileResponse
+#define SOAP_TYPE__ns1__createFileResponse (10)
 #endif
 
-/* struct _ns1__create_USCOREfile has binding name '_ns1__create_USCOREfile' for type '' */
-#ifndef SOAP_TYPE__ns1__create_USCOREfile
-#define SOAP_TYPE__ns1__create_USCOREfile (9)
+/* struct _ns1__createFile has binding name '_ns1__createFile' for type '' */
+#ifndef SOAP_TYPE__ns1__createFile
+#define SOAP_TYPE__ns1__createFile (9)
 #endif
 
-/* struct _ns1__store_USCOREfileResponse has binding name '_ns1__store_USCOREfileResponse' for type '' */
-#ifndef SOAP_TYPE__ns1__store_USCOREfileResponse
-#define SOAP_TYPE__ns1__store_USCOREfileResponse (8)
+/* struct _ns1__storeFileResponse has binding name '_ns1__storeFileResponse' for type '' */
+#ifndef SOAP_TYPE__ns1__storeFileResponse
+#define SOAP_TYPE__ns1__storeFileResponse (8)
 #endif
 
-/* struct _ns1__store_USCOREfile has binding name '_ns1__store_USCOREfile' for type '' */
-#ifndef SOAP_TYPE__ns1__store_USCOREfile
-#define SOAP_TYPE__ns1__store_USCOREfile (7)
+/* struct _ns1__storeFile has binding name '_ns1__storeFile' for type '' */
+#ifndef SOAP_TYPE__ns1__storeFile
+#define SOAP_TYPE__ns1__storeFile (7)
 #endif
 
 /* struct SOAP_ENV__Reason * has binding name 'PointerToSOAP_ENV__Reason' for type '' */
 #ifndef SOAP_TYPE_PointerToSOAP_ENV__Reason
-#define SOAP_TYPE_PointerToSOAP_ENV__Reason (33)
+#define SOAP_TYPE_PointerToSOAP_ENV__Reason (45)
 #endif
 
 /* struct SOAP_ENV__Detail * has binding name 'PointerToSOAP_ENV__Detail' for type '' */
 #ifndef SOAP_TYPE_PointerToSOAP_ENV__Detail
-#define SOAP_TYPE_PointerToSOAP_ENV__Detail (32)
+#define SOAP_TYPE_PointerToSOAP_ENV__Detail (44)
 #endif
 
 /* struct SOAP_ENV__Code * has binding name 'PointerToSOAP_ENV__Code' for type '' */
 #ifndef SOAP_TYPE_PointerToSOAP_ENV__Code
-#define SOAP_TYPE_PointerToSOAP_ENV__Code (26)
+#define SOAP_TYPE_PointerToSOAP_ENV__Code (38)
 #endif
 
-/* struct _ns1__store_USCOREfileResponse * has binding name 'PointerTo_ns1__store_USCOREfileResponse' for type '' */
-#ifndef SOAP_TYPE_PointerTo_ns1__store_USCOREfileResponse
-#define SOAP_TYPE_PointerTo_ns1__store_USCOREfileResponse (21)
+/* struct _ns1__storeFileResponse * has binding name 'PointerTo_ns1__storeFileResponse' for type '' */
+#ifndef SOAP_TYPE_PointerTo_ns1__storeFileResponse
+#define SOAP_TYPE_PointerTo_ns1__storeFileResponse (33)
 #endif
 
-/* struct _ns1__store_USCOREfile * has binding name 'PointerTo_ns1__store_USCOREfile' for type '' */
-#ifndef SOAP_TYPE_PointerTo_ns1__store_USCOREfile
-#define SOAP_TYPE_PointerTo_ns1__store_USCOREfile (20)
+/* struct _ns1__storeFile * has binding name 'PointerTo_ns1__storeFile' for type '' */
+#ifndef SOAP_TYPE_PointerTo_ns1__storeFile
+#define SOAP_TYPE_PointerTo_ns1__storeFile (32)
 #endif
 
 /* _QName has binding name '_QName' for type 'xsd:QName' */
@@ -452,12 +644,12 @@ typedef char *_QName;
 \******************************************************************************/
 
     
-    /** Web service synchronous operation 'soap_call___ns1__store_USCOREfile' to the specified endpoint and SOAP Action header, returns SOAP_OK or error code */
-    SOAP_FMAC5 int SOAP_FMAC6 soap_call___ns1__store_USCOREfile(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _ns1__store_USCOREfile *ns1__store_USCOREfile, struct _ns1__store_USCOREfileResponse *ns1__store_USCOREfileResponse);
-    /** Web service asynchronous operation 'soap_send___ns1__store_USCOREfile' to send a request message to the specified endpoint and SOAP Action header, returns SOAP_OK or error code */
-    SOAP_FMAC5 int SOAP_FMAC6 soap_send___ns1__store_USCOREfile(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _ns1__store_USCOREfile *ns1__store_USCOREfile);
-    /** Web service asynchronous operation 'soap_recv___ns1__store_USCOREfile' to receive a response message from the connected endpoint, returns SOAP_OK or error code */
-    SOAP_FMAC5 int SOAP_FMAC6 soap_recv___ns1__store_USCOREfile(struct soap *soap, struct _ns1__store_USCOREfileResponse *ns1__store_USCOREfileResponse);
+    /** Web service synchronous operation 'soap_call___ns1__storeFile' to the specified endpoint and SOAP Action header, returns SOAP_OK or error code */
+    SOAP_FMAC5 int SOAP_FMAC6 soap_call___ns1__storeFile(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _ns1__storeFile *ns1__storeFile, struct _ns1__storeFileResponse *ns1__storeFileResponse);
+    /** Web service asynchronous operation 'soap_send___ns1__storeFile' to send a request message to the specified endpoint and SOAP Action header, returns SOAP_OK or error code */
+    SOAP_FMAC5 int SOAP_FMAC6 soap_send___ns1__storeFile(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _ns1__storeFile *ns1__storeFile);
+    /** Web service asynchronous operation 'soap_recv___ns1__storeFile' to receive a response message from the connected endpoint, returns SOAP_OK or error code */
+    SOAP_FMAC5 int SOAP_FMAC6 soap_recv___ns1__storeFile(struct soap *soap, struct _ns1__storeFileResponse *ns1__storeFileResponse);
 
 /******************************************************************************\
  *                                                                            *
@@ -465,8 +657,8 @@ typedef char *_QName;
  *                                                                            *
 \******************************************************************************/
 
-    /** Web service operation '__ns1__store_USCOREfile' implementation, should return SOAP_OK or error code */
-    SOAP_FMAC5 int SOAP_FMAC6 __ns1__store_USCOREfile(struct soap*, struct _ns1__store_USCOREfile *ns1__store_USCOREfile, struct _ns1__store_USCOREfileResponse *ns1__store_USCOREfileResponse);
+    /** Web service operation '__ns1__storeFile' implementation, should return SOAP_OK or error code */
+    SOAP_FMAC5 int SOAP_FMAC6 __ns1__storeFile(struct soap*, struct _ns1__storeFile *ns1__storeFile, struct _ns1__storeFileResponse *ns1__storeFileResponse);
 
 /******************************************************************************\
  *                                                                            *
@@ -478,7 +670,7 @@ SOAP_FMAC5 int SOAP_FMAC6 soap_serve(struct soap*);
 
 SOAP_FMAC5 int SOAP_FMAC6 soap_serve_request(struct soap*);
 
-SOAP_FMAC5 int SOAP_FMAC6 soap_serve___ns1__store_USCOREfile(struct soap*);
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___ns1__storeFile(struct soap*);
 
 #endif
 

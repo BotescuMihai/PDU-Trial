@@ -17,7 +17,7 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
 #endif
 #include "soapH.h"
 
-SOAP_SOURCE_STAMP("@(#) soapServer.c ver 2.8.122 2022-06-14 07:03:09 GMT")
+SOAP_SOURCE_STAMP("@(#) soapServer.c ver 2.8.122 2022-06-14 17:03:40 GMT")
 SOAP_FMAC5 int SOAP_FMAC6 soap_serve(struct soap *soap)
 {
 #ifndef WITH_FASTCGI
@@ -56,36 +56,36 @@ SOAP_FMAC5 int SOAP_FMAC6 soap_serve(struct soap *soap)
 SOAP_FMAC5 int SOAP_FMAC6 soap_serve_request(struct soap *soap)
 {
 	(void)soap_peek_element(soap);
-	if (!soap_match_tag(soap, soap->tag, "ns1:store_file"))
-		return soap_serve___ns1__store_USCOREfile(soap);
+	if (!soap_match_tag(soap, soap->tag, "ns1:storeFile"))
+		return soap_serve___ns1__storeFile(soap);
 	return soap->error = SOAP_NO_METHOD;
 }
 #endif
 
-SOAP_FMAC5 int SOAP_FMAC6 soap_serve___ns1__store_USCOREfile(struct soap *soap)
-{	struct __ns1__store_USCOREfile soap_tmp___ns1__store_USCOREfile;
-	struct _ns1__store_USCOREfileResponse ns1__store_USCOREfileResponse;
-	soap_default__ns1__store_USCOREfileResponse(soap, &ns1__store_USCOREfileResponse);
-	soap_default___ns1__store_USCOREfile(soap, &soap_tmp___ns1__store_USCOREfile);
-	if (!soap_get___ns1__store_USCOREfile(soap, &soap_tmp___ns1__store_USCOREfile, "-ns1:store_file", NULL))
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___ns1__storeFile(struct soap *soap)
+{	struct __ns1__storeFile soap_tmp___ns1__storeFile;
+	struct _ns1__storeFileResponse ns1__storeFileResponse;
+	soap_default__ns1__storeFileResponse(soap, &ns1__storeFileResponse);
+	soap_default___ns1__storeFile(soap, &soap_tmp___ns1__storeFile);
+	if (!soap_get___ns1__storeFile(soap, &soap_tmp___ns1__storeFile, "-ns1:storeFile", NULL))
 		return soap->error;
 	if (soap_body_end_in(soap)
 	 || soap_envelope_end_in(soap)
 	 || soap_end_recv(soap))
 		return soap->error;
-	soap->error = __ns1__store_USCOREfile(soap, soap_tmp___ns1__store_USCOREfile.ns1__store_USCOREfile, &ns1__store_USCOREfileResponse);
+	soap->error = __ns1__storeFile(soap, soap_tmp___ns1__storeFile.ns1__storeFile, &ns1__storeFileResponse);
 	if (soap->error)
 		return soap->error;
 	soap->encodingStyle = NULL; /* use SOAP literal style */
 	soap_serializeheader(soap);
-	soap_serialize__ns1__store_USCOREfileResponse(soap, &ns1__store_USCOREfileResponse);
+	soap_serialize__ns1__storeFileResponse(soap, &ns1__storeFileResponse);
 	if (soap_begin_count(soap))
 		return soap->error;
 	if ((soap->mode & SOAP_IO_LENGTH))
 	{	if (soap_envelope_begin_out(soap)
 		 || soap_putheader(soap)
 		 || soap_body_begin_out(soap)
-		 || soap_put__ns1__store_USCOREfileResponse(soap, &ns1__store_USCOREfileResponse, "ns1:store_fileResponse", "")
+		 || soap_put__ns1__storeFileResponse(soap, &ns1__storeFileResponse, "ns1:storeFileResponse", "")
 		 || soap_body_end_out(soap)
 		 || soap_envelope_end_out(soap))
 			 return soap->error;
@@ -95,7 +95,7 @@ SOAP_FMAC5 int SOAP_FMAC6 soap_serve___ns1__store_USCOREfile(struct soap *soap)
 	 || soap_envelope_begin_out(soap)
 	 || soap_putheader(soap)
 	 || soap_body_begin_out(soap)
-	 || soap_put__ns1__store_USCOREfileResponse(soap, &ns1__store_USCOREfileResponse, "ns1:store_fileResponse", "")
+	 || soap_put__ns1__storeFileResponse(soap, &ns1__storeFileResponse, "ns1:storeFileResponse", "")
 	 || soap_body_end_out(soap)
 	 || soap_envelope_end_out(soap)
 	 || soap_end_send(soap))
