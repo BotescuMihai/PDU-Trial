@@ -218,12 +218,6 @@
   <wsdl:message name="clientLogFilesResponse1">
   	<wsdl:part name="parameters" element="tns:clientLogFilesResponse1"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="serv_filesRequest">
-  	<wsdl:part name="parameters" element="tns:NewOperation"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="serv_filesRequest">
-  	<wsdl:part name="parameters" element="tns:NewOperation"></wsdl:part>
-  </wsdl:message>
   <wsdl:message name="servFilesRequest">
   	<wsdl:part name="parameters" element="tns:servFiles"></wsdl:part>
   </wsdl:message>
@@ -307,16 +301,118 @@
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="operationsSOAP" type="tns:operations">
-    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="storeFile">
-      <soap:operation soapAction="http://www.example.org/operations/storeFile"/>
-      <wsdl:input>
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
+  	<soap:binding style="document"
+  		transport="http://schemas.xmlsoap.org/soap/http" />
+  	<wsdl:operation name="storeFile">
+  		<soap:operation
+  			soapAction="http://www.example.org/operations/storeFile" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="createFile">
+  		<soap:operation
+  			soapAction="http://www.example.org/operations/createFile" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="modifyFile">
+  		<soap:operation
+  			soapAction="http://www.example.org/operations/modifyFile" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="removeFile">
+  		<soap:operation
+  			soapAction="http://www.example.org/operations/removeFile" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="clientLogFiles">
+  		<soap:operation
+  			soapAction="http://www.example.org/operations/clientLogFiles" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="servFiles">
+  		<soap:operation
+  			soapAction="http://www.example.org/operations/servFiles" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="filesInCertainProgLanguage">
+  		<soap:operation
+  			soapAction="http://www.example.org/operations/filesInCertainProgLanguage" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="largestServFile">
+  		<soap:operation
+  			soapAction="http://www.example.org/operations/largestServFile" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="smallestServFile">
+  		<soap:operation
+  			soapAction="http://www.example.org/operations/smallestServFile" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="filesStatistics">
+  		<soap:operation
+  			soapAction="http://www.example.org/operations/filesStatistics" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="totalServFilesSize">
+  		<soap:operation
+  			soapAction="http://www.example.org/operations/totalServFilesSize" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="operations">
     <wsdl:port binding="tns:operationsSOAP" name="operationsSOAP">

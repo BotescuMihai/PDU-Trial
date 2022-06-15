@@ -8,7 +8,6 @@
 #include <sys/select.h>
 #include "operationsSOAP.nsmap"
 #include "soapH.h"
-//#include "test.h"
 
 /*
 extern WINDOW * mainwnd ;
@@ -122,158 +121,19 @@ void *soap_main (void *args) {
     pthread_exit (NULL) ;
 }
 /*
-char *do_client_concat (struct soap *soap, char *o1, char *o2) {
-    int bsize ;
-    char *b ;
-    bsize = strlen (o1) + strlen (o2)+2 ;
-    b = soap_malloc (soap, bsize) ;
-    sprintf (b, "%s %s", o2, o1) ; b [bsize] = 0 ;
 
 
 
-    return b ;
 
-}
 
-int ns__bye (struct soap*s, struct byeStruct rq, struct ns__byeResponse *rsp) {
-    /* Do nothing for this sample.
-       In "Real" application clear structures associated with your ID */
-/*    return SOAP_OK ;
-}
 
-int ns__connect(struct soap*s, long *rsp) {
-    long clientid = create_client_id() ;
-    *rsp = clientid ;
 
-    return SOAP_OK ;
-} */
-
-/*
-int my_get(struct soap *soap, char * rq)
-{
-    const char *ptr = rq;
-    size_t size = strlen(ptr);
-    soap_set_mime(soap, NULL, "body");
-    soap_set_mime_attachment(soap, ptr, size, SOAP_MIME_NONE, "text/xml", "attach1", NULL, NULL);
-    soap->http_content = "text/xml";
-    if (soap_response(soap, SOAP_FILE)
-        || soap_send(soap, "<doc title=\"Example\">Some text</doc>\n")
-        || soap_end_send(soap))
-        return soap_closesock(soap);
-    soap_clr_mime(soap);
-    return SOAP_OK;
-} */
-
-/*
-int ns__echo(struct soap*s, char *rq, char **rsp) {
-    char *rsp1 ;
-    int n = 0;
-    /*
-    struct soap_multipart *attachment;
-    printf("Attachements\n");
-    for (attachment = s->dime.list; attachment; attachment = attachment->next)
-    {
-        ++n;
-        printf("Part %d:\n", n);
-        printf("ptr        =%p\n", attachment->ptr);
-        printf("size       =%ul\n", attachment->size);
-        printf("id         =%s\n", attachment->id ? attachment->id : "");
-        printf("type       =%s\n", attachment->type ? attachment->type : "");
-        printf("location   =%s\n", attachment->location ? attachment->location : "");
-        printf("description=%s\n", attachment->description ? attachment->description : "");
-    }
-    rsp1 = do_client_concat (s, ":: Am primit ::", rq) ;
-    *rsp = rsp1 ;
-    fprintf(stderr, "File content\n===========\n");
-    fprintf(stderr, "%s\n", *rsp);
-    return SOAP_OK ;
-}*/
-
-/*
-int ns__echo(struct soap *soap, char * rq, char ** rsp)
-{
-    struct soap_multipart *attachment;
-    printf("Attachements\n");
-    int n = 0;
-    for (attachment = soap->mime.list; attachment; attachment = attachment->next)
-    {
-        ++n;
-        printf("Part %d:\n", n);
-        printf("ptr        =%p\n", attachment->ptr);
-        printf("%s\n", attachment->ptr);
-       // write(1, attachment->ptr, sizeof(attachment->ptr));
-    //    write(1, "\n", 1);
-        printf("size       =%ul\n", attachment->size);
-        printf("id         =%s\n", attachment->id ? attachment->id : "");
-        printf("type       =%s\n", attachment->type ? attachment->type : "");
-        printf("location   =%s\n", attachment->location ? attachment->location : "");
-        printf("description=%s\n", attachment->description ? attachment->description : "");
-    }
-    * rsp = rq;
-    return SOAP_OK;
-} */
-
-/*
- <?xml version="1.0" encoding="UTF-8"?>
-<SOAP-ENV:Envelope
-    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
-    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns:ns="http://tempuri.org/ns.xsd">
- <SOAP-ENV:Body>
- <mtom:AttachmentRequest>
- <mtom:fileName>file</mtom:fileName>
-  <ns:echo>
-   <echoRequest>Hei</echoRequest>
-  </ns:echo>
- </SOAP-ENV:Body>
-</SOAP-ENV:Envelope>
- ALA BUN
- */
-
-/**
- * <?xml version="1.0" ?>
- * <wsdl:definitions name="DIME Sample" targetNamespace="https://example.com/DimeExample" xmlns:wsdl="https://schemas.xmlsoap.org/wsdl/" xmlns:soap="https://schemas.xmlsoap.org/wsdl/soap/" xmlns:dime="https://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/" xmlns:content= "https://schemas.xmlsoap.org/ws/2002/04/content-type/" xmlns:ref="https://schemas.xmlsoap.org/ws/2002/04/reference/" xmlns:svc="https://example.com/DimeExample/Service/" xmlns:msg="https://example.com/DimeExample/Messages/" xmlns:xs="https://www.w3.org/2001/XMLSchema" >
- * <wsdl:types> <xs:schema targetNamespace="https://example.com/DimeExample" elementFormDefault="qualified"> <xs:import namespace= "https://schemas.xmlsoap.org/ws/2002/04/content-type/"/> <xs:import namespace= "https://schemas.xmlsoap.org/ws/2002/04/reference/"/> <xs:element name="GetMediaFile"> <xs:complexType> <xs:sequence> <xs:element name="fileName" type="xs:string"/> <xs:element name="file" type="msg:MediaFile" minOccurs="0"/> </xs:sequence> </xs:complexType> </xs:element> <xs:complexType name="ReferencedBinary"> <xs:simpleContent>
- * <xs:extension base="xs:base64Binary"> <xs:attribute ref="ref:location" use="optional"/> </xs:extension> </xs:simpleContent> </xs:complexType> <xs:complexType name="MediaFile"> <xs:simpleContent> <xs:restriction base="msg:ReferencedBinary"> <xs:annotation> <xs:appinfo> <content:mediaType type="video/mpeg"/> </xs:appinfo> </xs:annotation> </xs:restriction> </xs:simpleContent> </xs:complexType> </xs:schema> </wsdl:types> <wsdl:message name="GetMediaFile"> <wsdl:part name="body" element="msg:GetMediaFile"/> </wsdl:message> <wsdl:portType name="PortType">
- * <wsdl:operation name="GetMediaFile"> <wsdl:input message="svc:GetMediaFile"/> </wsdl:operation> </wsdl:portType> <wsdl:binding name="SoapDimeBinding" type="svc:PortType"> <soap:binding transport="https://schemas.xmlsoap.org/soap/http" style="document"/> <wsdl:operation name="GetMediaFile"> <soap:operation soapAction="https://example.com/GetMediaFile"/> <wsdl:input> <dime:message layout= "https://schemas.xmlsoap.org/ws/2002/04/dime/closed-layout" wsdl:required="true"/> <soap:body parts="body" use="literal"/> </wsdl:input> </wsdl:operation> </wsdl:binding>
- * <wsdl:service name="DimeSample"> <wsdl:port name="SoapDimePort" binding="svc:SoapDimeBinding"> <soap:address location="https://example.com/DimeSample/"/> </wsdl:port> </wsdl:service> </wsdl:definitions>
- * @param s
- * @param rq
- * @param rsp
- * @return
- */
-/*
-int ns__echo(struct soap*s, char *rq, char **rsp) {
-  char *rsp1 ;
-  rsp1 = do_client_concat (s, ":: echo ::", rq) ;
-  *rsp = rsp1 ;
-  return SOAP_OK ;
-}*/
-
-/*
-
-int ns__concat(struct soap*s, struct concatStruct rq, char **rsp) {
-    char *rsp1;
-    rsp1 = do_client_concat (s, rq.op1, rq.op2) ;
-    *rsp = rsp1 ;
-    return SOAP_OK ;
-}
-
-int ns__adder(struct soap*s, struct addStruct rq, long *rsp) {
-    long rsp1 ;
-    rsp1 = rq.op1 + rq.op2;
-    *rsp = rsp1 ;
-
-    return SOAP_OK ;
-}
-*/
 
 
 
 // operatia 1: trimite fisier spre executie catre serfver
 
+/*
 int __ns1__storeFile(
         struct soap * s, // soap
         struct _ns1__storeFile*             ns1__storeFile,	///< Input parameter
@@ -290,7 +150,7 @@ int __ns1__storeFile(
         if (n == 2) {
             /*  if (strstr(attachment->id, ".c") || strstr(attachment->id, ".py") || strstr(attachment->id, ".cpp") ||
                   strstr(attachment->id, ".java")) { */
-            printf("Part %d:\n", n);
+         /*   printf("Part %d:\n", n);
             printf("ptr        =%p\n", attachment->ptr);
             printf("Content:\n%s\n", attachment->ptr);
             // write(1, attachment->ptr, sizeof(attachment->ptr));
@@ -328,10 +188,10 @@ int __ns1__storeFile(
     ns1__storeFileResponse->out = "ceau";
    // sprintf(ns1__storeFileResponse->out, "Salut %s", ns1__storeFile->in);
     return SOAP_OK ;
-}
+} */
 
 // operatia 2: creeaza fisier pe server
-
+/*
 int __ns1__createFile(
         struct soap * s, // soap
         struct _ns1__createFile*             ns1__createFile,	///< Input parameter
@@ -348,4 +208,4 @@ int __ns1__createFile(
     sprintf(resp, ":: fisier creeat pe server :: %s",ns1__createFile->in);
     ns1__createFileResponse->out = resp;
     return SOAP_OK;
-}
+}*/

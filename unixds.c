@@ -71,7 +71,8 @@ char * procesare(long opt){
             // client PY
             break;
         case 7:
-            // client SOAP
+            rs1 = (char*) malloc(my_ls("./client_files/SOAP"));
+            strcpy(rs1, my_ls("./client_files/SOAP"));
             break;
         default: break;
     }
@@ -165,7 +166,7 @@ void *unix_main (void *args) {
         } else {
             printf("Client socket filepath: %s\n", client_sockaddr.sun_path);
         }
-
+        char * buff;
         /************************************/
         /* Read and print the data          */
         /* incoming on the connected socket */
@@ -184,7 +185,6 @@ void *unix_main (void *args) {
                 strcpy(opt, buf);
             }
             long opt = strtol(buf, NULL, 10);
-            char * buff;
             if(opt < 4) procesare(opt);
             buff = opt >= 4 ? procesare(opt) : NULL;
             /******************************************/
@@ -214,6 +214,21 @@ void *unix_main (void *args) {
         }
     }
     else{
+        /*
+        printf("Sending data...\n");
+        buff = malloc(100);
+        strcpy(buff, "Nu pot accepta alte conexiuni\n");
+        rc = send(client_sock, buff, strlen(buff), 0);
+        if (rc == -1) {
+            perror("send");
+            //printf("SEND ERROR: %d", sock_errno());
+            close(server_sock);
+            close(client_sock);
+            exit(1);
+        } else {
+            printf("Data sent!\n");
+            close(client_sock);
+        } */
         fprintf(stderr, "Nu pot accepta alte conexiuni\n");
     }
     close(server_sock);

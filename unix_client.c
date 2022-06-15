@@ -11,26 +11,24 @@
 #include <sys/select.h>
 #include <fcntl.h>
 #include <sys/un.h>
-
 #define SERVER_PATH "tpf_unix_sock.server"
 #define CLIENT_PATH "tpf_unix_sock.client"
 #define DATA "Hello from client"
 
 char * opts[] ={
-        "1. Conectare client INET (UX)",
-        "2. Conectare client INET (OTH)",
-        "3. Oprire (fortata) server",
-        "4. Afiseaza fisierele de la nivelul server-ului",
-        "5. Afiseaza fisierele de la nivelul client-ului INET (UX)",
-        "6. Afiseaza fisierele de la nivelul client-ului INET (OTH)",
-        "7. Afiseaza fisierele de la nivelul client-ului SOAP"
+        "Active runtime (de cat timp este pornit server-ul)",
+        "Numarul de clienti INET conectati",
+        "Oprire (fortata) server",
+        "Deconecteaza toti clientii de INET",
+        "Stergere fisier existent de la nivelul client-ului INET (UX) -- [LOCAL]",
+        "Stergere fisier existent de la nivelul client-ului SOAP -- [LOCAL]"
 };
 
 
 void meniu(){
     int i;
     for(i=0;i<sizeof(opts)/sizeof(char*);i++){
-        fprintf(stderr, "[%d]\t%s\n", i+1, opts[i]);
+        fprintf(stderr, "[%d]\t--  %s  --\n", i+1, opts[i]);
     }
 }
 
@@ -40,7 +38,7 @@ int main(void){
     int client_sock, rc, len;
     struct sockaddr_un server_sockaddr;
     struct sockaddr_un client_sockaddr;
-    char buf[256];
+    char buf[10000];
     memset(&server_sockaddr, 0, sizeof(struct sockaddr_un));
     memset(&client_sockaddr, 0, sizeof(struct sockaddr_un));
 
@@ -94,7 +92,7 @@ int main(void){
 
         if (opt >= 4) {
             printf("Waiting to recieve data...\n");
-            memset(buf, 0, 256);
+            memset(buf, 0, 10000);
             rc = recv(client_sock, buf, sizeof(buf), 0);
             if (rc == -1) {
                 perror("recv");
@@ -102,7 +100,7 @@ int main(void){
                 close(client_sock);
                 exit(1);
             } else {
-                printf("DATA RECEIVED = %s\n", buf);
+                printf("%s\n", buf);
             }
         }
     }

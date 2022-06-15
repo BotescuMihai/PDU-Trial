@@ -338,10 +338,13 @@ void *inet_main (void *args) {
                client_UIDS[client_no ++] = newID;
               if (readSingleInt (i, &m)<0) {
                  // Cannot read from client. This is impossible :) Close connection!
+               //  perror("eroare readsingleint");
                  close (i) ; FD_CLR (i, &active_fd_set) ;
                }
+           //   fprintf(stderr, "m int=%d\n", m.msg);
                if (writeSingleInt (i, h, newID) < 0) {
                  // Cannot write to client. Close connection!
+                  // perror("eroare writesingleint");
                  close (i) ; FD_CLR (i, &active_fd_set) ;
                }
             } else { /* Already identified. Existing client... communication continues */

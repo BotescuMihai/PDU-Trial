@@ -48,7 +48,7 @@ int readSingleInt (int sock, msgIntType *m) {  		 // Simple read/write facilitie
 		return -1  ;
 	}
 	m->msg = ntohl(s.i.msg) ; 
-	return nb ;
+	return nb;
 }
 
 int writeSingleInt (int sock, msgHeaderType h, int i) {			// Build the message and send it!

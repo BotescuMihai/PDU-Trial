@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <time.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/select.h>
@@ -19,7 +20,6 @@ void *soap_main (void *args) ;
 #define SOAPPORT   18082
 
 pthread_mutex_t curmtx = PTHREAD_MUTEX_INITIALIZER ;
-
 int main () {
   int iport, sport ;
 
@@ -37,13 +37,12 @@ int main () {
 //  refresh () ;
 */
   unlink (UNIXSOCKET) ;
-
   pthread_create (&unixthr, NULL, unix_main, UNIXSOCKET) ; /* Transmite SOCKET-ul utilizat */
   iport = INETPORT ;
   pthread_create (&inetthr, NULL, inet_main, &iport) ;
 
   sport = SOAPPORT ;
-  pthread_create (&soapthr, NULL, soap_main, &sport) ;
+//  pthread_create (&soapthr, NULL, soap_main, &sport) ;
 /*
   pthread_create (&workerthr, NULL, work_main, NULL) ;
     Implementarea firului de lucru:
@@ -54,7 +53,7 @@ int main () {
  */
   pthread_join (unixthr, NULL) ;
   pthread_join (inetthr, NULL) ;
-  pthread_join (soapthr, NULL) ;
+//  pthread_join (soapthr, NULL) ;
 
 /*
   getch () ;
