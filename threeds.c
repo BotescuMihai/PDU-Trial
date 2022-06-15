@@ -42,7 +42,7 @@ int main () {
   pthread_create (&inetthr, NULL, inet_main, &iport) ;
 
   sport = SOAPPORT ;
-//  pthread_create (&soapthr, NULL, soap_main, &sport) ;
+  pthread_create (&soapthr, NULL, soap_main, &sport) ;
 /*
   pthread_create (&workerthr, NULL, work_main, NULL) ;
     Implementarea firului de lucru:
@@ -53,7 +53,7 @@ int main () {
  */
   pthread_join (unixthr, NULL) ;
   pthread_join (inetthr, NULL) ;
-//  pthread_join (soapthr, NULL) ;
+  pthread_join (soapthr, NULL) ;
 
 /*
   getch () ;
