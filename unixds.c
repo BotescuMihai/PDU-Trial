@@ -1,4 +1,5 @@
 #include <stddef.h>
+#include "headerr.h"
 #include <errno.h>
 #include <pthread.h>
 // #include <ncurses.h>
@@ -12,12 +13,19 @@
 #include <sys/select.h>
 #include <sys/un.h>
 #include <dirent.h>
+#include <time.h>
+#include<signal.h>
 #define MAX 1024
 #define SOCK_PATH  "tpf_unix_sock.server"
+#define UNIXSOCKET "tpf_unix_sock.client"
 /*
 extern WINDOW * mainwnd ;
 extern pthread_mutex_t curmtx ;
 */
+
+clock_t end;
+double total_time = 0.0;
+int server_sock, client_sock, len, rc;
 
 char * my_ls(char * path){
     struct dirent *d;
@@ -30,9 +38,9 @@ char * my_ls(char * path){
     sprintf(res, "\t[%s]\n", path);
     while((d = readdir(dh)) != NULL){
         char * tempent = malloc(1000);
-      //  sprintf(tempent, "%d\t%s\t%d\t%d\t%d\t%d\n", d->d_ino, d->d_name, d->d_namlen, d->d_reclen, d->d_seekoff, d->d_type);
-      sprintf(tempent,"%s\n", d->d_name);
-      strcat(res, tempent);
+        //  sprintf(tempent, "%d\t%s\t%d\t%d\t%d\t%d\n", d->d_ino, d->d_name, d->d_namlen, d->d_reclen, d->d_seekoff, d->d_type);
+        sprintf(tempent,"%s\n", d->d_name);
+        strcat(res, tempent);
     }
     return res;
 }
@@ -41,40 +49,104 @@ int fd_temp;
 char * procesare(long opt){
     fprintf(stderr,"Opt %ld\n", opt);
     char * rs1;
+    int salvout, fdlog, fdlog2;
+    char tmp[300];
+    char buf[256];
+    pid_t ppid;
+    int counter = 0;
     switch(opt){
         case 1:
-            system("make inetclient && ./inetclient");
+            salvout = dup(STDOUT_FILENO);
+            fdlog = open("tempfileforfork.txt", O_CREAT | O_RDWR | S_IRUSR | S_IWUSR | S_IXUSR, 0666);
+            dup2(fdlog, STDOUT_FILENO);
+            fdlog2 = dup(fdlog);
+            ppid = getpid();
+            sprintf(&tmp, "ps -p %d -o etime", ppid);
+            system(tmp);
+            dup2(salvout, STDOUT_FILENO);
+            close(fdlog);
+            fdlog = open("tempfileforfork.txt", O_RDWR | O_CREAT);
+            rs1 = (char*)malloc(256);
+            read(fdlog, rs1, 256);
+            close(fdlog);
+            unlink("tempfileforfork.txt");
             break;
         case 2:
-            // conectare client py
-            break;
-        case 3:
             system("killall serverds");
             break;
-        case 4:
-            rs1 = (char*) malloc(strlen(my_ls("./serv_files/INET/")));
-            strcpy(rs1, my_ls("./serv_files/INET/"));
-            strcat(rs1, my_ls("./serv_files/SOAP/"));
+        case 3:
+            for (int i = 0; i < FD_SETSIZE; ++i){
+                if (FD_ISSET (i, &active_fd_set)){
+                    close (i); FD_CLR (i, &active_fd_set);
+                }
+            }
+            rs1 = (char*)malloc(100);
+            strcpy(rs1,"Am executat\n");
             rs1[strlen(rs1)] = 0;
-           /* dup2(fd_temp, STDOUT_FILENO);
-            fprintf(stdout, "\t[INET]\n");
-            system("ls -la ./serv_files/INET/");
-            fprintf(stdout, "\t[SOAP]\n");
-            system("ls -la ./serv_files/SOAP/");
-            close(fd_temp); */
+            break;
+        case 4:
+            memset(buf, 0, 256);
+            int bytes_rec = recv(client_sock, buf, sizeof(buf), 0);
+            if (bytes_rec == -1) {
+                perror("recv");
+                //   printf("RECV ERROR: %d\n", sock_errno());
+                close(server_sock);
+                close(client_sock);
+                exit(1);
+            } else {
+                printf("DATA RECEIVED = %s\n", buf);
+            }
+            //strcpy(rs1, buf);
+
+
+            salvout = dup(STDOUT_FILENO);
+            fdlog = open("tempfileforfork2.txt", O_CREAT | O_RDWR | S_IRUSR | S_IWUSR | S_IXUSR, 0666);
+            dup2(fdlog, STDOUT_FILENO);
+            fdlog2 = dup(fdlog);
+            sprintf(&tmp, "ls ./serv_files/INET/%s", buf);
+            system(tmp);
+            dup2(salvout, STDOUT_FILENO);
+            close(fdlog);
+            fdlog = open("tempfileforfork2.txt", O_RDWR | O_CREAT);
+            rs1 = (char*)malloc(256);
+            read(fdlog, rs1, 256);
+            close(fdlog);
+            unlink("tempfileforfork2.txt");
+            if(strlen(rs1)!=0){
+                salvout = dup(STDOUT_FILENO);
+                fdlog = open("tempfileforfork2.txt", O_CREAT | O_RDWR | S_IRUSR | S_IWUSR | S_IXUSR, 0666);
+                dup2(fdlog, STDOUT_FILENO);
+                fdlog2 = dup(fdlog);
+                sprintf(&tmp, "rm ./serv_files/INET/%s", buf);
+                system(tmp);
+                dup2(salvout, STDOUT_FILENO);
+                close(fdlog);
+                fdlog = open("tempfileforfork2.txt", O_RDWR | O_CREAT);
+                rs1 = (char*)malloc(256);
+                read(fdlog, rs1, 256);
+                close(fdlog);
+                unlink("tempfileforfork2.txt");
+                strcpy(rs1,"Fisier sters!");
+                rs1[strlen(rs1)] = 0;
+            }
+            else{
+                strcpy(rs1,"Acest fisier nu exista!");
+            }
+
             break;
         case 5:
-            rs1 = (char*) malloc(my_ls("./client_files/INET"));
-            strcpy(rs1, my_ls("./client_files/INET"));
+            for (int i = 0; i < FD_SETSIZE; ++i){
+                if (FD_ISSET (i, &active_fd_set) && i != STDIN_FILENO){
+                    counter ++;
+                }
+            }
+            rs1 = (char*)malloc(100);
+            sprintf(rs1,"%d clienti", counter-1);
+            rs1[strlen(rs1)] = 0;
             break;
-        case 6:
-            // client PY
+        default:
+            rs1 = NULL;
             break;
-        case 7:
-            rs1 = (char*) malloc(my_ls("./client_files/SOAP"));
-            strcpy(rs1, my_ls("./client_files/SOAP"));
-            break;
-        default: break;
     }
     /*
     fd_temp = open("temp", O_RDWR | O_CREAT, O_TRUNC);
@@ -86,7 +158,6 @@ char * procesare(long opt){
 }
 int conn;
 void *unix_main (void *args) {
-    int server_sock, client_sock, len, rc;
     int bytes_rec = 0;
     struct sockaddr_un server_sockaddr;
     struct sockaddr_un client_sockaddr;
@@ -102,7 +173,7 @@ void *unix_main (void *args) {
     server_sock = socket(AF_UNIX, SOCK_STREAM, 0);
     if (server_sock == -1){
         perror("socket");
- //      printf("SOCKET ERROR: %d\n", sock_errno());
+        //      printf("SOCKET ERROR: %d\n", sock_errno());
         exit(1);
     }
 
@@ -122,7 +193,7 @@ void *unix_main (void *args) {
     rc = bind(server_sock, (struct sockaddr *) &server_sockaddr, len);
     if (rc == -1){
         perror("bind");
-       // printf("BIND ERROR: %d\n", sock_errno());
+        // printf("BIND ERROR: %d\n", sock_errno());
         close(server_sock);
         exit(1);
     }
@@ -185,28 +256,27 @@ void *unix_main (void *args) {
                 strcpy(opt, buf);
             }
             long opt = strtol(buf, NULL, 10);
-            if(opt < 4) procesare(opt);
-            buff = opt >= 4 ? procesare(opt) : NULL;
+            buff = procesare(opt);
             /******************************************/
             /* Send data back to the connected socket */
             /******************************************/
-           // sprintf(buf, "Mi-ai trimis optiunea %s", buf);
-           if(buff != NULL) {
-               //memset(buf, 0, 256);
-               //  sprintf(buf, "Mi-ai trimis optiunea %s", opt);
-             //  buf[strlen(buf)] = 0;
-               printf("Sending data...\n");
-               rc = send(client_sock, buff, strlen(buff), 0);
-               if (rc == -1) {
-                   perror("send");
-                   //printf("SEND ERROR: %d", sock_errno());
-                   close(server_sock);
-                   close(client_sock);
-                   exit(1);
-               } else {
-                   printf("Data sent!\n");
-               }
-           }
+            // sprintf(buf, "Mi-ai trimis optiunea %s", buf);
+            if(buff != NULL) {
+                //memset(buf, 0, 256);
+                //  sprintf(buf, "Mi-ai trimis optiunea %s", opt);
+                //  buf[strlen(buf)] = 0;
+                printf("Sending data...\n");
+                rc = send(client_sock, buff, strlen(buff), 0);
+                if (rc == -1) {
+                    perror("send");
+                    //printf("SEND ERROR: %d", sock_errno());
+                    close(server_sock);
+                    close(client_sock);
+                    exit(1);
+                } else {
+                    printf("Data sent!\n");
+                }
+            }
 
             /******************************/
             /* Close the sockets and exit */

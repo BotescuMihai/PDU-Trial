@@ -11,17 +11,17 @@
 #include <sys/select.h>
 #include <fcntl.h>
 #include <sys/un.h>
+#include <time.h>
 #define SERVER_PATH "tpf_unix_sock.server"
 #define CLIENT_PATH "tpf_unix_sock.client"
 #define DATA "Hello from client"
 
 char * opts[] ={
         "Active runtime (de cat timp este pornit server-ul)",
-        "Numarul de clienti INET conectati",
         "Oprire (fortata) server",
         "Deconecteaza toti clientii de INET",
         "Stergere fisier existent de la nivelul client-ului INET (UX) -- [LOCAL]",
-        "Stergere fisier existent de la nivelul client-ului SOAP -- [LOCAL]"
+        "Numarul de clienti conectati"
 };
 
 
@@ -46,7 +46,7 @@ int main(void){
     client_sock = socket(AF_UNIX, SOCK_STREAM, 0);
     if (client_sock == -1) {
         perror("socket");
-  //      printf("SOCKET ERROR = %d\n", sock_errno());
+        //      printf("SOCKET ERROR = %d\n", sock_errno());
         exit(1);
     }
 
@@ -57,7 +57,7 @@ int main(void){
     unlink(CLIENT_PATH);
     rc = bind(client_sock, (struct sockaddr *) &client_sockaddr, len);
     if (rc == -1){
-         perror("bind");
+        perror("bind");
         // printf("BIND ERROR: %d\n", sock_errno());
         close(client_sock);
         exit(1);
@@ -68,19 +68,24 @@ int main(void){
     rc = connect(client_sock, (struct sockaddr *) &server_sockaddr, len);
     if(rc == -1){
         perror("connect");
-    //    printf("CONNECT ERROR = %d\n", sock_errno());
+        //    printf("CONNECT ERROR = %d\n", sock_errno());
         close(client_sock);
         exit(1);
     }
-  //  strcpy(buf, DATA);
+    //  strcpy(buf, DATA);
     while(1) {
 
         meniu();
         fprintf(stderr, "Selecteaza optiunea...>");
         scanf("%s", buf);
         long opt = strtol(buf, NULL, 10);
-        printf("Sending data...\n");
         rc = send(client_sock, buf, strlen(buf), 0);
+        if (opt == 4){
+            fprintf(stderr,"Introduceti numele fisierului...>");
+            scanf("%s", buf);
+            rc = send(client_sock, buf, strlen(buf),0);
+        }
+        printf("Sending data...\n");
         if (rc == -1) {
             perror("send");
             // printf("SEND ERROR = %d\n", sock_errno());
@@ -90,7 +95,7 @@ int main(void){
             printf("Data sent!\n");
         }
 
-        if (opt >= 4) {
+        if (opt <= 5) {
             printf("Waiting to recieve data...\n");
             memset(buf, 0, 10000);
             rc = recv(client_sock, buf, sizeof(buf), 0);
@@ -100,7 +105,12 @@ int main(void){
                 close(client_sock);
                 exit(1);
             } else {
-                printf("%s\n", buf);
+                if(opt == 1){
+                    clock_t end = clock();
+                    double endd = (double)end / CLOCKS_PER_SEC;
+                    printf("%s\n", buf);
+                }
+                else printf("%s\n", buf);
             }
         }
     }

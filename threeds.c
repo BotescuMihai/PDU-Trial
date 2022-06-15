@@ -9,7 +9,10 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/select.h>
+#include "timeother.h"
+#include "headerr.h"
 
+clock_t begin;
 void *unix_main (void *args) ;
 void *inet_main (void *args) ;
 void *soap_main (void *args) ;
